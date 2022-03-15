@@ -32,13 +32,13 @@ const Footer: FC = () => {
                 <h4>vadimbelaev002@gmail.com</h4>
                 <div className={cl.socialNetworks}>
                     <a target='_blank' href='https://github.com/VadimBelyaev02'>
-                        <img className={cl.imgLink} src={footerImages.github}/>
+                        <img src={footerImages.github} className={cl.imgLink} />
                     </a>
                     <a target='_blank' href='https://www.linkedin.com/in/vadim-belyaev-273a87211/'>
-                        <img className={cl.imgLink} src={footerImages.linkedin}/>
+                        <img src={footerImages.linkedin} className={cl.imgLink}/>
                     </a>
                     <a target='_blank' href='https://t.me/vadim060902'>
-                        <img className={cl.imgLink} src={footerImages.telegram}/>
+                        <img src={footerImages.telegram} className={cl.imgLink}/>
                     </a>
                 </div>
             </div>
