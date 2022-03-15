@@ -12,7 +12,7 @@ interface IFooterImages {
 }
 
 export const footerImages: IFooterImages = {
-    github: telegram,
+    github: github,
     linkedin: linkedin,
     telegram: telegram
 }
