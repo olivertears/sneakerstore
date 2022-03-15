@@ -1,10 +1,9 @@
 // @ts-ignore
-import github from './github.png'
-// @ts-ignore
 import linkedin from './linkedin.png'
 // @ts-ignore
 import telegram from './telegram.png'
-
+// @ts-ignore
+import github from './github.png'
 
 interface IFooterImages {
     github: string,
