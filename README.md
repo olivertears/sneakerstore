@@ -1,1 +1,1 @@
-# [Sneaker Store](https://sneakerstore-olivertears.vercel.app/)
+# [Sneaker Store](https://sneakerstore.vercel.app/)
