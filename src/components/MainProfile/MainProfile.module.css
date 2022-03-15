@@ -1,0 +1,40 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.twoItemsWrap {
+    display: flex;
+    margin: auto;
+}
+
+.contentWrap {
+    width: 12vw;
+    height: auto;
+    margin: 20px;
+    padding: 50px;
+    border-radius: 10px;
+    outline: 5px solid #dadada;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-width: 100px;
+}
+
+.contentWrap:hover {
+    background: #5dc5ff;
+    box-shadow: 0 0 10px 2px;
+    outline: 5px solid #333;
+    cursor: pointer;
+}
+
+.wrap img {
+    width: 50px;
+    margin: 0 auto 10px;
+}
+
+.wrap button {
+    width: 200px;
+    margin: 20px auto;
+}

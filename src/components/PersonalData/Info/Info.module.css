@@ -1,0 +1,50 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 100px;
+}
+
+.photoAndTextWrap {
+    display: flex;
+    margin: auto;
+}
+
+.photoWrap {
+    justify-content: center;
+    background: #333333;
+    border-radius: 30px;
+    width: 400px;
+    height: 400px;
+    margin-right: 20px;
+}
+
+.inputWrap {
+    padding: 0 0 10px;
+    width: 400px;
+    margin: auto;
+    display: flex;
+}
+
+.inputWrap:last-child {
+    padding: 0;
+}
+
+.inputWrap input {
+    margin: 0 0 10px 20px;
+    width: 290px;
+}
+
+.inputWrap:last-child input {
+    margin-bottom: 0;
+}
+
+.inputWrap h3 {
+    margin-top: 5px;
+    width: 100px;
+    text-align: right;
+}
+
+.authorizationButton {
+    width: 200px;
+    margin: 20px auto 0;
+}

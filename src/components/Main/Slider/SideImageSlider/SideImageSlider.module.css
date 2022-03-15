@@ -1,0 +1,24 @@
+.wrap {
+    display: flex;
+    width: 12.5vw;
+    height: 12.5vw;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.img {
+    position: absolute;
+    width: 12.5vw;
+    transition: all 0.4s ease-in-out;
+}
+
+.transformPositive {
+    transform: translateX(100%);
+    filter: blur(50px)
+}
+
+.transformNegative {
+    transform: translateX(-100%);
+    filter: blur(50px)
+}

@@ -1,0 +1,23 @@
+.wrap {
+    display: flex;
+    background: #333;
+    padding: 30px 100px;
+    color: white;
+}
+
+.wrapOnePart {
+    text-align: center;
+    width: 50vw;
+}
+
+.imgLink {
+    border-radius: 50%;
+    width: 50px;
+    margin: 10px 5px;
+}
+
+.imgLink:hover {
+    opacity: 95%;
+    cursor: pointer;
+    outline: 3px solid black;
+}

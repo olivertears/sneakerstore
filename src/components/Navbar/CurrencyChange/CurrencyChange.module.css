@@ -1,0 +1,46 @@
+.wrap {
+    margin: 15px 0 15px 10px;
+}
+
+.list {
+    position: absolute;
+}
+
+.header {
+    display: flex;
+    padding: 5px;
+    height: 30px;
+}
+
+.header:hover {
+    cursor: pointer;
+}
+
+.header img {
+    height: 4px;
+    margin: 13px 5px;
+}
+
+.currency {
+    margin: 0 5px;
+    font-weight: 600;
+    width: 20px;
+}
+
+.option {
+    padding: 5px 0;
+    font-size: 16px;
+    font-weight: 100;
+    text-align: center;
+    width: 58px;
+    background: rgba(51, 51, 51, 0.8);
+}
+
+.option:first-child {
+    margin-top: 15px;
+}
+
+.option:hover {
+    cursor: pointer;
+    background: rgba(51, 51, 51, 0.95);
+}
