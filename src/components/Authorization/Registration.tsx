@@ -28,7 +28,7 @@ const Registration: FC = () => {
             password: password,
             firstName: name,
             lastName: surname,
-            phone: phone,
+            phone: `+${phone}`,
             email: email,
             country: country,
             city: city,
@@ -85,7 +85,9 @@ const Registration: FC = () => {
                 </div>
                 <div className={cl.inputWrap}>
                     <h3><span>*</span>Phone</h3>
+                    <h2 className={cl.phonePlus}>+</h2>
                     <input
+                        className={cl.phoneInput}
                         required
                         minLength={10}
                         maxLength={13}

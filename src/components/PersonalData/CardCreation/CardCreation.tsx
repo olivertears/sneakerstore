@@ -31,7 +31,7 @@ const CardCreation: FC<ICardCreationProps> = ({setIsCardSettings}) => {
             owner: ownerPattern(owner),
             cvv: Number(cvv),
         }
-        //console.log(newCard)
+        console.log(newCard)
         cardValidation(newCard) ? console.log('Everything is good') : setError('The card is no longer active')
         setIsCardSettings(false)
     }

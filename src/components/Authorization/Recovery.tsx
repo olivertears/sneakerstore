@@ -34,7 +34,7 @@ const Recovery: FC = () => {
 
             <form onSubmit={recoveryAccount}>
                 <div className={cl.inputWrap}>
-                    <h3><span>*</span>Email</h3>
+                    <h3>Email</h3>
                     <input
                         required
                         readOnly={isReal ? true : false}
@@ -45,7 +45,7 @@ const Recovery: FC = () => {
                     />
                 </div>
                 <div className={cl.inputWrap}>
-                    <h3><span>*</span>Password</h3>
+                    <h3>Password</h3>
                     <input
                         required
                         readOnly={isReal ? true : false}
@@ -64,7 +64,7 @@ const Recovery: FC = () => {
 
                 {isReal &&
                   <div className={cl.inputWrap}>
-                    <h3><span>*</span>Code</h3>
+                    <h3>Code</h3>
                     <input
                       required
                       minLength={4}

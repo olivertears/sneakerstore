@@ -31,7 +31,7 @@ const Login: FC = () => {
 
             <form onSubmit={loginCustomer}>
                 <div className={cl.inputWrap}>
-                    <h3><span>*</span>Email</h3>
+                    <h3>Email</h3>
                     <input
                         required
                         type='email'
@@ -40,7 +40,7 @@ const Login: FC = () => {
                     />
                 </div>
                 <div className={cl.inputWrap}>
-                    <h3><span>*</span>Password</h3>
+                    <h3>Password</h3>
                     <input
                         required
                         minLength={6}
