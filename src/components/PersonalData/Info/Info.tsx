@@ -20,6 +20,7 @@ const Info: FC = () => {
     const postCustomerData = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
         const newCustomer: ICustomer = {
+            id: customer.id,
             firstName: name,
             lastName: surname,
             phone: phone,
@@ -33,8 +34,9 @@ const Info: FC = () => {
 
     return (
         <div className={cl.wrap}>
-
+            <h1>PERSONAL INFORMATION</h1>
             <div className={cl.photoAndTextWrap}>
+
                 <div className={cl.photoWrap}></div>
 
                 <form onSubmit={postCustomerData}>
@@ -106,6 +108,8 @@ const Info: FC = () => {
             >
                 Save
             </button>
+
+            <hr/>
         </div>
     );
 };

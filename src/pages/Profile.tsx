@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
-import MainProfile from "../components/MainProfile/MainProfile";
+import ProfilePage from "../components/ProfilePage/ProfilePage";
 
 const Profile: FC = () => {
     return (
         <div>
-            <MainProfile/>
+            <ProfilePage/>
         </div>
     );
 };

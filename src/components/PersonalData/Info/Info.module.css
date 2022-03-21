@@ -1,7 +1,12 @@
 .wrap {
     display: flex;
     flex-direction: column;
-    padding: 50px 100px;
+    padding: 50px 100px 0;
+    text-align: center;
+}
+
+.wrap h1 {
+    margin-bottom: 20px;
 }
 
 .photoAndTextWrap {

@@ -1,7 +1,7 @@
 import {ICard} from "./ICard";
 
 export interface ICustomer {
-    id?: string,
+    id: string,
     password?: string,
     role?: string,
 

@@ -48,7 +48,7 @@ const ChangePassword: FC = () => {
                 type='submit'
                 className={`${cl.authorizationButton} ${cl.recoveryButton}`}
             >
-                Change
+                Save
             </button>
         </form>
         </div>

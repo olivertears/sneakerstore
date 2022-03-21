@@ -57,6 +57,7 @@ input {
   background: #f6f6f6;
   border-radius: 5px;
 
+  margin: 10px 0;
   padding: 5px;
   height: 30px;
   font-size: 20px;
@@ -69,6 +70,8 @@ input::-webkit-inner-spin-button{
 
 button {
   height: 50px;
+  width: 200px;
+  margin: auto;
   background: #333333;
   color: white;
   border: none;
@@ -83,6 +86,15 @@ button {
 button:hover {
   cursor: pointer;
   outline: 3px solid black;
+}
+
+hr {
+  border: none;
+  border-radius: 5px;
+  background-color: #333333;
+  height: 3px;
+  margin: 50px auto;
+  width: 700px;
 }
 
 /* LOADER */

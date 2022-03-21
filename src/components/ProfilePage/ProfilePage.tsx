@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
 //@ts-ignore
-import cl from './MainProfile.module.css'
+import cl from './ProfilePage.module.css'
 import {profileImages} from "../../dataStorage/images/Profile";
 import {useActions} from "../../hooks/useActions";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../router";
 
-const MainProfile: FC = () => {
+const ProfilePage: FC = () => {
     const {logout, setPage} = useActions()
     const navigate = useNavigate()
 
@@ -65,4 +65,4 @@ const MainProfile: FC = () => {
     );
 };
 
-export default MainProfile
+export default ProfilePage

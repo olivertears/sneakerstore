@@ -77,11 +77,3 @@
     background: #dadada;
 }
 
-.wrap hr {
-    border: none;
-    border-radius: 5px;
-    background-color: #333333;
-    height: 3px;
-    margin: 50px auto;
-    width: 700px;
-}

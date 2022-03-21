@@ -15,15 +15,6 @@ const Recovery: FC = () => {
 
     const [eyeOpen, setEyeOpen] = useState<boolean>(false)
 
-    const loginCustomer = (e: React.FormEvent<HTMLFormElement>): void => {
-        e.preventDefault()
-        const loginData: {password: string, email: string} = {
-            password: password,
-            email: email,
-        }
-        //registration(loginData)
-    }
-
     const recoveryAccount = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if(isReal) {
@@ -41,7 +32,7 @@ const Recovery: FC = () => {
         <div className={cl.wrap}>
             <h1 id='recovery'>RECOVERY</h1>
 
-            <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => recoveryAccount(e)}>
+            <form onSubmit={recoveryAccount}>
                 <div className={cl.inputWrap}>
                     <h3><span>*</span>Email</h3>
                     <input

@@ -24,6 +24,7 @@ const Registration: FC = () => {
     const postCustomerData = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
         const newCustomer: ICustomer = {
+            id: Date.now().toString(),
             password: password,
             firstName: name,
             lastName: surname,
