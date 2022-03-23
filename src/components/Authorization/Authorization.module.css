@@ -61,6 +61,7 @@
     font-size: 16px;
     text-decoration: underline;
     margin: auto;
+    font-weight: 400;
 }
 
 .wrap .recoveryLink {
