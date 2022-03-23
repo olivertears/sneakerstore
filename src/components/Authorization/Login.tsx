@@ -3,7 +3,7 @@ import {authorizationImages} from "../../dataStorage/images/Authorization";
 //@ts-ignore
 import cl from './Authorization.module.css'
 import {useActions} from "../../hooks/useActions";
-import {scrollIntoView} from "../../utils/scrollIntoView";
+import {scrollIntoView} from "../../utils/scrolls/scrollIntoView";
 import {ILogin} from "../../models/ILogin";
 
 const Login: FC = () => {
@@ -11,7 +11,6 @@ const Login: FC = () => {
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const [eyeOpen, setEyeOpen] = useState<boolean>(false)
 
     const loginCustomer = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
@@ -34,6 +33,7 @@ const Login: FC = () => {
                     <h3>Email</h3>
                     <input
                         required
+
                         type='email'
                         value={email}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
@@ -44,15 +44,10 @@ const Login: FC = () => {
                     <input
                         required
                         minLength={6}
-                        className={cl.passwordInput}
-                        type={eyeOpen ? 'text' : 'password'}
+
+                        type='password'
                         value={password}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-                    />
-                    <img
-                        className={cl.eyeImage}
-                        src={eyeOpen ? authorizationImages.eyeOpen : authorizationImages.eyeClose}
-                        onClick={() => eyeOpen ? setEyeOpen(false) : setEyeOpen(true)}
                     />
                 </div>
 

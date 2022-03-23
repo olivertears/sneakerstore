@@ -1,11 +1,15 @@
 import React, {Dispatch, FC, SetStateAction, useState} from 'react';
 //@ts-ignore
 import cl from './CardCreation.module.css'
-import {monthPattern, yearPattern, numberPattern, paymentSystemPattern, ownerPattern} from "../../../utils/patterns";
 import {ICard} from "../../../models/ICard";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
-import {cardValidation} from "../../../utils/validations";
 import {useActions} from "../../../hooks/useActions";
+import {cardDateValidation} from "../../../utils/validations/cardDateValidation";
+import {cardNumberPattern} from "../../../utils/patterns/cardNumberPattern"
+import {cardMonthPattern, cardYearPattern} from "../../../utils/patterns/cardDatePattern"
+import {cardOwnerPattern} from "../../../utils/patterns/cardOwnerPattern"
+import {cardPaymentSystemPattern} from "../../../utils/patterns/cardPaymentSystemPattern"
+
 
 interface ICardCreationProps {
     setIsCardSettings: Dispatch<SetStateAction<boolean>>;
@@ -26,13 +30,13 @@ const CardCreation: FC<ICardCreationProps> = ({setIsCardSettings}) => {
         const newCard: ICard = {
             id: Date.now().toString(),
             customerId: customer.id,
-            number: numberPattern(number),
-            validityDate: `${monthPattern(month)}/${yearPattern(year)}`,
-            owner: ownerPattern(owner),
+            number: cardNumberPattern(number),
+            validityDate: `${cardMonthPattern(month)}/${cardYearPattern(year)}`,
+            owner: cardOwnerPattern(owner),
             cvv: Number(cvv),
         }
         console.log(newCard)
-        cardValidation(newCard) ? console.log('Everything is good') : setError('The card is no longer active')
+        cardDateValidation(newCard) ? console.log('Everything is good') : setError('The card is no longer active')
         setIsCardSettings(false)
     }
 
@@ -51,16 +55,16 @@ const CardCreation: FC<ICardCreationProps> = ({setIsCardSettings}) => {
 
                 <div className={cl.cardImage}>
                     <img
-                        src={paymentSystemPattern(number)}
+                        src={cardPaymentSystemPattern(number)}
                         className={cl.paymentSystem}
                     />
-                    <h4 className={cl.number}>{numberPattern(number)}</h4>
+                    <h4 className={cl.number}>{cardNumberPattern(number)}</h4>
 
                     <div className={cl.wrapForValidDate}>
                         <h4 className={cl.validThru}>VALID THRU</h4>
-                        <h4 className={cl.validDate}>{monthPattern(month)}/{yearPattern(year)}</h4>
+                        <h4 className={cl.validDate}>{cardMonthPattern(month)}/{cardYearPattern(year)}</h4>
                     </div>
-                    <h4 className={cl.owner}>{ownerPattern(owner)}</h4>
+                    <h4 className={cl.owner}>{cardOwnerPattern(owner)}</h4>
                 </div>
 
                 <input

@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 //@ts-ignore
 import cl from './ArrowToTop.module.css'
 import {appImages} from "../../../dataStorage/images/App";
-import {scrollToTop} from "../../../utils/scrollToTop";
+import {scrollToTop} from "../../../utils/scrolls/scrollToTop";
 
 const ArrowToTop: FC = () => {
     return (

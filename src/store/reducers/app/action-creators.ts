@@ -1,6 +1,6 @@
 import {AppActionsEnum, SetPageAction, SetCurrencyAction, SetLoadingAction, SetErrorAction} from "./types";
 import {ICurrency} from "../../../models/ICurrency";
-import {scrollToTop} from "../../../utils/scrollToTop";
+import {scrollToTop} from "../../../utils/scrolls/scrollToTop";
 
 
 export const AppActionsCreators = {
@@ -13,7 +13,7 @@ export const AppActionsCreators = {
         payload: error
     }),
     setPage: (page: string): SetPageAction => {
-        localStorage.setItem('page', page)
+        //sessionStorage.setItem('page', page)
         scrollToTop()
         return {
             type: AppActionsEnum.SET_PAGE,

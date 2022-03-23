@@ -3,7 +3,7 @@ import {ICustomer} from "../../../models/ICustomer";
 import {AppDispatch} from "../../index";
 import {AppActionsCreators} from "../app/action-creators";
 import CustomerService from "../../../api/CustomerService";
-import {scrollToTop} from "../../../utils/scrollToTop";
+import {scrollToTop} from "../../../utils/scrolls/scrollToTop";
 import {ILogin} from "../../../models/ILogin";
 import {IRecovery} from "../../../models/IRecovery";
 import {useNavigate} from "react-router-dom";

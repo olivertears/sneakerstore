@@ -21,7 +21,7 @@ const Navbar: FC = () => {
     const cart: number = 1
 
     useEffect(() => {
-        setPage(localStorage.getItem('page') as string || 'MAIN')
+        setPage(window.location.pathname.slice(1).toUpperCase() || 'MAIN')
     }, [])
 
     return (

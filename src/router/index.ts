@@ -31,6 +31,15 @@ export enum RouteNames {
     DEAL = '/deal',
 }
 
+export const publicRoutes: IRoute[] = [
+    {path: RouteNames.MAIN, element: Main},
+    {path: RouteNames.CATALOG, element: Catalog},
+    {path: RouteNames.FAVOURITES, element: Favourites},
+    {path: RouteNames.CART, element: Cart},
+    {path: RouteNames.AUTHORIZATION, element: Authorization},
+    {path: RouteNames.DEAL, element: Deal},
+]
+
 export const privateRoutes: IRoute[] = [
     {path: RouteNames.PROFILE, element: Profile},
     {path: RouteNames.PERSONAL_DATA, element: PersonalData},
@@ -40,14 +49,5 @@ export const privateRoutes: IRoute[] = [
     {path: RouteNames.CATALOG, element: Catalog},
     {path: RouteNames.FAVOURITES, element: Favourites},
     {path: RouteNames.CART, element: Cart},
-    {path: RouteNames.DEAL, element: Deal},
-]
-
-export const publicRoutes: IRoute[] = [
-    {path: RouteNames.MAIN, element: Main},
-    {path: RouteNames.CATALOG, element: Catalog},
-    {path: RouteNames.FAVOURITES, element: Favourites},
-    {path: RouteNames.CART, element: Cart},
-    {path: RouteNames.AUTHORIZATION, element: Authorization},
     {path: RouteNames.DEAL, element: Deal},
 ]

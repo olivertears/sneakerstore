@@ -5,8 +5,6 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
 import Error from "./ReusedComponents/Error/Error";
 
-//TODO: если ввели левую страницу - идёт редирект на главную / профиль - прописать setPage(page)
-
 const AppRouter: FC = () => {
     const {auth} = useTypedSelector(store => store.customer)
 

@@ -38,8 +38,9 @@ const Recovery: FC = () => {
                     <input
                         required
                         readOnly={isReal ? true : false}
-                        className={isReal ? cl.emailIsRealInput : ''}
+
                         type='email'
+                        className={isReal ? cl.emailIsRealInput : ''}
                         value={email}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                     />
@@ -49,9 +50,10 @@ const Recovery: FC = () => {
                     <input
                         required
                         readOnly={isReal ? true : false}
-                        className={`${cl.passwordInput} ${isReal ? cl.emailIsRealInput : ''}`}
                         minLength={6}
+
                         type={eyeOpen ? 'text' : 'password'}
+                        className={`${cl.passwordInput} ${isReal ? cl.emailIsRealInput : ''}`}
                         value={password}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                     />
@@ -69,8 +71,9 @@ const Recovery: FC = () => {
                       required
                       minLength={4}
                       maxLength={4}
-                      type='number'
+
                       value={code}
+                      onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key.replace(/[^[0-9]/g, '') || [8, 37, 38, 39, 40, 46].includes(e.keyCode) || (e.ctrlKey && e.keyCode === 65) || e.preventDefault()}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCode(e.target.value)}
                     />
                   </div>
