@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Navbar from "./components/Navbar/Navbar";
 import AppRouter from "./components/AppRouter";
+import './css/fonts.css'
 import './css/App.css'
 import {useTypedSelector} from "./hooks/useTypedSelector";
 import Loader from "./components/Loader";
