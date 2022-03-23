@@ -5,9 +5,12 @@ import cl from './Authorization.module.css'
 import {useActions} from "../../hooks/useActions";
 import {scrollIntoView} from "../../utils/scrolls/scrollIntoView";
 import {ILogin} from "../../models/ILogin";
+import {useNavigate} from "react-router-dom";
+import {RouteNames} from "../../router";
 
 const Login: FC = () => {
     const {login} = useActions()
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -19,6 +22,7 @@ const Login: FC = () => {
             password: password,
         }
         login(loginData)
+        navigate(RouteNames.PROFILE)
     }
 
     return (

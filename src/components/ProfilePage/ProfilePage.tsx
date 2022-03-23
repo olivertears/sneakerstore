@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../router";
 
 const ProfilePage: FC = () => {
-    const {logout, setPage} = useActions()
+    const {logout} = useActions()
     const navigate = useNavigate()
 
     return (
@@ -15,20 +15,14 @@ const ProfilePage: FC = () => {
             <div className={cl.twoItemsWrap}>
                 <div
                     className={cl.contentWrap}
-                    onClick={() => {
-                        setPage('PERSONAL_DATA')
-                        navigate(RouteNames.PERSONAL_DATA)
-                    }}
+                    onClick={() => navigate(RouteNames.PERSONAL_DATA)}
                 >
                     <img src={profileImages.personalData}/>
                     <h2>PERSONAL DATA</h2>
                 </div>
                 <div
                     className={cl.contentWrap}
-                    onClick={() => {
-                        setPage('ORDERS')
-                        navigate(RouteNames.ORDERS)
-                    }}
+                    onClick={() => navigate(RouteNames.ORDERS)}
                 >
                     <img src={profileImages.orders}/>
                     <h2>ORDERS</h2>
@@ -38,27 +32,24 @@ const ProfilePage: FC = () => {
             <div className={cl.twoItemsWrap}>
                 <div
                     className={cl.contentWrap}
-                    onClick={() => {
-                        setPage('FAVOURITES')
-                        navigate(RouteNames.FAVOURITES)
-                    }}
+                    onClick={() => navigate(RouteNames.FAVOURITES)}
                 >
                     <img src={profileImages.favourites}/>
                     <h2>FAVOURITES</h2>
                 </div>
                 <div
                     className={cl.contentWrap}
-                    onClick={() => {
-                        setPage('CART')
-                        navigate(RouteNames.CART)
-                    }}
+                    onClick={() => navigate(RouteNames.CART)}
                 >
                     <img src={profileImages.cart}/>
                     <h2>CART</h2>
                 </div>
             </div>
 
-            <button onClick={logout}>
+            <button onClick={() => {
+                logout()
+                navigate(RouteNames.AUTHORIZATION)
+            }}>
                 Logout
             </button>
         </div>

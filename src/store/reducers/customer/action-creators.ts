@@ -54,7 +54,7 @@ export const CustomerActionCreators = {
         localStorage.removeItem('auth')
         dispatch(CustomerActionCreators.setCustomer({} as ICustomer))
         dispatch(CustomerActionCreators.setAuth(false))
-        dispatch(AppActionsCreators.setPage('LOGIN'))
+        dispatch(AppActionsCreators.setPage('AUTHORIZATION'))
     },
     checkDoesEmailExist: (email: string) => async (dispatch: AppDispatch) => {
         try {

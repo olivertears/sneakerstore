@@ -21,26 +21,20 @@ const Navbar: FC = () => {
     const cart: number = 1
 
     useEffect(() => {
-        setPage(window.location.pathname.slice(1).toUpperCase() || 'MAIN')
+        setPage(window.location.pathname.slice(1).toUpperCase() || '')
     }, [window.location.pathname])
 
     return (
         <div className={cl.wrap}>
             <h1
-                className={ page === 'MAIN' ? cl.selectedPage : cl.page}
-                onClick={() => {
-                    setPage('MAIN')
-                    navigate(RouteNames.MAIN)
-                }}
+                className={ page === '' ? cl.selectedPage : cl.page}
+                onClick={() => navigate(RouteNames.MAIN)}
             >
                 MAIN
             </h1>
             <h1
                 className={ page === 'CATALOG' ? cl.selectedPage : cl.page}
-                onClick={() => {
-                    setPage('CATALOG')
-                    navigate(RouteNames.CATALOG)
-                }}
+                onClick={() => navigate(RouteNames.CATALOG)}
             >
                 CATALOG
             </h1>
@@ -54,22 +48,18 @@ const Navbar: FC = () => {
                     className={cl.imgLink}
                     src={page === 'PROFILE' || page === 'PERSONAL_DATA' || page === 'ORDERS' || page === 'AUTHORIZATION' ? navbarImages.profileOn : navbarImages.profileOff}
                     onClick={() => {
-                        if(auth) {
-                            setPage('PROFILE')
+                        auth
+                            ?
                             navigate(RouteNames.PROFILE)
-                        } else {
-                            setPage('AUTHORIZATION')
+                            :
                             navigate(RouteNames.AUTHORIZATION)
-                        }
+
                     }}
                 />
                 <div>
                     <img className={cl.imgLink}
                          src={page === 'FAVOURITES' ? navbarImages.favouritesOn : navbarImages.favouritesOff}
-                         onClick={() => {
-                             setPage('FAVOURITES')
-                             navigate(RouteNames.FAVOURITES)
-                         }}
+                         onClick={() => navigate(RouteNames.FAVOURITES)}
                     />
                     <div className={cl.circle}>
                         <span className={cl.numberInCircle}>{favourites}</span>
@@ -78,10 +68,7 @@ const Navbar: FC = () => {
                 <div>
                     <img className={cl.imgLink}
                          src={page === 'CART' ? navbarImages.cartOn : navbarImages.cartOff}
-                         onClick={() => {
-                             setPage('CART')
-                             navigate(RouteNames.CART)
-                         }}
+                         onClick={() => navigate(RouteNames.CART)}
                     />
                     <div className={cl.circle}>
                         <span className={cl.numberInCircle}>{cart}</span>
