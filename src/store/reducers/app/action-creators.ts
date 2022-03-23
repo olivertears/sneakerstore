@@ -13,7 +13,6 @@ export const AppActionsCreators = {
         payload: error
     }),
     setPage: (page: string): SetPageAction => {
-        //sessionStorage.setItem('page', page)
         scrollToTop()
         return {
             type: AppActionsEnum.SET_PAGE,

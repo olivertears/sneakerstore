@@ -22,7 +22,7 @@ const Navbar: FC = () => {
 
     useEffect(() => {
         setPage(window.location.pathname.slice(1).toUpperCase() || 'MAIN')
-    }, [])
+    }, [window.location.pathname])
 
     return (
         <div className={cl.wrap}>

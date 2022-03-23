@@ -2,8 +2,8 @@ import React, {FC} from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import {RouteNames, publicRoutes, privateRoutes} from "../router";
 import {useTypedSelector} from "../hooks/useTypedSelector";
-import {useActions} from "../hooks/useActions";
-import Error from "./ReusedComponents/Error/Error";
+import NotFound from "../pages/NotFound";
+
 
 const AppRouter: FC = () => {
     const {auth} = useTypedSelector(store => store.customer)
@@ -21,7 +21,7 @@ const AppRouter: FC = () => {
                 )}
                 <Route
                     path="*"
-                    element={<Navigate to={RouteNames.PROFILE}/>}
+                    element={<NotFound/>}
                 />
             </Routes>
                 :
@@ -35,7 +35,7 @@ const AppRouter: FC = () => {
                 )}
                 <Route
                     path="*"
-                    element={<Navigate to={RouteNames.AUTHORIZATION}/>}
+                    element={<NotFound/>}
                 />
             </Routes>
 
