@@ -9,7 +9,7 @@ interface ICenterSliderProps {
 }
 
 const CenterImageSlider: FC<ICenterSliderProps> = ({images, clockwise}) => {
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState<number>(0);
 
     useEffect(() => {
         setTimeout(() => {
@@ -20,8 +20,8 @@ const CenterImageSlider: FC<ICenterSliderProps> = ({images, clockwise}) => {
         }, 6000)
     }, [activeIndex])
 
-    const prevImgIndex = activeIndex ? activeIndex - 1 : images.length - 1
-    const nextImgIndex = activeIndex === images.length - 1 ? 0 : activeIndex + 1
+    const prevImgIndex: number = activeIndex ? activeIndex - 1 : images.length - 1
+    const nextImgIndex: number = activeIndex === images.length - 1 ? 0 : activeIndex + 1
 
     return (
         <div className={cl.wrap}>

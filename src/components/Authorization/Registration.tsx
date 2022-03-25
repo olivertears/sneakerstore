@@ -2,9 +2,9 @@ import React, {FC, useState} from 'react';
 import {authorizationImages} from "../../dataStorage/images/Authorization";
 //@ts-ignore
 import cl from './Authorization.module.css'
-import {ICustomer} from "../../models/ICustomer";
 import {useActions} from "../../hooks/useActions";
 import {capitalizePattern} from "../../utils/patterns/capitalizePattern";
+import {IRegistration} from "../../models/IRegistration";
 
 const Registration: FC = () => {
     const {registration} = useActions()
@@ -21,7 +21,7 @@ const Registration: FC = () => {
 
     const postCustomerData = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
-        const newCustomer: ICustomer = {
+        const newCustomer: IRegistration = {
             id: Date.now().toString(),
             password: password,
             firstName: capitalizePattern(name),

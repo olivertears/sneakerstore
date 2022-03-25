@@ -24,6 +24,7 @@ const Navbar: FC = () => {
         setPage(window.location.pathname.slice(1).toUpperCase() || '')
     }, [window.location.pathname])
 
+
     return (
         <div className={cl.wrap}>
             <h1
@@ -46,7 +47,7 @@ const Navbar: FC = () => {
                 <CurrencyChange />
                 <img
                     className={cl.imgLink}
-                    src={page === 'PROFILE' || page === 'PERSONAL_DATA' || page === 'ORDERS' || page === 'AUTHORIZATION' ? navbarImages.profileOn : navbarImages.profileOff}
+                    src={page === 'PROFILE' || page === 'PROFILE/PERSONAL_DATA' || page === 'PROFILE/ORDERS' || page === 'AUTHORIZATION' ? navbarImages.profileOn : navbarImages.profileOff}
                     onClick={() => {
                         auth
                             ?

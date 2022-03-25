@@ -1,4 +1,4 @@
-import {CustomerActionsEnum, SetAuthAction, SetCustomerAction} from "../customer/types";
+import {CustomerActionsEnum, SetAuthAction, SetCustomerAction, SetLoginDataAction} from "../customer/types";
 import {ICustomer} from "../../../models/ICustomer";
 import {AppDispatch} from "../../index";
 import {AppActionsCreators} from "../app/action-creators";
@@ -6,8 +6,6 @@ import CustomerService from "../../../api/CustomerService";
 import {scrollToTop} from "../../../utils/scrolls/scrollToTop";
 import {ILogin} from "../../../models/ILogin";
 import {IRecovery} from "../../../models/IRecovery";
-import {useNavigate} from "react-router-dom";
-import {RouteNames} from "../../../router";
 
 
 export const CustomerActionCreators = {
@@ -16,6 +14,13 @@ export const CustomerActionCreators = {
         return {
             type: CustomerActionsEnum.SET_AUTH,
             payload: auth
+        }
+    },
+    setLoginData: (loginData: ILogin): SetLoginDataAction => {
+        localStorage.setItem('loginData', JSON.stringify(loginData))
+        return {
+            type: CustomerActionsEnum.SET_LOGIN_DATA,
+            payload: loginData
         }
     },
     setCustomer: (customer: ICustomer): SetCustomerAction => {
@@ -36,11 +41,12 @@ export const CustomerActionCreators = {
             dispatch(AppActionsCreators.setLoading(false))
         }
     },
-    login: (loginData: ILogin | null) => async (dispatch: AppDispatch) => {
+    login: (loginData: ILogin) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionsCreators.setLoading(true))
-            const response = loginData ? await CustomerService.login(loginData) : await CustomerService.loginWithGoogle()
+            const response = await CustomerService.login(loginData)
             dispatch(CustomerActionCreators.setAuth(true))
+            dispatch(CustomerActionCreators.setLoginData(loginData))
             dispatch(CustomerActionCreators.setCustomer(response.data))
             dispatch(AppActionsCreators.setPage('PROFILE'))
         } catch (err: any) {
@@ -50,8 +56,10 @@ export const CustomerActionCreators = {
         }
     },
     logout: () => async (dispatch: AppDispatch) => {
+        localStorage.removeItem('loginData')
         localStorage.removeItem('customer')
         localStorage.removeItem('auth')
+        dispatch(CustomerActionCreators.setLoginData({} as ILogin))
         dispatch(CustomerActionCreators.setCustomer({} as ICustomer))
         dispatch(CustomerActionCreators.setAuth(false))
         dispatch(AppActionsCreators.setPage('AUTHORIZATION'))

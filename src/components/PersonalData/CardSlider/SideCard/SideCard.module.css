@@ -1,0 +1,51 @@
+.sideCardImage {
+    height: 100px;
+    width: 160px;
+    background-image: url('../../../../dataStorage/images/Card/cardWrap.png');
+    background-size: 100%;
+    margin: 60px 30px;
+}
+
+.paymentSystem {
+    float: right;
+    margin: 10px 10px 0 0;
+    width: 40px;
+}
+
+.number {
+    color: white;
+    margin-top: 43px;
+    font-size: 13px;
+}
+
+.wrapForValidDate {
+    display: flex;
+}
+
+.validThru {
+    color: white;
+    width: 15px;
+    font-size: 5px;
+    margin: 3px 0 0 100px;
+    text-align: right;
+    line-height: 5px;
+}
+
+.validDate {
+    color: white;
+    margin-left: 5px;
+    margin-top: -2px;
+    text-align: left;
+    font-size: 13px;
+}
+
+.owner {
+    color: white;
+    margin: 0 0 0 15px;
+    text-align: left;
+    width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre;
+    font-size: 10px;
+}

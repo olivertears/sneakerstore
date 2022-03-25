@@ -29,6 +29,7 @@ const App = () => {
         return () => window.removeEventListener("scroll", scrollHandler)
     }, [])
 
+
     return (
         <div className="appWrapper">
             <Navbar/>

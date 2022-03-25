@@ -4,6 +4,6 @@ export interface ICard {
     number: string,
     validityDate: string,
     owner: string,
-    cvv: number,
+    cvv: string,
 }
 

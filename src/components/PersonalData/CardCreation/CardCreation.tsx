@@ -33,7 +33,7 @@ const CardCreation: FC<ICardCreationProps> = ({setIsCardSettings}) => {
             number: cardNumberPattern(number),
             validityDate: `${cardMonthPattern(month)}/${cardYearPattern(year)}`,
             owner: cardOwnerPattern(owner),
-            cvv: Number(cvv),
+            cvv: cvv,
         }
         console.log(newCard)
         cardDateValidation(newCard) ? console.log('Everything is good') : setError('The card is no longer active')
