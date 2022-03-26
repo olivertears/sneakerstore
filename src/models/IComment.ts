@@ -4,7 +4,6 @@ export interface IComment {
     message: string,
     productId: string,
     date: string,
-    customer: string,
-    customerId: string,
+    customerId: string, // firstName, lastName, avatar
 }
 

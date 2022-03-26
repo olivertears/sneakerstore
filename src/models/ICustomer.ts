@@ -1,8 +1,5 @@
-import {ICard} from "./ICard";
-
 export interface ICustomer {
     id: string,
-
     firstName: string,
     lastName: string,
     phone: string,
@@ -14,9 +11,9 @@ export interface ICustomer {
     address?: string,
     avatar?: string,
 
-    cardIds?: string[],
-    favouriteIds?: string[],
-    commentIds?: string[],
-    cartIds?: string[],
-    orderIds?: string[]
+    cardsIds?: string[],
+    favouritesIds?: string[],
+    commentsIds?: string[],
+    inCartIds?: string[],
+    ordersIds?: string[]
 }

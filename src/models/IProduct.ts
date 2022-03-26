@@ -11,11 +11,13 @@ export interface IProduct {
     color: string,
     originCountry: string,
     material: string, // [suede, leather, textile, polymer, other materials]
-    description: string,
+    description?: string,
+    averageRate?: number,
 
-    averageRate: number,
-    orderAmount: number,
-    photos: string,
+    photosIds?: string[],
+    sizesIds?: string[],
+    commentsIds?: string[],
+    customersIds?: string[],
 
-    size: string, // [{size: number, amount: number}]
+    orderedAmount: number, //Вадя забыл добавить, потом добавит
 }

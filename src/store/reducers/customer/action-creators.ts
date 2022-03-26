@@ -5,7 +5,7 @@ import {AppActionsCreators} from "../app/action-creators";
 import CustomerService from "../../../api/CustomerService";
 import {scrollToTop} from "../../../utils/scrolls/scrollToTop";
 import {ILogin} from "../../../models/ILogin";
-import {IRecovery} from "../../../models/IRecovery";
+import {IResetPassword} from "../../../models/IResetPassword";
 
 
 export const CustomerActionCreators = {
@@ -77,7 +77,7 @@ export const CustomerActionCreators = {
             dispatch(AppActionsCreators.setLoading(false))
         }
     },
-    recovery: (recoveryData: IRecovery) => async (dispatch: AppDispatch) => {
+    recovery: (recoveryData: IResetPassword) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionsCreators.setLoading(true))
             const response = await CustomerService.recovery(recoveryData)

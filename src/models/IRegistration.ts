@@ -1,5 +1,4 @@
 export interface IRegistration {
-    id: string,
     password: string,
     firstName: string,
     lastName: string,
@@ -9,4 +8,5 @@ export interface IRegistration {
 
     city?: string,
     address?: string,
+    role?: string,
 }

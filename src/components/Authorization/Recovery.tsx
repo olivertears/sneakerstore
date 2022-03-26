@@ -3,7 +3,7 @@ import {authorizationImages} from "../../dataStorage/images/Authorization";
 //@ts-ignore
 import cl from './Authorization.module.css'
 import {useActions} from "../../hooks/useActions";
-import {IRecovery} from "../../models/IRecovery";
+import {IResetPassword} from "../../models/IResetPassword";
 
 const Recovery: FC = () => {
     const {checkDoesEmailExist, recovery} = useActions()
@@ -18,7 +18,7 @@ const Recovery: FC = () => {
     const recoveryAccount = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if(isReal) {
-            const recoveryData: IRecovery = {
+            const recoveryData: IResetPassword = {
                 newPassword: password,
                 verificationCode: code
             }

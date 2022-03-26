@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from "axios";
 import {ICustomer} from "../models/ICustomer";
 import {ILogin} from "../models/ILogin";
-import {IRecovery} from "../models/IRecovery";
+import {IResetPassword} from "../models/IResetPassword";
 
 export default class CustomerService {
     static async registration(newCustomer: ICustomer): Promise<AxiosResponse> {
@@ -20,7 +20,7 @@ export default class CustomerService {
     static async checkDoesEmailExist(email: string): Promise<AxiosResponse> {
         return axios.post('https://apisneakerstore.herokuapp.com/api/recovery')
     }
-    static async recovery(recoveryData: IRecovery): Promise<AxiosResponse> {
+    static async recovery(recoveryData: IResetPassword): Promise<AxiosResponse> {
         return axios.post('https://apisneakerstore.herokuapp.com/api/recovery')
     }
 }
