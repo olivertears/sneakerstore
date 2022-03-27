@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../router";
 
 const ProfilePage: FC = () => {
-    const {logout} = useActions()
+    const {logout} = useActions.useCustomerActions()
     const navigate = useNavigate()
 
     return (

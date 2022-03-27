@@ -6,7 +6,7 @@ import {useActions} from "../../hooks/useActions";
 import {IResetPassword} from "../../models/IResetPassword";
 
 const Recovery: FC = () => {
-    const {checkDoesEmailExist, recovery} = useActions()
+    const {checkDoesEmailExist, resetPassword} = useActions.useCustomerActions()
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -18,11 +18,12 @@ const Recovery: FC = () => {
     const recoveryAccount = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if(isReal) {
-            const recoveryData: IResetPassword = {
+            const resetPasswordData: IResetPassword = {
+                email: email,
                 newPassword: password,
-                verificationCode: code
+                code: Number(code)
             }
-            recovery(recoveryData)
+            resetPassword(resetPasswordData)
         } else {
             checkDoesEmailExist(email) ? setIsReal(true) : setIsReal(false)
         }

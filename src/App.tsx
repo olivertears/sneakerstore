@@ -9,16 +9,17 @@ import Footer from "./components/Footer/Footer";
 import ArrowToTop from "./components/ReusedComponents/ArrowToTop/ArrowToTop";
 import {useActions} from "./hooks/useActions";
 import {ICustomer} from "./models/ICustomer";
+import {RouteNames} from "./router";
+import {useNavigate} from "react-router-dom";
 
 const App = () => {
-    const {setAuth, setCustomer} = useActions()
+    const {setAuth, setCustomer} = useActions.useCustomerActions()
     const {loading} = useTypedSelector(state => state.app)
     const [scroll, setScroll] = useState<number>(0)
 
     const scrollHandler = () => {
         setScroll(window.scrollY)
     }
-
 
     useEffect(() => {
         if(localStorage.getItem('auth')) {
@@ -28,7 +29,6 @@ const App = () => {
         window.addEventListener("scroll", scrollHandler);
         return () => window.removeEventListener("scroll", scrollHandler)
     }, [])
-
 
     return (
         <div className="appWrapper">

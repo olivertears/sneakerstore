@@ -7,7 +7,6 @@ import {useActions} from "../../../hooks/useActions";
 
 const Info: FC = () => {
     const {customer} = useTypedSelector(state => state.customer)
-    const {registration} = useActions()
 
     const [name, setName] = useState<string>(customer.firstName)
     const [surname, setSurname] = useState<string>(customer.lastName)
@@ -29,7 +28,6 @@ const Info: FC = () => {
             city: city,
             address: address,
         }
-        registration(newCustomer)
     }
 
     return (

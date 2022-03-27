@@ -5,7 +5,7 @@ import {RouteNames} from "../router";
 import {useActions} from "../hooks/useActions";
 
 const NotFound: FC = () => {
-    const {setPage} = useActions()
+    const {setPage} = useActions.useAppActions()
     const navigate = useNavigate()
 
     return (

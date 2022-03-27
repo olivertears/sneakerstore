@@ -5,12 +5,14 @@ export interface CustomerState {
     auth: boolean,
     loginData: ILogin,
     customer: ICustomer,
+
 }
 
 export enum CustomerActionsEnum {
     SET_AUTH = 'SET_AUTH',
     SET_LOGIN_DATA = 'SET_LOGIN_DATA',
     SET_CUSTOMER = 'SET_CUSTOMER',
+    CHANGE_CUSTOMER = 'CHANGE_CUSTOMER',
 }
 
 export interface SetAuthAction {

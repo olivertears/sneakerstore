@@ -9,11 +9,14 @@ import {useActions} from "../../hooks/useActions";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../router";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../store";
 
 const Navbar: FC = () => {
     const navigate = useNavigate()
 
-    const {setPage} = useActions()
+    const {setPage} = useActions.useAppActions()
+
     const {page} = useTypedSelector(state => state.app)
     const {auth} = useTypedSelector(state => state.customer)
 
@@ -23,6 +26,10 @@ const Navbar: FC = () => {
     useEffect(() => {
         setPage(window.location.pathname.slice(1).toUpperCase() || '')
     }, [window.location.pathname])
+
+    useEffect(() => {
+        page === 'PROFILE' && navigate(RouteNames.PROFILE)
+    }, [page])
 
 
     return (
@@ -47,7 +54,7 @@ const Navbar: FC = () => {
                 <CurrencyChange />
                 <img
                     className={cl.imgLink}
-                    src={page === 'PROFILE' || page === 'PROFILE/PERSONAL_DATA' || page === 'PROFILE/ORDERS' || page === 'AUTHORIZATION' ? navbarImages.profileOn : navbarImages.profileOff}
+                    src={page === 'PROFILE' || page === 'AUTHORIZATION' ? navbarImages.profileOn : navbarImages.profileOff}
                     onClick={() => {
                         auth
                             ?

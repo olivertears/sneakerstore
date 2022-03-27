@@ -1,79 +1,77 @@
 import {ICard} from "../../../models/ICard";
-import {AddCardAction, CardActionsEnum, ChangeCardAction, DeleteCardAction, SetCardsAction} from "./types";
+import {
+    AddCardAction,
+    CardActionsEnum,
+    ChangeCardAction,
+    RemoveCardAction,
+    SetCardsAction
+} from "./types";
 import {AppDispatch} from "../../index";
-import {AppActionsCreators} from "../app/action-creators";
+import {AppActionCreators} from "../app/action-creators";
 import CardService from "../../../api/CardService";
 import {ILogin} from "../../../models/ILogin";
 
 
 export const CardActionCreators = {
-    setCards: (cards: ICard[]): SetCardsAction => {
-        return {
-            type: CardActionsEnum.SET_CARDS,
-            payload: cards
-        }
-    },
-    addOneCard: (newCard: ICard): AddCardAction => {
-        return {
-            type: CardActionsEnum.ADD_CARD,
-            payload: newCard
-        }
-    },
-    deleteOneCard: (cardId: string): DeleteCardAction => {
-        return {
-            type: CardActionsEnum.DELETE_CARD,
-            payload: cardId
-        }
-    },
-    changeOneCard: (changedCard: ICard): ChangeCardAction => {
-        return {
-            type: CardActionsEnum.CHANGE_CARD,
-            payload: changedCard
-        }
-    },
+    setCards: (cards: ICard[]): SetCardsAction => ({
+        type: CardActionsEnum.SET_CARDS,
+        payload: cards
+    }),
+    addCard: (newCard: ICard): AddCardAction => ({
+        type: CardActionsEnum.ADD_CARD,
+        payload: newCard
+    }),
+    changeCard: (changedCard: ICard): ChangeCardAction => ({
+        type: CardActionsEnum.CHANGE_CARD,
+        payload: changedCard
+    }),
+    removeCard: (cardId: string): RemoveCardAction => ({
+        type: CardActionsEnum.REMOVE_CARD,
+        payload: cardId
+    }),
 
     getCards: (customerId: string, loginData: ILogin) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionsCreators.setLoading(true))
+            dispatch(AppActionCreators.setLoading(true))
             const response = await CardService.getCards(customerId, loginData)
             dispatch(CardActionCreators.setCards(response.data))
         } catch (err: any) {
-            dispatch(AppActionsCreators.setError(err.response.data.message))
+            dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionsCreators.setLoading(false))
+            dispatch(AppActionCreators.setLoading(false))
         }
     },
-    addCard: (newCard: ICard, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    postCard: (newCard: ICard, loginData: ILogin) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionsCreators.setLoading(true))
+            dispatch(AppActionCreators.setLoading(true))
             await CardService.postCard(newCard, loginData)
-            dispatch(CardActionCreators.addOneCard(newCard))
+            dispatch(CardActionCreators.addCard(newCard))
         } catch (err: any) {
-            dispatch(AppActionsCreators.setError(err.response.data.message))
+            dispatch(AppActionCreators.setError('Card with this number already exists'))
         } finally {
-            dispatch(AppActionsCreators.setLoading(false))
+            dispatch(AppActionCreators.setLoading(false))
         }
     },
-    changeCard: (changedCard: ICard, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    putCard: (changedCard: ICard, loginData: ILogin) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionsCreators.setLoading(true))
-            await CardService.changeCard(changedCard, loginData)
-            dispatch(CardActionCreators.changeOneCard(changedCard))
+            dispatch(AppActionCreators.setLoading(true))
+            await CardService.putCard(changedCard, loginData)
+            dispatch(CardActionCreators.changeCard(changedCard))
         } catch (err: any) {
-            dispatch(AppActionsCreators.setError(err.response.data.message))
+            dispatch(AppActionCreators.setError('Card with this number already exists'))
         } finally {
-            dispatch(AppActionsCreators.setLoading(false))
+            dispatch(AppActionCreators.setLoading(false))
         }
     },
     deleteCard: (cardId: string, loginData: ILogin) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionsCreators.setLoading(true))
+            dispatch(AppActionCreators.setLoading(true))
             await CardService.deleteCard(cardId, loginData)
-            dispatch(CardActionCreators.deleteOneCard(cardId))
+            dispatch(CardActionCreators.removeCard(cardId))
         } catch (err: any) {
-            dispatch(AppActionsCreators.setError(err.response.data.message))
+            dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionsCreators.setLoading(false))
+            dispatch(AppActionCreators.setLoading(false))
         }
     },
 }

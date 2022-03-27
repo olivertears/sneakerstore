@@ -16,7 +16,7 @@ interface ICardSliderProps {
 const CardSlider: FC<ICardSliderProps> = ({setIsCardSettings}) => {
     const {customer, loginData} = useTypedSelector(state => state.customer)
     const {cards} = useTypedSelector(state => state.card)
-    const {getCards, addCard, changeCard, deleteCard} = useActions()
+    const {getCards, postCard, putCard, deleteCard} = useActions.useCardActions()
 
     const [activeImgIndex, setActiveImgIndex] = useState<number>(0);
 
@@ -73,8 +73,8 @@ const CardSlider: FC<ICardSliderProps> = ({setIsCardSettings}) => {
             </div>
 
             <button onClick={() => getCards(customer.id, loginData)}>GET CARDS</button>
-            <button onClick={() => addCard({id: '0', cvv: '', customerId: customer.id, validityDate: '', owner: 'V', number: '1111' }, loginData)}>ADD CARD</button>
-            <button onClick={() => changeCard({id: '0', cvv: '', customerId: customer.id, validityDate: '', owner: 'V', number: '0000' }, loginData)}>CHANGE CARD</button>
+            <button onClick={() => postCard({id: '0', cvv: '', customersIds: [customer.id], validityDate: '', owner: 'scbh', number: '0000' }, loginData)}>ADD CARD</button>
+            <button onClick={() => putCard({id: '0', cvv: '', customersIds: [''], validityDate: '', owner: '', number: '' }, loginData)}>CHANGE CARD</button>
             <button onClick={() => deleteCard('0', loginData)}>DELETE CARDS</button>
 
             <hr/>

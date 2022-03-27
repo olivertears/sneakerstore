@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {authorizationImages} from "../../dataStorage/images/Authorization";
 //@ts-ignore
 import cl from './Authorization.module.css'
@@ -7,22 +7,21 @@ import {scrollIntoView} from "../../utils/scrolls/scrollIntoView";
 import {ILogin} from "../../models/ILogin";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../router";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 const Login: FC = () => {
-    const {login} = useActions()
-    const navigate = useNavigate()
+    const {login} = useActions.useCustomerActions()
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
-    const loginCustomer = (e: React.FormEvent<HTMLFormElement>): void => {
+    const loginCustomer = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const loginData: ILogin = {
             email: email,
             password: password,
         }
         login(loginData)
-        navigate(RouteNames.PROFILE)
     }
 
     return (

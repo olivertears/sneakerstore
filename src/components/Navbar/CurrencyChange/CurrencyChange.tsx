@@ -9,7 +9,7 @@ import {useTypedSelector} from "../../../hooks/useTypedSelector";
 import {ICurrency} from "../../../models/ICurrency";
 
 const CurrencyChange: FC = () => {
-    const {setCurrency} = useActions()
+    const {setCurrency} = useActions.useAppActions()
     const {currency} = useTypedSelector(state => state.app)
 
     const [isOpen, setIsOpen] = useState<boolean>(false)

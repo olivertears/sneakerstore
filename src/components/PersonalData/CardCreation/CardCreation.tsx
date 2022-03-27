@@ -17,7 +17,7 @@ interface ICardCreationProps {
 
 const CardCreation: FC<ICardCreationProps> = ({setIsCardSettings}) => {
     const {customer} = useTypedSelector(state => state.customer)
-    const {setError} = useActions()
+    const {setError} = useActions.useAppActions()
 
     const [number, setNumber] = useState<string>('')
     const [owner, setOwner] = useState<string>('')
@@ -29,7 +29,7 @@ const CardCreation: FC<ICardCreationProps> = ({setIsCardSettings}) => {
         e.preventDefault()
         const newCard: ICard = {
             id: Date.now().toString(),
-            customerId: customer.id,
+            customersIds: [customer.id],
             number: cardNumberPattern(number),
             validityDate: `${cardMonthPattern(month)}/${cardYearPattern(year)}`,
             owner: cardOwnerPattern(owner),

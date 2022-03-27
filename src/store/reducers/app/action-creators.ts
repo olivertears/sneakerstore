@@ -3,7 +3,7 @@ import {ICurrency} from "../../../models/ICurrency";
 import {scrollToTop} from "../../../utils/scrolls/scrollToTop";
 
 
-export const AppActionsCreators = {
+export const AppActionCreators = {
     setLoading: (loading: boolean): SetLoadingAction => ({
         type: AppActionsEnum.SET_LOADING,
         payload: loading

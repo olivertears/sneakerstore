@@ -8,7 +8,7 @@ interface IError {
 }
 
 const Error: FC<IError> = ({message}) => {
-    const {setError} = useActions()
+    const {setError} = useActions.useAppActions()
 
 
     return (

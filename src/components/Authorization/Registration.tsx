@@ -7,7 +7,7 @@ import {capitalizePattern} from "../../utils/patterns/capitalizePattern";
 import {IRegistration} from "../../models/IRegistration";
 
 const Registration: FC = () => {
-    const {registration} = useActions()
+    const {registration} = useActions.useCustomerActions()
 
     const [name, setName] = useState<string>('')
     const [surname, setSurname] = useState<string>('')
@@ -22,17 +22,15 @@ const Registration: FC = () => {
     const postCustomerData = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
         const newCustomer: IRegistration = {
-            id: Date.now().toString(),
             password: password,
             firstName: capitalizePattern(name),
             lastName: capitalizePattern(surname),
-            phone: `+${phone}`,
+            phone: phone,
             email: email,
             country: capitalizePattern(country),
             city: capitalizePattern(city || ''),
             address: address,
         }
-        console.log(newCustomer)
         registration(newCustomer)
     }
 
