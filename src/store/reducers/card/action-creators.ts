@@ -34,7 +34,7 @@ export const CardActionCreators = {
         try {
             dispatch(AppActionCreators.setLoading(true))
             const response = await CardService.getCards(customerId, loginData)
-            dispatch(CardActionCreators.setCards(response.data))
+            dispatch(CardActionCreators.setCards(response.data as ICard[]))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {

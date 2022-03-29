@@ -66,7 +66,7 @@ export const CustomerActionCreators = {
             localStorage.setItem('customer', JSON.stringify(response.data))
             dispatch(CustomerActionCreators.setAuth(true))
             dispatch(CustomerActionCreators.setLoginData(loginData))
-            dispatch(CustomerActionCreators.setCustomer(response.data))
+            dispatch(CustomerActionCreators.setCustomer(response.data as ICustomer))
             dispatch(AppActionCreators.setPage('PROFILE'))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Invalid email or password'))

@@ -4,13 +4,11 @@ export interface ICustomer {
     lastName: string,
     phone: string,
     email: string,
-    country: string,
 
-    role?: string,
-    city?: string,
-    address?: string,
     avatar?: string,
+    role?: string,
 
+    addressesIds?: string[],
     cardsIds?: string[],
     favouritesIds?: string[],
     commentsIds?: string[],

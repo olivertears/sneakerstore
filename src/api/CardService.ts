@@ -4,7 +4,7 @@ import {ILogin} from "../models/ILogin";
 
 
 export default class CardService {
-    static async getCards(customerId: string, loginData: ILogin): Promise<AxiosResponse> {
+    static async getCards(customerId: string, loginData: ILogin): Promise<AxiosResponse<ICard[]>> {
         return axios.get(`https://apisneakerstore.herokuapp.com/api/customers/${customerId}/cards`, {
             headers: {
                 Authorization: 'Basic ' + btoa(`${loginData.email}:${loginData.password}`)

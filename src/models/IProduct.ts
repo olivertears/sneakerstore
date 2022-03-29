@@ -1,5 +1,3 @@
-import {ISize} from "./ISize";
-
 export interface IProduct {
     id: string,
     price: number,
@@ -12,12 +10,11 @@ export interface IProduct {
     originCountry: string,
     material: string, // [suede, leather, textile, polymer, other materials]
     description?: string,
-    averageRate?: number,
-
-    photosIds?: string[],
-    sizesIds?: string[],
-    commentsIds?: string[],
-    customersIds?: string[],
 
     orderedAmount: number, //Вадя забыл добавить, потом добавит
+    averageRate: number,
+
+    photosIds: string[],
+    sizesIds: string[],
+    commentsIds?: string[],
 }

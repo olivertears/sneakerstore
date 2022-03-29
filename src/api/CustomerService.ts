@@ -6,7 +6,7 @@ import {IChangePassword} from "../models/IChangePassword";
 import {ICustomer} from "../models/ICustomer";
 
 export default class CustomerService {
-    static async getCustomer(customerId: string): Promise<AxiosResponse> {
+    static async getCustomer(customerId: string): Promise<AxiosResponse<ICustomer>> {
         return axios.get(`https://apisneakerstore.herokuapp.com/api/customers/${customerId}`)
     }
     static async putCustomer(changedCustomer: ICustomer, loginData: ILogin): Promise<AxiosResponse> {
@@ -28,7 +28,7 @@ export default class CustomerService {
     static async registration(registrationData: IRegistration): Promise<AxiosResponse> {
         return axios.post('https://apisneakerstore.herokuapp.com/api/register', registrationData)
     }
-    static async login(loginData: ILogin): Promise<AxiosResponse> {
+    static async login(loginData: ILogin): Promise<AxiosResponse<ICustomer>> {
         return axios.post('https://apisneakerstore.herokuapp.com/api/login', loginData, {
             headers: {
                 Authorization: 'Basic ' + btoa(`${loginData.email}:${loginData.password}`)

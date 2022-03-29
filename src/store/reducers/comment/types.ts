@@ -4,7 +4,7 @@ export interface CommentState {
     comments: IComment[]
 }
 
-export enum CommentActionEnum {
+export enum CommentActionsEnum {
     SET_COMMENTS = 'SET_COMMENTS',
     ADD_COMMENT = 'ADD_COMMENT',
     CHANGE_COMMENT = 'CHANGE_COMMENT',
@@ -12,22 +12,22 @@ export enum CommentActionEnum {
 }
 
 export interface SetCommentsAction {
-    type: CommentActionEnum.SET_COMMENTS,
+    type: CommentActionsEnum.SET_COMMENTS,
     payload: IComment[]
 }
 
 export interface AddCommentAction {
-    type: CommentActionEnum.ADD_COMMENT,
+    type: CommentActionsEnum.ADD_COMMENT,
     payload: IComment
 }
 
 export interface  ChangeCommentAction {
-    type: CommentActionEnum.CHANGE_COMMENT,
+    type: CommentActionsEnum.CHANGE_COMMENT,
     payload: IComment
 }
 
 export interface RemoveCommentAction {
-    type: CommentActionEnum.REMOVE_COMMENT,
+    type: CommentActionsEnum.REMOVE_COMMENT,
     payload: string
 }
 

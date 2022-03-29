@@ -4,9 +4,5 @@ export interface IRegistration {
     lastName: string,
     phone: string,
     email: string,
-    country: string,
-
-    city?: string,
-    address?: string,
     role?: string,
 }

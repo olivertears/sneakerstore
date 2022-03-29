@@ -11,9 +11,6 @@ const Registration: FC = () => {
 
     const [name, setName] = useState<string>('')
     const [surname, setSurname] = useState<string>('')
-    const [country, setCountry] = useState<string>('')
-    const [city, setCity] = useState<string>('')
-    const [address, setAddress] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -27,9 +24,6 @@ const Registration: FC = () => {
             lastName: capitalizePattern(surname),
             phone: phone,
             email: email,
-            country: capitalizePattern(country),
-            city: capitalizePattern(city || ''),
-            address: address,
         }
         registration(newCustomer)
     }
@@ -60,33 +54,6 @@ const Registration: FC = () => {
                         value={surname}
                         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key.replace(/[^A-Za-z\s]/g,'') && !(e.ctrlKey && e.keyCode === 86) || e.preventDefault()}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSurname(e.target.value)}
-                    />
-                </div>
-                <div className={cl.inputWrap}>
-                    <h3><span>*</span>Country</h3>
-                    <input
-                        required
-
-                        value={country}
-                        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key.replace(/[^A-Za-z\s]/g,'') && !(e.ctrlKey && e.keyCode === 86) || e.preventDefault()}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCountry(e.target.value)}
-                    />
-                </div>
-                <div className={cl.inputWrap}>
-                    <h3>City</h3>
-                    <input
-                        value={city}
-                        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key.replace(/[^A-Za-z\s]/g,'') && !(e.ctrlKey && e.keyCode === 86) || e.preventDefault()}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCity(e.target.value)}
-                    />
-                </div>
-                <div className={cl.inputWrap}>
-                    <h3>Address</h3>
-                    <input
-                        maxLength={100}
-
-                        value={address}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
                     />
                 </div>
                 <div className={cl.inputWrap}>

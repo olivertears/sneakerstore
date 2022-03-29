@@ -2,7 +2,7 @@ import {IComment} from "../../../models/IComment";
 import {
     AddCommentAction,
     ChangeCommentAction,
-    CommentActionEnum,
+    CommentActionsEnum,
     RemoveCommentAction,
     SetCommentsAction
 } from "./types";
@@ -14,19 +14,19 @@ import {ILogin} from "../../../models/ILogin";
 
 export const CommentActionCreators = {
     setComments: (comments: IComment[]): SetCommentsAction => ({
-        type: CommentActionEnum.SET_COMMENTS,
+        type: CommentActionsEnum.SET_COMMENTS,
         payload: comments
     }),
     addComment: (comment: IComment): AddCommentAction => ({
-        type: CommentActionEnum.ADD_COMMENT,
+        type: CommentActionsEnum.ADD_COMMENT,
         payload: comment
     }),
     changeComment: (comment: IComment): ChangeCommentAction => ({
-        type: CommentActionEnum.CHANGE_COMMENT,
+        type: CommentActionsEnum.CHANGE_COMMENT,
         payload: comment
     }),
     removeComment: (commentId: string): RemoveCommentAction => ({
-        type: CommentActionEnum.REMOVE_COMMENT,
+        type: CommentActionsEnum.REMOVE_COMMENT,
         payload: commentId
     }),
 
@@ -34,7 +34,7 @@ export const CommentActionCreators = {
         try {
             dispatch(AppActionCreators.setLoading(true))
             const response = await CommentService.getComments(productId)
-            dispatch(CommentActionCreators.setComments(response.data))
+            dispatch(CommentActionCreators.setComments(response.data as IComment[]))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {

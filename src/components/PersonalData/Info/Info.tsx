@@ -10,9 +10,6 @@ const Info: FC = () => {
 
     const [name, setName] = useState<string>(customer.firstName)
     const [surname, setSurname] = useState<string>(customer.lastName)
-    const [country, setCountry] = useState<string>(customer.country)
-    const [city, setCity] = useState<string>(customer.city || '')
-    const [address, setAddress] = useState<string>(customer.address || '')
     const [phone, setPhone] = useState<string>(customer.phone)
     const [email, setEmail] = useState<string>(customer.email)
 
@@ -24,9 +21,6 @@ const Info: FC = () => {
             lastName: surname,
             phone: phone,
             email: email,
-            country: country,
-            city: city,
-            address: address,
         }
     }
 
@@ -73,28 +67,6 @@ const Info: FC = () => {
                             type='email'
                             value={email}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                        />
-                    </div>
-                    <div className={cl.inputWrap}>
-                        <h3>Country</h3>
-                        <input
-                            required
-                            value={country}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCountry(e.target.value)}
-                        />
-                    </div>
-                    <div className={cl.inputWrap}>
-                        <h3>City</h3>
-                        <input
-                            value={city}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCity(e.target.value)}
-                        />
-                    </div>
-                    <div className={cl.inputWrap}>
-                        <h3>Address</h3>
-                        <input
-                            value={address}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
                         />
                     </div>
                 </form>
