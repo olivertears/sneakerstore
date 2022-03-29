@@ -32,11 +32,12 @@ export enum RouteNames {
 }
 
 export const publicRoutes: IRoute[] = [
+    {path: RouteNames.AUTHORIZATION, element: Authorization},
+
     {path: RouteNames.MAIN, element: Main},
     {path: RouteNames.CATALOG, element: Catalog},
     {path: RouteNames.FAVOURITES, element: Favourites},
     {path: RouteNames.CART, element: Cart},
-    {path: RouteNames.AUTHORIZATION, element: Authorization},
     {path: RouteNames.DEAL, element: Deal},
 ]
 
