@@ -69,15 +69,16 @@ const Info: FC = () => {
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                         />
                     </div>
+
+                    <button
+                        type='submit'
+                        className={cl.authorizationButton}
+                    >
+                        Save
+                    </button>
                 </form>
             </div>
 
-            <button
-                type='submit'
-                className={cl.authorizationButton}
-            >
-                Save
-            </button>
 
             <hr/>
         </div>

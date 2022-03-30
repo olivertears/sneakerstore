@@ -2,7 +2,6 @@ import React, {FC, Dispatch, SetStateAction, useState, useEffect} from 'react';
 //@ts-ignore
 import cl from './CardSlider.module.css'
 import {cardImages} from "../../../dataStorage/images/Card";
-import {ICard} from "../../../models/ICard";
 import {cardPaymentSystemPattern} from "../../../utils/patterns/cardPaymentSystemPattern";
 import SideCard from "./SideCard/SideCard";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";

@@ -3,11 +3,11 @@ import React, {FC} from 'react';
 import cl from './Error.module.css'
 import {useActions} from "../../../hooks/useActions";
 
-interface IError {
+interface IErrorProps {
     message: string
 }
 
-const Error: FC<IError> = ({message}) => {
+const Error: FC<IErrorProps> = ({message}) => {
     const {setError} = useActions.useAppActions()
 
 
@@ -21,7 +21,7 @@ const Error: FC<IError> = ({message}) => {
                 onClick={(e:React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
             >
                 <h1>Error :(</h1>
-                <h4>{message}</h4>
+                <h3>{message}</h3>
                 <button onClick={() => setError('')}>OK</button>
             </div>
         </div>

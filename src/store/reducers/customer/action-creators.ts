@@ -1,4 +1,10 @@
-import {CustomerActionsEnum, SetAuthAction, SetCustomerAction, SetLoginDataAction} from "../customer/types";
+import {
+    CustomerActionsEnum,
+    SetAuthAction,
+    SetCustomerAction,
+    SetLoginDataAction,
+    SetLoginWithGoogleForm
+} from "../customer/types";
 import {ICustomer} from "../../../models/ICustomer";
 import {AppDispatch} from "../../index";
 import {AppActionCreators} from "../app/action-creators";
@@ -11,6 +17,10 @@ import {IChangePassword} from "../../../models/IChangePassword";
 
 
 export const CustomerActionCreators = {
+    setLoginWithGoogleForm: (isLoginWithGoogleForm: boolean): SetLoginWithGoogleForm => ({
+        type: CustomerActionsEnum.SET_LOGIN_WITH_GOOGLE_FORM,
+        payload: isLoginWithGoogleForm
+    }),
     setAuth: (auth: boolean): SetAuthAction => ({
         type: CustomerActionsEnum.SET_AUTH,
         payload: auth
@@ -83,7 +93,17 @@ export const CustomerActionCreators = {
         dispatch(CustomerActionCreators.setAuth(false))
         dispatch(AppActionCreators.setPage('AUTHORIZATION'))
     },
-
+    loginWithGoogleForm: () => async (dispatch: AppDispatch) => {
+        try {
+            dispatch(AppActionCreators.setLoading(true))
+            const response = await CustomerService.loginWithGoogleForm()
+            dispatch(CustomerActionCreators.setLoginWithGoogleForm(true))
+        } catch (err: any) {
+            dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
+        } finally {
+            dispatch(AppActionCreators.setLoading(false))
+        }
+    },
     registration: (registrationData: IRegistration) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
@@ -95,7 +115,6 @@ export const CustomerActionCreators = {
             dispatch(AppActionCreators.setLoading(false))
         }
     },
-
     checkDoesEmailExist: (email: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))

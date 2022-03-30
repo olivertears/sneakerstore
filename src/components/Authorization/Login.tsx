@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react';
 import {authorizationImages} from "../../dataStorage/images/Authorization";
 //@ts-ignore
 import cl from './Authorization.module.css'
@@ -10,7 +10,7 @@ import {RouteNames} from "../../router";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 const Login: FC = () => {
-    const {login} = useActions.useCustomerActions()
+    const {login, loginWithGoogleForm} = useActions.useCustomerActions()
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -27,7 +27,10 @@ const Login: FC = () => {
     return (
         <div className={cl.wrap}>
             <h1 className={cl.loginTitle}>LOGIN</h1>
-            <a href="https://apisneakerstore.herokuapp.com/oauth2/authorization/google">
+            <a
+                href="https://apisneakerstore.herokuapp.com/oauth2/authorization/google"
+                onClick={() => loginWithGoogleForm()}
+            >
                 <h4>Login with Google</h4>
             </a>
 

@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {Dispatch, FC, SetStateAction, useState} from 'react';
 import {authorizationImages} from "../../dataStorage/images/Authorization";
 //@ts-ignore
 import cl from './Authorization.module.css'
@@ -7,23 +7,23 @@ import {capitalizePattern} from "../../utils/patterns/capitalizePattern";
 import {IRegistration} from "../../models/IRegistration";
 
 const Registration: FC = () => {
-    const {registration} = useActions.useCustomerActions()
+    const {registration, loginWithGoogleForm} = useActions.useCustomerActions()
 
     const [name, setName] = useState<string>('')
     const [surname, setSurname] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-    const [eyeOpen, setEyeOpen] = useState<boolean>(false)
+    const [newEmail, setNewEmail] = useState<string>('')
+    const [newPassword, setNewPassword] = useState<string>('')
+    const [eyeOpenReg, setEyeOpenReg] = useState<boolean>(false)
 
     const postCustomerData = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
         const newCustomer: IRegistration = {
-            password: password,
+            password: newPassword,
             firstName: capitalizePattern(name),
             lastName: capitalizePattern(surname),
             phone: phone,
-            email: email,
+            email: newEmail,
         }
         registration(newCustomer)
     }
@@ -31,13 +31,16 @@ const Registration: FC = () => {
     return (
         <div className={cl.wrap}>
             <h1>REGISTRATION</h1>
-            <a href="https://apisneakerstore.herokuapp.com/oauth2/authorization/google">
+            <a
+                href="https://apisneakerstore.herokuapp.com/oauth2/authorization/google"
+                onClick={() => loginWithGoogleForm()}
+            >
                 <h4>Login with Google</h4>
             </a>
 
             <form onSubmit={postCustomerData}>
                 <div className={cl.inputWrap}>
-                    <h3><span>*</span>Name</h3>
+                    <h3>Name</h3>
                     <input
                         required
 
@@ -47,7 +50,7 @@ const Registration: FC = () => {
                     />
                 </div>
                 <div className={cl.inputWrap}>
-                    <h3><span>*</span>Surname</h3>
+                    <h3>Surname</h3>
                     <input
                         required
 
@@ -57,7 +60,7 @@ const Registration: FC = () => {
                     />
                 </div>
                 <div className={cl.inputWrap}>
-                    <h3><span>*</span>Phone</h3>
+                    <h3>Phone</h3>
                     <h2 className={cl.phonePlus}>+</h2>
                     <input
                         required
@@ -71,30 +74,30 @@ const Registration: FC = () => {
                     />
                 </div>
                 <div className={cl.inputWrap}>
-                    <h3><span>*</span>Email</h3>
+                    <h3>Email</h3>
                     <input
                         required
 
                         type='email'
-                        value={email}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                        value={newEmail}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewEmail(e.target.value)}
                     />
                 </div>
                 <div className={cl.inputWrap}>
-                    <h3><span>*</span>Password</h3>
+                    <h3>Password</h3>
                     <input
                         required
                         minLength={6}
 
-                        type={eyeOpen ? 'text' : 'password'}
+                        type={eyeOpenReg ? 'text' : 'password'}
                         className={cl.passwordInput}
-                        value={password}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                        value={newPassword}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewPassword(e.target.value)}
                     />
                     <img
                         className={cl.eyeImage}
-                        src={eyeOpen ? authorizationImages.eyeOpen : authorizationImages.eyeClose}
-                        onClick={() => eyeOpen ? setEyeOpen(false) : setEyeOpen(true)}
+                        src={eyeOpenReg ? authorizationImages.eyeOpen : authorizationImages.eyeClose}
+                        onClick={() => eyeOpenReg ? setEyeOpenReg(false) : setEyeOpenReg(true)}
                     />
                 </div>
 

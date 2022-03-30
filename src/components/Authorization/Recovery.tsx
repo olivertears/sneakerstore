@@ -8,24 +8,23 @@ import {IResetPassword} from "../../models/IResetPassword";
 const Recovery: FC = () => {
     const {checkDoesEmailExist, resetPassword} = useActions.useCustomerActions()
 
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
+    const [oldEmail, setOldEmail] = useState<string>('')
+    const [newPass, setNewPass] = useState<string>('')
     const [code, setCode] = useState<string>('')
     const [isReal, setIsReal] = useState<boolean>(false)
-
     const [eyeOpen, setEyeOpen] = useState<boolean>(false)
 
     const recoveryAccount = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if(isReal) {
             const resetPasswordData: IResetPassword = {
-                email: email,
-                newPassword: password,
+                email: oldEmail,
+                newPassword: newPass,
                 code: Number(code)
             }
             resetPassword(resetPasswordData)
         } else {
-            checkDoesEmailExist(email) ? setIsReal(true) : setIsReal(false)
+            checkDoesEmailExist(oldEmail) ? setIsReal(true) : setIsReal(false)
         }
     }
 
@@ -42,8 +41,8 @@ const Recovery: FC = () => {
 
                         type='email'
                         className={isReal ? cl.emailIsRealInput : ''}
-                        value={email}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                        value={oldEmail}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setOldEmail(e.target.value)}
                     />
                 </div>
                 <div className={cl.inputWrap}>
@@ -55,8 +54,8 @@ const Recovery: FC = () => {
 
                         type={eyeOpen ? 'text' : 'password'}
                         className={`${cl.passwordInput} ${isReal ? cl.emailIsRealInput : ''}`}
-                        value={password}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                        value={newPass}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewPass(e.target.value)}
                     />
                     <img
                         className={cl.eyeImage}

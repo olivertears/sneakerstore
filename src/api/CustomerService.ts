@@ -35,6 +35,9 @@ export default class CustomerService {
             },
         })
     }
+    static async loginWithGoogleForm(): Promise<AxiosResponse<ICustomer>> {
+        return axios.get('https://apisneakerstore.herokuapp.com/oauth2/authorization/google')
+    }
     static async checkDoesEmailExist(email: string): Promise<AxiosResponse> {
         return axios.post('https://apisneakerstore.herokuapp.com/api/forgot_password', {
             params: {
