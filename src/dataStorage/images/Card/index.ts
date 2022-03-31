@@ -6,13 +6,15 @@ import cardWrap from './cardWrap.png'
 import mastercard from './mastercard.png'
 //@ts-ignore
 import visa from './visa.png'
-
+//@ts-ignore
+import deleteBtn from './deleteBtn.png'
 
 interface ICardImages {
     addCard: string,
     cardWrap: string,
     mastercard: string,
     visa: string,
+    deleteBtn: string
 }
 
 export const cardImages: ICardImages = {
@@ -20,4 +22,5 @@ export const cardImages: ICardImages = {
     cardWrap: cardWrap,
     mastercard: mastercard,
     visa: visa,
+    deleteBtn: deleteBtn
 }

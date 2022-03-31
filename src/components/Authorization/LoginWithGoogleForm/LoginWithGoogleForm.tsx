@@ -13,13 +13,13 @@ const LoginWithGoogleForm: FC = () => {
     const [surname, setSurname] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
     const [email, setEmail] = useState<string>('')
-    const [pass, setPass] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
     const [eyeOpenGoogle, setEyeOpenGoogle] = useState<boolean>(false)
 
     const postCustomerData = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
         const newCustomer: IRegistration = {
-            password: pass,
+            password: password,
             firstName: capitalizePattern(name),
             lastName: capitalizePattern(surname),
             phone: phone,
@@ -88,8 +88,8 @@ const LoginWithGoogleForm: FC = () => {
 
                                     type={eyeOpenGoogle ? 'text' : 'password'}
                                     className={cl.passwordInput}
-                                    value={pass}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPass(e.target.value)}
+                                    value={password}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                 />
                                 <img
                                     className={cl.eyeImage}

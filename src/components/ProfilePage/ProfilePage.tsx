@@ -15,7 +15,10 @@ const ProfilePage: FC = () => {
             <div className={cl.twoItemsWrap}>
                 <div
                     className={cl.contentWrap}
-                    onClick={() => navigate(RouteNames.PERSONAL_DATA)}
+                    onClick={() => {
+
+                        navigate(RouteNames.PERSONAL_DATA)
+                    }}
                 >
                     <img src={profileImages.personalData}/>
                     <h2>PERSONAL DATA</h2>

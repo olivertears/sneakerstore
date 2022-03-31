@@ -12,6 +12,7 @@ export default class CardService {
         })
     }
     static async postCard(newCard: ICard, loginData: ILogin): Promise<AxiosResponse> {
+        // return axios.post('https://apisneakerstore.herokuapp.com/api/cards', newCard)
         return axios.post('https://apisneakerstore.herokuapp.com/api/cards', newCard, {
             headers: {
                 Authorization: 'Basic ' + btoa(`${loginData.email}:${loginData.password}`)

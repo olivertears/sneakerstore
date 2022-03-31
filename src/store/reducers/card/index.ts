@@ -3,13 +3,16 @@ import {ICard} from "../../../models/ICard";
 
 
 const initialState: CardState = {
-    cards: [] as ICard[]
+    cards: [
+        {id: '0', number: '', validityDate: '', owner: '', cvv: '', customersIds: ['']},
+        {id: '1', number: '5166 6666 6666 6666', validityDate: '12/24', owner: 'OLIVER TEARS', cvv: '666', customersIds: ['']},
+    ] as ICard[]
 }
 
 export default function CardReducer(state = initialState, action: CardAction): CardState {
     switch (action.type) {
         case CardActionsEnum.SET_CARDS:
-            return {...state, cards: action.payload}
+            return {...state, cards: [...state.cards, ...action.payload]}
         case CardActionsEnum.ADD_CARD:
             return {...state, cards: [...state.cards, action.payload]}
         case CardActionsEnum.CHANGE_CARD:

@@ -6,4 +6,3 @@ export interface ICard {
     cvv: string,
     customersIds: string[],
 }
-

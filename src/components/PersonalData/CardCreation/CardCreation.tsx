@@ -9,6 +9,7 @@ import {cardNumberPattern} from "../../../utils/patterns/cardNumberPattern"
 import {cardMonthPattern, cardYearPattern} from "../../../utils/patterns/cardDatePattern"
 import {cardOwnerPattern} from "../../../utils/patterns/cardOwnerPattern"
 import {cardPaymentSystemPattern} from "../../../utils/patterns/cardPaymentSystemPattern"
+import {randomUUID} from "../../../utils/randomUUID";
 
 
 interface ICardCreationProps {
@@ -16,8 +17,9 @@ interface ICardCreationProps {
 }
 
 const CardCreation: FC<ICardCreationProps> = ({setIsCardSettings}) => {
-    const {customer} = useTypedSelector(state => state.customer)
+    const {customer, loginData} = useTypedSelector(state => state.customer)
     const {setError} = useActions.useAppActions()
+    const {postCard, putCard} = useActions.useCardActions()
 
     const [number, setNumber] = useState<string>('')
     const [owner, setOwner] = useState<string>('')
@@ -25,18 +27,17 @@ const CardCreation: FC<ICardCreationProps> = ({setIsCardSettings}) => {
     const [year, setYear] = useState<string>('')
     const [cvv, setCvv] = useState<string>('')
 
-    const postCard = (e: React.FormEvent<HTMLFormElement>): void => {
+    const addCard = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
         const newCard: ICard = {
-            id: Date.now().toString(),
+            id: randomUUID(),
             customersIds: [customer.id],
             number: cardNumberPattern(number),
             validityDate: `${cardMonthPattern(month)}/${cardYearPattern(year)}`,
             owner: cardOwnerPattern(owner),
             cvv: cvv,
         }
-        console.log(newCard)
-        cardDateValidation(newCard) ? console.log('Everything is good') : setError('The card is no longer active')
+        cardDateValidation(newCard) ? postCard(newCard, loginData) : setError('The card is no longer active')
         setIsCardSettings(false)
     }
 
@@ -49,7 +50,7 @@ const CardCreation: FC<ICardCreationProps> = ({setIsCardSettings}) => {
             <form
                 className={cl.content}
                 onClick={(e:React.MouseEvent<HTMLFormElement>) => e.stopPropagation()}
-                onSubmit={postCard}
+                onSubmit={addCard}
             >
                 <h1>Card Settings</h1>
 

@@ -1,9 +1,7 @@
 import React, {FC, Dispatch, SetStateAction, useState, useEffect} from 'react';
 //@ts-ignore
 import cl from './CardSlider.module.css'
-import {cardImages} from "../../../dataStorage/images/Card";
-import {cardPaymentSystemPattern} from "../../../utils/patterns/cardPaymentSystemPattern";
-import SideCard from "./SideCard/SideCard";
+import OneCard from "./OneCard/OneCard";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
 import {useActions} from "../../../hooks/useActions";
 
@@ -17,12 +15,12 @@ const CardSlider: FC<ICardSliderProps> = ({setIsCardSettings}) => {
     const {cards} = useTypedSelector(state => state.card)
     const {getCards, postCard, putCard, deleteCard} = useActions.useCardActions()
 
-    const [activeImgIndex, setActiveImgIndex] = useState<number>(0);
-
-
-
+    const [activeImgIndex, setActiveImgIndex] = useState<number>(cards.length > 1 ? 1 : 0);
     const prevImgIndex: number = activeImgIndex ? activeImgIndex - 1 : cards.length - 1
     const nextImgIndex: number = activeImgIndex === cards.length - 1 ? 0 : activeImgIndex + 1
+
+    const [right, setRight] = useState(false)
+    const [left, setLeft] = useState(false)
 
     return (
         <div className={cl.wrap}>
@@ -31,51 +29,30 @@ const CardSlider: FC<ICardSliderProps> = ({setIsCardSettings}) => {
             <div className={cl.sliderWrap}>
                 <div
                     className={cl.arrow}
-                    onClick={() => setActiveImgIndex(activeImgIndex === 0 ? cards.length - 1 : activeImgIndex - 1)}
+                    onClick={() => {
+                        setLeft(true)
+                        setTimeout(() => {
+                            setActiveImgIndex(activeImgIndex === 0 ? cards.length - 1 : activeImgIndex - 1)
+                            setLeft(false)
+                        }, 450)
+                    }}
                 />
 
-                {cards.length === 0
-                    ?
-                    ''
-                    :
-                    <>
-                        <SideCard card={cards[prevImgIndex]}/>
-
-                        <div
-                            key={cards[activeImgIndex].id}
-                            className={cl.cardImage}
-                            onClick={() => setIsCardSettings(true)}
-                            style={{backgroundImage: cards[activeImgIndex].id === '0' ? `url(${cardImages.addCard})` : `url(${cardImages.cardWrap})`}}
-                        >
-                            <img
-                                src={cardPaymentSystemPattern(cards[activeImgIndex].number || '')}
-                                className={cl.paymentSystem}
-                            />
-                            <h4 className={cl.number}>{cards[activeImgIndex].number}</h4>
-
-                            <div className={cl.wrapForValidDate}>
-                                <h4 className={cl.validThru}>{cards[activeImgIndex].id === '0' ? '' : 'VALID THRU'}</h4>
-                                <h4 className={cl.validDate}>{cards[activeImgIndex].validityDate}</h4>
-                            </div>
-                            <h4 className={cl.owner}>{cards[activeImgIndex].owner}</h4>
-                        </div>
-
-                        <SideCard card={cards[nextImgIndex]}/>
-                    </>
-                }
-
+                <OneCard card={cards[prevImgIndex]} active={false} setIsCardSettings={setIsCardSettings} moveRight={right} moveLeft={left} position={'left'}/>
+                <OneCard card={cards[activeImgIndex]} active={true} setIsCardSettings={setIsCardSettings} moveRight={right} moveLeft={left} position={'center'}/>
+                <OneCard card={cards[nextImgIndex]} active={false} setIsCardSettings={setIsCardSettings} moveRight={right} moveLeft={left} position={'right'}/>
 
                 <div
                     className={cl.arrow}
-                    onClick={() => setActiveImgIndex(activeImgIndex === cards.length - 1 ? 0 : activeImgIndex + 1)}
+                    onClick={() => {
+                        setRight(true)
+                        setTimeout(() => {
+                            setActiveImgIndex(activeImgIndex === cards.length - 1 ? 0 : activeImgIndex + 1)
+                            setRight(false)
+                        }, 450)
+                    }}
                 />
             </div>
-
-            <button onClick={() => getCards(customer.id, loginData)}>GET CARDS</button>
-            <button onClick={() => postCard({id: '0', cvv: '', customersIds: [customer.id], validityDate: '', owner: 'scbh', number: '0000' }, loginData)}>ADD CARD</button>
-            <button onClick={() => putCard({id: '0', cvv: '', customersIds: [''], validityDate: '', owner: '', number: '' }, loginData)}>CHANGE CARD</button>
-            <button onClick={() => deleteCard('0', loginData)}>DELETE CARDS</button>
-
             <hr/>
         </div>
     );

@@ -12,18 +12,18 @@ const Registration: FC = () => {
     const [name, setName] = useState<string>('')
     const [surname, setSurname] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
-    const [newEmail, setNewEmail] = useState<string>('')
-    const [newPassword, setNewPassword] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
     const [eyeOpenReg, setEyeOpenReg] = useState<boolean>(false)
 
     const postCustomerData = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
         const newCustomer: IRegistration = {
-            password: newPassword,
+            password: password,
             firstName: capitalizePattern(name),
             lastName: capitalizePattern(surname),
             phone: phone,
-            email: newEmail,
+            email: email,
         }
         registration(newCustomer)
     }
@@ -79,8 +79,8 @@ const Registration: FC = () => {
                         required
 
                         type='email'
-                        value={newEmail}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewEmail(e.target.value)}
+                        value={email}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                     />
                 </div>
                 <div className={cl.inputWrap}>
@@ -91,8 +91,8 @@ const Registration: FC = () => {
 
                         type={eyeOpenReg ? 'text' : 'password'}
                         className={cl.passwordInput}
-                        value={newPassword}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewPassword(e.target.value)}
+                        value={password}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                     />
                     <img
                         className={cl.eyeImage}
