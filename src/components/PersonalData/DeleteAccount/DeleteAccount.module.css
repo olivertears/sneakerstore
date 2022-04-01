@@ -1,0 +1,12 @@
+.wrap {
+    text-align: center;
+    padding: 0 100px 50px;
+}
+
+.deleteAccountBtn {
+    margin-top: 20px;
+}
+
+.deleteAccountBtn:hover {
+    background: darkred;
+}

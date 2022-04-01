@@ -3,28 +3,33 @@ import React, {Dispatch, FC, SetStateAction, useState} from 'react';
 import cl from "./OneCard.module.css";
 import {cardPaymentSystemPattern} from "../../../../utils/patterns/cardPaymentSystemPattern";
 import {ICard} from "../../../../models/ICard";
-import {cardImages} from "../../../../dataStorage/images/Card";
+import {appImages} from "../../../../dataStorage/images/App";
+import {useActions} from "../../../../hooks/useActions";
+import {useTypedSelector} from "../../../../hooks/useTypedSelector";
 
 interface ISideCardProps {
     card: ICard
     active: boolean
-    setIsCardSettings: Dispatch<SetStateAction<boolean>>
+    setCardSettings: Dispatch<SetStateAction<ICard>>
     moveRight: boolean
     moveLeft: boolean
     position: string
 }
 
-const OneCard: FC<ISideCardProps> = ({card, active, setIsCardSettings, moveRight, moveLeft, position}) => {
+const OneCard: FC<ISideCardProps> = ({card, active, setCardSettings, moveRight, moveLeft, position}) => {
+    const {loginData} = useTypedSelector(state => state.customer)
+    const {deleteCard} = useActions.useCardActions()
 
     return (
         <div
             key={card.id}
             className={`${cl.cardImage} ${card.id === '0' ? cl.addCard : cl.cardWrap} ${active ? cl.active : cl.notActive} ${position === 'left' && moveRight && cl.leftToRight} ${position === 'center' && moveRight && cl.centerToRight} ${position === 'right' && moveLeft && cl.rightToLeft} ${position === 'center' && moveLeft && cl.centerToLeft}`}
-            onClick={() => active && setIsCardSettings(true)}
+            onClick={() => active && setCardSettings(card)}
         >
             <img
-                src={card.id !== '0' ? cardImages.deleteBtn : ''}
+                src={card.id !== '0' ? appImages.deleteBtn : ''}
                 className={`${cl.deleteBtn} ${active && cl.deleteHover}`}
+                onClick={() => active && deleteCard(card.id, loginData)}
             />
             <img
                 src={cardPaymentSystemPattern(card.number || '')}

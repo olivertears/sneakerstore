@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 //@ts-ignore
-import cl from './Error.module.css'
+import cl from './ErrorWarningWindow.module.css'
 import {useActions} from "../../../hooks/useActions";
 
 interface IErrorProps {

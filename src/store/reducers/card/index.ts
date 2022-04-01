@@ -5,7 +5,6 @@ import {ICard} from "../../../models/ICard";
 const initialState: CardState = {
     cards: [
         {id: '0', number: '', validityDate: '', owner: '', cvv: '', customersIds: ['']},
-        {id: '1', number: '5166 6666 6666 6666', validityDate: '12/24', owner: 'OLIVER TEARS', cvv: '666', customersIds: ['']},
     ] as ICard[]
 }
 

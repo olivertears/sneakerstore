@@ -1,4 +1,11 @@
-import {AppActionsEnum, SetPageAction, SetCurrencyAction, SetLoadingAction, SetErrorAction} from "./types";
+import {
+    AppActionsEnum,
+    SetPageAction,
+    SetCurrencyAction,
+    SetLoadingAction,
+    SetErrorAction,
+    SetWarningAction
+} from "./types";
 import {ICurrency} from "../../../models/ICurrency";
 import {scrollToTop} from "../../../utils/scrolls/scrollToTop";
 
@@ -10,6 +17,10 @@ export const AppActionCreators = {
     }),
     setError: (error: string): SetErrorAction => ({
         type: AppActionsEnum.SET_ERROR,
+        payload: error
+    }),
+    setWarning: (error: string): SetWarningAction => ({
+        type: AppActionsEnum.SET_WARNING,
         payload: error
     }),
     setPage: (page: string): SetPageAction => {

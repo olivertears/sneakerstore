@@ -3,25 +3,29 @@ import Info from "../components/PersonalData/Info/Info";
 import ChangePassword from "../components/PersonalData/ChangePassword/ChangePassword";
 import CardSlider from "../components/PersonalData/CardSlider/CardSlider";
 import CardCreation from "../components/PersonalData/CardCreation/CardCreation";
-import Error from "../components/ReusedComponents/Error/Error";
+import Error from "../components/ReusedComponents/ErrorWarningWindow/Error";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import AddressList from "../components/PersonalData/AddressList/AddressList";
 import AddressCreation from "../components/PersonalData/AddressCreation/AddressCreation";
 import DeleteAccount from "../components/PersonalData/DeleteAccount/DeleteAccount";
+import Warning from "../components/ReusedComponents/ErrorWarningWindow/Warning";
+import {ICard} from "../models/ICard";
+import {IAddress} from "../models/IAddress";
 
 const PersonalData: FC = () => {
-    const {error} = useTypedSelector(state => state.app)
-    const [isCardSettings, setIsCardSettings] = useState<boolean>(false)
-    const [isAddressSettings, setIsAddressSettings] = useState<boolean>(false)
+    const {error, warning} = useTypedSelector(state => state.app)
+    const [cardSettings, setCardSettings] = useState<ICard>({} as ICard)
+    const [addressSettings, setAddressSettings] = useState<IAddress>({} as IAddress)
 
     return (
         <div>
             {error && <Error message={error}/>}
-            {isCardSettings && <CardCreation setIsCardSettings={setIsCardSettings}/>}
-            {isAddressSettings && <AddressCreation setIsAddressSettings={setIsAddressSettings}/>}
+            {warning && <Warning message={warning}/>}
+            {cardSettings.id && <CardCreation setCardSettings={setCardSettings} cardSettings={cardSettings}/>}
+            {addressSettings.id && <AddressCreation setAddressSettings={setAddressSettings} addressSettings={addressSettings}/>}
             <Info/>
-            <AddressList setIsAddressSettings={setIsAddressSettings}/>
-            <CardSlider setIsCardSettings={setIsCardSettings}/>
+            <AddressList setAddressSettings={setAddressSettings}/>
+            <CardSlider setCardSettings={setCardSettings}/>
             <ChangePassword/>
             <DeleteAccount/>
         </div>

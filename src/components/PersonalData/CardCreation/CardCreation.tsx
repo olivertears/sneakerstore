@@ -10,22 +10,24 @@ import {cardMonthPattern, cardYearPattern} from "../../../utils/patterns/cardDat
 import {cardOwnerPattern} from "../../../utils/patterns/cardOwnerPattern"
 import {cardPaymentSystemPattern} from "../../../utils/patterns/cardPaymentSystemPattern"
 import {randomUUID} from "../../../utils/randomUUID";
+import {deleteSpaces} from "../../../utils/patterns/deleteSpaces";
 
 
 interface ICardCreationProps {
-    setIsCardSettings: Dispatch<SetStateAction<boolean>>;
+    setCardSettings: Dispatch<SetStateAction<ICard>>;
+    cardSettings: ICard
 }
 
-const CardCreation: FC<ICardCreationProps> = ({setIsCardSettings}) => {
+const CardCreation: FC<ICardCreationProps> = ({setCardSettings, cardSettings}) => {
     const {customer, loginData} = useTypedSelector(state => state.customer)
     const {setError} = useActions.useAppActions()
     const {postCard, putCard} = useActions.useCardActions()
 
-    const [number, setNumber] = useState<string>('')
-    const [owner, setOwner] = useState<string>('')
-    const [month, setMonth] = useState<string>('')
-    const [year, setYear] = useState<string>('')
-    const [cvv, setCvv] = useState<string>('')
+    const [number, setNumber] = useState<string>(deleteSpaces(cardSettings.number))
+    const [owner, setOwner] = useState<string>(cardSettings.owner)
+    const [month, setMonth] = useState<string>(cardSettings.validityDate.slice(0,2))
+    const [year, setYear] = useState<string>(cardSettings.validityDate.slice(-2))
+    const [cvv, setCvv] = useState<string>(cardSettings.cvv)
 
     const addCard = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
@@ -38,19 +40,32 @@ const CardCreation: FC<ICardCreationProps> = ({setIsCardSettings}) => {
             cvv: cvv,
         }
         cardDateValidation(newCard) ? postCard(newCard, loginData) : setError('The card is no longer active')
-        setIsCardSettings(false)
+        setCardSettings({} as ICard)
     }
 
+    const changeCard = (e: React.FormEvent<HTMLFormElement>): void => {
+        e.preventDefault()
+        const changedCard: ICard = {
+            id: cardSettings.id,
+            customersIds: [customer.id],
+            number: cardNumberPattern(number),
+            validityDate: `${cardMonthPattern(month)}/${cardYearPattern(year)}`,
+            owner: cardOwnerPattern(owner),
+            cvv: cvv,
+        }
+        cardDateValidation(changedCard) ? putCard(changedCard, loginData) : setError('The card is no longer active')
+        setCardSettings({} as ICard)
+    }
 
     return (
         <div
             className={cl.wrap}
-            onClick={() => setIsCardSettings(false)}
+            onClick={() => setCardSettings({} as ICard)}
         >
             <form
                 className={cl.content}
                 onClick={(e:React.MouseEvent<HTMLFormElement>) => e.stopPropagation()}
-                onSubmit={addCard}
+                onSubmit={cardSettings.id === '0' ? addCard : changeCard}
             >
                 <h1>Card Settings</h1>
 

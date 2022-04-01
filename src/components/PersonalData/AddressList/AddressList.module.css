@@ -1,0 +1,78 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.allAddressesWrap {
+    background: #333333;
+    border-radius: 10px;
+    width: 600px;
+    margin: 10px auto;
+}
+
+.addressWrap {
+    display: flex;
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 400;
+    width: 600px;
+    height: 30px;
+    color: white;
+    padding: 5px 0;
+}
+
+.addressWrap:first-child {
+    border-radius: 10px 10px 0 0;
+}
+
+.addressWrap:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+.addressWrap:hover {
+    cursor: pointer;
+    background: #1D1F22;
+}
+
+.number {
+    width: 50px;
+}
+
+.addressData {
+    width: 500px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre;
+}
+
+.deleteBtn {
+    width: 20px;
+    height: 20px;
+    margin: 5px 15px;
+}
+
+.deleteBtn:hover {
+    background: black;
+    box-shadow: 0 0 5px 2px;
+    color: black;
+}
+
+.addBtn {
+    background: #333333;
+    height: 30px;
+    width: 200px;
+    margin: 10px auto 0;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.addBtn:hover {
+    cursor: pointer;
+    outline: 3px solid black;
+}
+
+.addBtn img{
+    width: 30px;
+}

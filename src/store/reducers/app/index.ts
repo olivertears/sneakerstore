@@ -5,7 +5,8 @@ const initialState: AppState = {
     loading: false,
     page: 'MAIN',
     currency: {label: 'USD', symbol: '$', exchangeRate: 1},
-    error: ''
+    error: '',
+    warning: ''
 }
 
 export default function appReducer(state = initialState, action: AppAction): typeof initialState{
@@ -14,6 +15,8 @@ export default function appReducer(state = initialState, action: AppAction): typ
             return {...state, loading: action.payload}
         case AppActionsEnum.SET_ERROR:
             return {...state, error: action.payload}
+        case AppActionsEnum.SET_WARNING:
+            return {...state, warning: action.payload}
         case AppActionsEnum.SET_PAGE:
             return {...state, page: action.payload}
         case AppActionsEnum.SET_CURRENCY:

@@ -5,8 +5,12 @@ import {profileImages} from "../../dataStorage/images/Profile";
 import {useActions} from "../../hooks/useActions";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../router";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 const ProfilePage: FC = () => {
+    const {customer, loginData} = useTypedSelector(state => state.customer)
+    const {getCards} = useActions.useCardActions()
+    const {getAddresses} = useActions.useAddressActions()
     const {logout} = useActions.useCustomerActions()
     const navigate = useNavigate()
 
@@ -16,7 +20,8 @@ const ProfilePage: FC = () => {
                 <div
                     className={cl.contentWrap}
                     onClick={() => {
-
+                        getCards(customer.id, loginData)
+                        getAddresses(customer.id, loginData)
                         navigate(RouteNames.PERSONAL_DATA)
                     }}
                 >

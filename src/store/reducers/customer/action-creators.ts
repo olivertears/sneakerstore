@@ -140,6 +140,7 @@ export const CustomerActionCreators = {
         try {
             dispatch(AppActionCreators.setLoading(true))
             await CustomerService.changePassword(changePasswordData)
+            dispatch(AppActionCreators.setWarning(`The password has been successfully changed!`))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Invalid oldPassword'))
         } finally {

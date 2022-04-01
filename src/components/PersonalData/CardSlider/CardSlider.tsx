@@ -4,16 +4,17 @@ import cl from './CardSlider.module.css'
 import OneCard from "./OneCard/OneCard";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
 import {useActions} from "../../../hooks/useActions";
+import {ICard} from "../../../models/ICard";
 
 
 interface ICardSliderProps {
-    setIsCardSettings: Dispatch<SetStateAction<boolean>>;
+    setCardSettings: Dispatch<SetStateAction<ICard>>;
 }
 
-const CardSlider: FC<ICardSliderProps> = ({setIsCardSettings}) => {
+const CardSlider: FC<ICardSliderProps> = ({setCardSettings}) => {
     const {customer, loginData} = useTypedSelector(state => state.customer)
     const {cards} = useTypedSelector(state => state.card)
-    const {getCards, postCard, putCard, deleteCard} = useActions.useCardActions()
+    const {setCards} = useActions.useCardActions()
 
     const [activeImgIndex, setActiveImgIndex] = useState<number>(cards.length > 1 ? 1 : 0);
     const prevImgIndex: number = activeImgIndex ? activeImgIndex - 1 : cards.length - 1
@@ -22,26 +23,20 @@ const CardSlider: FC<ICardSliderProps> = ({setIsCardSettings}) => {
     const [right, setRight] = useState(false)
     const [left, setLeft] = useState(false)
 
+    useEffect(() => {
+        localStorage.setItem('cards', JSON.stringify(cards))
+    }, [cards])
+
+    useEffect(() => {
+        setCards(JSON.parse(localStorage.getItem('cards') || '') as ICard[])
+    }, [])
+
+
     return (
         <div className={cl.wrap}>
-            <h1>BANK CARD</h1>
+            <h1>BANK CARDS</h1>
 
             <div className={cl.sliderWrap}>
-                <div
-                    className={cl.arrow}
-                    onClick={() => {
-                        setLeft(true)
-                        setTimeout(() => {
-                            setActiveImgIndex(activeImgIndex === 0 ? cards.length - 1 : activeImgIndex - 1)
-                            setLeft(false)
-                        }, 450)
-                    }}
-                />
-
-                <OneCard card={cards[prevImgIndex]} active={false} setIsCardSettings={setIsCardSettings} moveRight={right} moveLeft={left} position={'left'}/>
-                <OneCard card={cards[activeImgIndex]} active={true} setIsCardSettings={setIsCardSettings} moveRight={right} moveLeft={left} position={'center'}/>
-                <OneCard card={cards[nextImgIndex]} active={false} setIsCardSettings={setIsCardSettings} moveRight={right} moveLeft={left} position={'right'}/>
-
                 <div
                     className={cl.arrow}
                     onClick={() => {
@@ -49,6 +44,21 @@ const CardSlider: FC<ICardSliderProps> = ({setIsCardSettings}) => {
                         setTimeout(() => {
                             setActiveImgIndex(activeImgIndex === cards.length - 1 ? 0 : activeImgIndex + 1)
                             setRight(false)
+                        }, 450)
+                    }}
+                />
+
+                <OneCard card={cards[prevImgIndex]} active={false} setCardSettings={setCardSettings} moveRight={right} moveLeft={left} position={'left'}/>
+                <OneCard card={cards[activeImgIndex]} active={true} setCardSettings={setCardSettings} moveRight={right} moveLeft={left} position={'center'}/>
+                <OneCard card={cards[nextImgIndex]} active={false} setCardSettings={setCardSettings} moveRight={right} moveLeft={left} position={'right'}/>
+
+                <div
+                    className={cl.arrow}
+                    onClick={() => {
+                        setLeft(true)
+                        setTimeout(() => {
+                            setActiveImgIndex(activeImgIndex === 0 ? cards.length - 1 : activeImgIndex - 1)
+                            setLeft(false)
                         }, 450)
                     }}
                 />
