@@ -12,7 +12,7 @@ interface IAddressListProps {
 
 const AddressList: FC<IAddressListProps> = ({setAddressSettings}) => {
     const {addresses} = useTypedSelector(state => state.address)
-    const {loginData} = useTypedSelector(state => state.customer)
+    const {authorization} = useTypedSelector(state => state.customer)
     const {deleteAddress, setAddresses} = useActions.useAddressActions()
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const AddressList: FC<IAddressListProps> = ({setAddressSettings}) => {
                         <img
                             className={cl.deleteBtn}
                             src={appImages.deleteBtn}
-                            onClick={() => deleteAddress(address.id, loginData)}
+                            onClick={() => deleteAddress(address.id, authorization)}
                         />
                     </div>
                 )}

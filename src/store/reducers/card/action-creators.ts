@@ -30,10 +30,10 @@ export const CardActionCreators = {
         payload: cardId
     }),
 
-    getCards: (customerId: string, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    getCards: (customerId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            const response = await CardService.getCards(customerId, loginData)
+            const response = await CardService.getCards(customerId, authorization)
             dispatch(CardActionCreators.setCards(response.data as ICard[]))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
@@ -41,10 +41,10 @@ export const CardActionCreators = {
             dispatch(AppActionCreators.setLoading(false))
         }
     },
-    postCard: (newCard: ICard, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    postCard: (newCard: ICard, authorization: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            await CardService.postCard(newCard, loginData)
+            await CardService.postCard(newCard, authorization)
             dispatch(CardActionCreators.addCard(newCard))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Card with this number already exists'))
@@ -52,10 +52,10 @@ export const CardActionCreators = {
             dispatch(AppActionCreators.setLoading(false))
         }
     },
-    putCard: (changedCard: ICard, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    putCard: (changedCard: ICard, authorization: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            await CardService.putCard(changedCard, loginData)
+            await CardService.putCard(changedCard, authorization)
             dispatch(CardActionCreators.changeCard(changedCard))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Card with this number already exists'))
@@ -63,10 +63,10 @@ export const CardActionCreators = {
             dispatch(AppActionCreators.setLoading(false))
         }
     },
-    deleteCard: (cardId: string, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    deleteCard: (cardId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            await CardService.deleteCard(cardId, loginData)
+            await CardService.deleteCard(cardId, authorization)
             dispatch(CardActionCreators.removeCard(cardId))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))

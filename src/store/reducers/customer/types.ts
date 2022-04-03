@@ -4,16 +4,15 @@ import {ILogin} from "../../../models/ILogin";
 export interface CustomerState {
     loginWithGoogleForm: boolean
     auth: boolean,
-    loginData: ILogin,
+    authorization: string,
     customer: ICustomer,
 }
 
 export enum CustomerActionsEnum {
     SET_LOGIN_WITH_GOOGLE_FORM = 'SET_LOGIN_WITH_GOOGLE_FORM',
     SET_AUTH = 'SET_AUTH',
-    SET_LOGIN_DATA = 'SET_LOGIN_DATA',
+    SET_AUTHORIZATION = 'SET_LOGIN_DATA',
     SET_CUSTOMER = 'SET_CUSTOMER',
-    CHANGE_CUSTOMER = 'CHANGE_CUSTOMER',
 }
 
 export interface SetLoginWithGoogleForm {
@@ -27,8 +26,8 @@ export interface SetAuthAction {
 }
 
 export interface SetLoginDataAction {
-    type: CustomerActionsEnum.SET_LOGIN_DATA,
-    payload: ILogin
+    type: CustomerActionsEnum.SET_AUTHORIZATION,
+    payload: string
 }
 
 export interface SetCustomerAction {

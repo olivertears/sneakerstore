@@ -7,24 +7,24 @@ export default class CommentService {
     static async getComments(productId: string): Promise<AxiosResponse<IComment[]>> {
         return axios.get(`https://apisneakerstore.herokuapp.com/api/products/${productId}/comments`)
     }
-    static async postComment(newComment: IComment, loginData: ILogin): Promise<AxiosResponse> {
+    static async postComment(newComment: IComment, authorization: string): Promise<AxiosResponse> {
         return axios.post('https://apisneakerstore.herokuapp.com/api/comments', newComment, {
             headers: {
-                Authorization: 'Basic ' + btoa(`${loginData.email}:${loginData.password}`)
+                Authorization: 'Basic ' + authorization
             },
         })
     }
-    static async putComment(changedComment: IComment, loginData: ILogin): Promise<AxiosResponse> {
+    static async putComment(changedComment: IComment, authorization: string): Promise<AxiosResponse> {
         return axios.put('https://apisneakerstore.herokuapp.com/api/comments', changedComment, {
             headers: {
-                Authorization: 'Basic ' + btoa(`${loginData.email}:${loginData.password}`)
+                Authorization: 'Basic ' + authorization
             },
         })
     }
-    static async deleteComment(commentId: string, loginData: ILogin): Promise<AxiosResponse> {
+    static async deleteComment(commentId: string, authorization: string): Promise<AxiosResponse> {
         return axios.delete(`https://apisneakerstore.herokuapp.com/api/comments/${commentId}`, {
             headers: {
-                Authorization: 'Basic ' + btoa(`${loginData.email}:${loginData.password}`)
+                Authorization: 'Basic ' + authorization
             },
         })
     }

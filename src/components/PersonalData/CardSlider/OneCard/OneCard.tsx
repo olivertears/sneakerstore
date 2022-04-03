@@ -17,7 +17,7 @@ interface ISideCardProps {
 }
 
 const OneCard: FC<ISideCardProps> = ({card, active, setCardSettings, moveRight, moveLeft, position}) => {
-    const {loginData} = useTypedSelector(state => state.customer)
+    const {authorization} = useTypedSelector(state => state.customer)
     const {deleteCard} = useActions.useCardActions()
 
     return (
@@ -29,7 +29,7 @@ const OneCard: FC<ISideCardProps> = ({card, active, setCardSettings, moveRight, 
             <img
                 src={card.id !== '0' ? appImages.deleteBtn : ''}
                 className={`${cl.deleteBtn} ${active && cl.deleteHover}`}
-                onClick={() => active && deleteCard(card.id, loginData)}
+                onClick={() => active && deleteCard(card.id, authorization)}
             />
             <img
                 src={cardPaymentSystemPattern(card.number || '')}

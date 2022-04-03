@@ -9,17 +9,17 @@ export default class CustomerService {
     static async getCustomer(customerId: string): Promise<AxiosResponse<ICustomer>> {
         return axios.get(`https://apisneakerstore.herokuapp.com/api/customers/${customerId}`)
     }
-    static async putCustomer(changedCustomer: ICustomer, loginData: ILogin): Promise<AxiosResponse> {
+    static async putCustomer(changedCustomer: ICustomer, authorization: string): Promise<AxiosResponse> {
         return axios.put('https://apisneakerstore.herokuapp.com/api/customers', changedCustomer, {
             headers: {
-                Authorization: 'Basic ' + btoa(`${loginData.email}:${loginData.password}`)
+                Authorization: 'Basic ' + authorization
             },
         })
     }
-    static async deleteCustomer(customerId: string, loginData: ILogin): Promise<AxiosResponse> {
+    static async deleteCustomer(customerId: string, authorization: string): Promise<AxiosResponse> {
         return axios.delete(`https://apisneakerstore.herokuapp.com/api/customers/${customerId}`, {
             headers: {
-                Authorization: 'Basic ' + btoa(`${loginData.email}:${loginData.password}`)
+                Authorization: 'Basic ' + authorization
             },
         })
     }

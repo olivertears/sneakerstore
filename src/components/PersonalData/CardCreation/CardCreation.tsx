@@ -19,7 +19,7 @@ interface ICardCreationProps {
 }
 
 const CardCreation: FC<ICardCreationProps> = ({setCardSettings, cardSettings}) => {
-    const {customer, loginData} = useTypedSelector(state => state.customer)
+    const {customer, authorization} = useTypedSelector(state => state.customer)
     const {setError} = useActions.useAppActions()
     const {postCard, putCard} = useActions.useCardActions()
 
@@ -39,7 +39,7 @@ const CardCreation: FC<ICardCreationProps> = ({setCardSettings, cardSettings}) =
             owner: cardOwnerPattern(owner),
             cvv: cvv,
         }
-        cardDateValidation(newCard) ? postCard(newCard, loginData) : setError('The card is no longer active')
+        cardDateValidation(newCard) ? postCard(newCard, authorization) : setError('The card is no longer active')
         setCardSettings({} as ICard)
     }
 
@@ -53,7 +53,7 @@ const CardCreation: FC<ICardCreationProps> = ({setCardSettings, cardSettings}) =
             owner: cardOwnerPattern(owner),
             cvv: cvv,
         }
-        cardDateValidation(changedCard) ? putCard(changedCard, loginData) : setError('The card is no longer active')
+        cardDateValidation(changedCard) ? putCard(changedCard, authorization) : setError('The card is no longer active')
         setCardSettings({} as ICard)
     }
 

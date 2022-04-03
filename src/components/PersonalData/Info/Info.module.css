@@ -14,15 +14,6 @@
     margin: auto;
 }
 
-.photoWrap {
-    justify-content: center;
-    background: #333333;
-    border-radius: 30px;
-    width: 300px;
-    height: 300px;
-    margin-right: 20px;
-}
-
 .inputWrap {
     padding: 0 0 10px;
     width: 400px;
@@ -43,6 +34,23 @@
     margin-bottom: 0;
 }
 
+.inputWrap .phoneInput {
+    margin-left: 0;
+    width: 242px;
+    border-radius: 0 5px 5px 0;
+    padding-left: 0;
+}
+
+.inputWrap .phonePlus {
+    width: 30px;
+    height: 30px;
+    background: #f6f6f6;
+    border-radius: 5px 0 0 5px;
+    margin: 0 0 0 20px;
+    padding: 5px;
+    text-align: center;
+}
+
 .inputWrap h3 {
     margin-top: 5px;
     width: 100px;
@@ -52,4 +60,8 @@
 .authorizationButton {
     width: 200px;
     margin: 10px auto 0;
+}
+
+.disabledBtn:hover {
+    cursor: not-allowed;
 }

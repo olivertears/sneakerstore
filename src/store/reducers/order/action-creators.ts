@@ -1,10 +1,7 @@
 import {IOrder} from "../../../models/IOrder";
 import {AddOrderAction, OrderActionsEnum, RemoveOrderAction, SetOrdersAction} from "./types";
-import {ILogin} from "../../../models/ILogin";
 import {AppDispatch} from "../../index";
 import {AppActionCreators} from "../app/action-creators";
-import CardService from "../../../api/CardService";
-import {ICard} from "../../../models/ICard";
 import OrderService from "../../../api/OrderService";
 
 export const OrderActionCreators = {
@@ -21,10 +18,10 @@ export const OrderActionCreators = {
         payload: orderId
     }),
 
-    getOrders: (customerId: string, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    getOrders: (customerId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            const response = await OrderService.getOrders(customerId, loginData)
+            const response = await OrderService.getOrders(customerId, authorization)
             dispatch(OrderActionCreators.setOrders(response.data as IOrder[]))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
@@ -43,10 +40,10 @@ export const OrderActionCreators = {
             dispatch(AppActionCreators.setLoading(false))
         }
     },
-    deleteOrder: (orderId: string, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    deleteOrder: (orderId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            await OrderService.deleteOrder(orderId, loginData)
+            await OrderService.deleteOrder(orderId, authorization)
             dispatch(OrderActionCreators.removeOrder(orderId))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))

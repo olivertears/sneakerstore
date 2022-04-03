@@ -41,10 +41,10 @@ export const CommentActionCreators = {
             dispatch(AppActionCreators.setLoading(false))
         }
     },
-    postComment: (newComment: IComment, loginData: ILogin) => async(dispatch: AppDispatch) => {
+    postComment: (newComment: IComment, authorization: string) => async(dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            await CommentService.postComment(newComment, loginData)
+            await CommentService.postComment(newComment, authorization)
             dispatch(CommentActionCreators.addComment(newComment))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
@@ -52,10 +52,10 @@ export const CommentActionCreators = {
             dispatch(AppActionCreators.setLoading(false))
         }
     },
-    putComment: (changedComment: IComment, loginData: ILogin) => async(dispatch: AppDispatch) => {
+    putComment: (changedComment: IComment, authorization: string) => async(dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            await CommentService.putComment(changedComment, loginData)
+            await CommentService.putComment(changedComment, authorization)
             dispatch(CommentActionCreators.changeComment(changedComment))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
@@ -63,10 +63,10 @@ export const CommentActionCreators = {
             dispatch(AppActionCreators.setLoading(false))
         }
     },
-    deleteComment: (commentId: string, loginData: ILogin) => async(dispatch: AppDispatch) => {
+    deleteComment: (commentId: string, authorization: string) => async(dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            await CommentService.deleteComment(commentId, loginData)
+            await CommentService.deleteComment(commentId, authorization)
             dispatch(CommentActionCreators.removeComment(commentId))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))

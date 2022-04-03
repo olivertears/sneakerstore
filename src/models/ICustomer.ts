@@ -10,7 +10,7 @@ export interface ICustomer {
 
     addressesIds?: string[],
     cardsIds?: string[],
-    favouritesIds?: string[],
+    favoritesIds?: string[],
     commentsIds?: string[],
     inCartIds?: string[],
     ordersIds?: string[]

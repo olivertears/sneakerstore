@@ -11,9 +11,10 @@ import {useActions} from "./hooks/useActions";
 import {ICustomer} from "./models/ICustomer";
 import {RouteNames} from "./router";
 import {useNavigate} from "react-router-dom";
+import {ILogin} from "./models/ILogin";
 
 const App = () => {
-    const {setAuth, setCustomer} = useActions.useCustomerActions()
+    const {setAuth, setCustomer, setAuthorization} = useActions.useCustomerActions()
     const {loading} = useTypedSelector(state => state.app)
     const [scroll, setScroll] = useState<number>(0)
 
@@ -24,6 +25,7 @@ const App = () => {
     useEffect(() => {
         if(localStorage.getItem('auth')) {
             setAuth(JSON.parse(localStorage.getItem('auth') || '') as boolean)
+            setAuthorization(JSON.parse(localStorage.getItem('authorization') || '') as string)
             setCustomer(JSON.parse(localStorage.getItem('customer') || '') as ICustomer)
         }
         window.addEventListener("scroll", scrollHandler);

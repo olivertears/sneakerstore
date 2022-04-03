@@ -29,10 +29,10 @@ export const AddressActionCreators = {
         payload: addressId
     }),
 
-    getAddresses: (customerId: string, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    getAddresses: (customerId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            const response = await AddressService.getAddresses(customerId, loginData)
+            const response = await AddressService.getAddresses(customerId, authorization)
             dispatch(AddressActionCreators.setAddresses(response.data as IAddress[]))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
@@ -40,10 +40,10 @@ export const AddressActionCreators = {
             dispatch(AppActionCreators.setLoading(false))
         }
     },
-    postAddress: (newAddress: IAddress, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    postAddress: (newAddress: IAddress, authorization: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            await AddressService.postAddress(newAddress, loginData)
+            await AddressService.postAddress(newAddress, authorization)
             dispatch(AddressActionCreators.addAddress(newAddress))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
@@ -51,10 +51,10 @@ export const AddressActionCreators = {
             dispatch(AppActionCreators.setLoading(false))
         }
     },
-    putAddress: (changedAddress: IAddress, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    putAddress: (changedAddress: IAddress, authorization: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            await AddressService.putAddress(changedAddress, loginData)
+            await AddressService.putAddress(changedAddress, authorization)
             dispatch(AddressActionCreators.changeAddress(changedAddress))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
@@ -62,10 +62,10 @@ export const AddressActionCreators = {
             dispatch(AppActionCreators.setLoading(false))
         }
     },
-    deleteAddress: (addressId: string, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    deleteAddress: (addressId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            await AddressService.deleteAddress(addressId, loginData)
+            await AddressService.deleteAddress(addressId, authorization)
             dispatch(AddressActionCreators.removeAddress(addressId))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))

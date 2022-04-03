@@ -25,9 +25,9 @@ export const CustomerActionCreators = {
         type: CustomerActionsEnum.SET_AUTH,
         payload: auth
     }),
-    setLoginData: (loginData: ILogin): SetLoginDataAction => ({
-        type: CustomerActionsEnum.SET_LOGIN_DATA,
-        payload: loginData
+    setAuthorization: (authorization: string): SetLoginDataAction => ({
+        type: CustomerActionsEnum.SET_AUTHORIZATION,
+        payload: authorization
     }),
     setCustomer: (customer: ICustomer): SetCustomerAction => ({
         type: CustomerActionsEnum.SET_CUSTOMER,
@@ -44,10 +44,10 @@ export const CustomerActionCreators = {
             dispatch(AppActionCreators.setLoading(false))
         }
     },
-    putCustomer: (customer: ICustomer, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    putCustomer: (customer: ICustomer, authorization: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            await CustomerService.putCustomer(customer, loginData)
+            await CustomerService.putCustomer(customer, authorization)
             localStorage.setItem('customer', JSON.stringify(customer))
             dispatch(CustomerActionCreators.setCustomer(customer))
         } catch (err: any){
@@ -56,10 +56,10 @@ export const CustomerActionCreators = {
             dispatch(AppActionCreators.setLoading(false))
         }
     },
-    deleteCustomer: (customerId: string, loginData: ILogin) => async (dispatch: AppDispatch) => {
+    deleteCustomer: (customerId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setLoading(true))
-            await CustomerService.deleteCustomer(customerId, loginData)
+            await CustomerService.deleteCustomer(customerId, authorization)
         } catch (err: any){
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
@@ -72,10 +72,10 @@ export const CustomerActionCreators = {
             dispatch(AppActionCreators.setLoading(true))
             const response = await CustomerService.login(loginData)
             localStorage.setItem('auth', JSON.stringify(true))
-            localStorage.setItem('loginData', JSON.stringify(loginData))
+            localStorage.setItem('authorization', JSON.stringify(btoa(`${loginData.email}:${loginData.password}`)))
             localStorage.setItem('customer', JSON.stringify(response.data))
             dispatch(CustomerActionCreators.setAuth(true))
-            dispatch(CustomerActionCreators.setLoginData(loginData))
+            dispatch(CustomerActionCreators.setAuthorization(btoa(`${loginData.email}:${loginData.password}`)))
             dispatch(CustomerActionCreators.setCustomer(response.data as ICustomer))
             dispatch(AppActionCreators.setPage('PROFILE'))
         } catch (err: any) {
@@ -85,10 +85,10 @@ export const CustomerActionCreators = {
         }
     },
     logout: () => (dispatch: AppDispatch) => {
-        localStorage.removeItem('loginData')
+        localStorage.removeItem('authorization')
         localStorage.removeItem('customer')
         localStorage.removeItem('auth')
-        dispatch(CustomerActionCreators.setLoginData({} as ILogin))
+        dispatch(CustomerActionCreators.setAuthorization(''))
         dispatch(CustomerActionCreators.setCustomer({} as ICustomer))
         dispatch(CustomerActionCreators.setAuth(false))
         dispatch(AppActionCreators.setPage('AUTHORIZATION'))

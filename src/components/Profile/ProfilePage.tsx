@@ -8,7 +8,7 @@ import {RouteNames} from "../../router";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 const ProfilePage: FC = () => {
-    const {customer, loginData} = useTypedSelector(state => state.customer)
+    const {customer, authorization} = useTypedSelector(state => state.customer)
     const {getCards} = useActions.useCardActions()
     const {getAddresses} = useActions.useAddressActions()
     const {logout} = useActions.useCustomerActions()
@@ -20,8 +20,8 @@ const ProfilePage: FC = () => {
                 <div
                     className={cl.contentWrap}
                     onClick={() => {
-                        getCards(customer.id, loginData)
-                        getAddresses(customer.id, loginData)
+                        getCards(customer.id, authorization)
+                        getAddresses(customer.id, authorization)
                         navigate(RouteNames.PERSONAL_DATA)
                     }}
                 >

@@ -12,7 +12,6 @@ interface ICardSliderProps {
 }
 
 const CardSlider: FC<ICardSliderProps> = ({setCardSettings}) => {
-    const {customer, loginData} = useTypedSelector(state => state.customer)
     const {cards} = useTypedSelector(state => state.card)
     const {setCards} = useActions.useCardActions()
 

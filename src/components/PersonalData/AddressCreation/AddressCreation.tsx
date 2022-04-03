@@ -13,7 +13,7 @@ interface IAddressCreationProps {
 }
 
 const AddressCreation: FC<IAddressCreationProps> = ({setAddressSettings, addressSettings}) => {
-    const {customer, loginData} = useTypedSelector(state => state.customer)
+    const {customer, authorization} = useTypedSelector(state => state.customer)
     const {postAddress, putAddress} = useActions.useAddressActions()
 
     const [country, setCountry] = useState<string>(addressSettings.country)
@@ -35,7 +35,7 @@ const AddressCreation: FC<IAddressCreationProps> = ({setAddressSettings, address
             apartment: apartment,
             customersIds: [customer.id]
         }
-        postAddress(newAddress, loginData)
+        postAddress(newAddress, authorization)
         setAddressSettings({} as IAddress)
     }
 
@@ -51,7 +51,7 @@ const AddressCreation: FC<IAddressCreationProps> = ({setAddressSettings, address
             apartment: apartment,
             customersIds: [customer.id]
         }
-        putAddress(changedAddress, loginData)
+        putAddress(changedAddress, authorization)
         setAddressSettings({} as IAddress)
     }
 

@@ -13,14 +13,14 @@ interface IWarningProps {
 const Warning: FC<IWarningProps> = ({message}) => {
     const {setWarning} = useActions.useAppActions()
     const {logout, deleteCustomer} = useActions.useCustomerActions()
-    const {customer, loginData} = useTypedSelector(state => state.customer)
+    const {customer, authorization} = useTypedSelector(state => state.customer)
     const navigate = useNavigate()
 
     const confirm = (): void => {
         setWarning('')
         logout()
         navigate(RouteNames.AUTHORIZATION)
-        message.includes('delete') && deleteCustomer(customer.id, loginData)
+        message.includes('delete') && deleteCustomer(customer.id, authorization)
     }
 
     return (
