@@ -12,11 +12,11 @@
 
 .content {
     background: #dadada;
-    width: 670px;
+    width: 550px;
     height: auto;
     border-radius: 10px;
     text-align: center;
-    padding: 30px 50px;
+    padding: 30px 50px 40px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -33,11 +33,12 @@
     display: flex;
     justify-content: center;
     outline: 3px solid black;
+    position: absolute;
+    overflow: hidden;
 }
 
 .canvas {
     position: absolute;
-    margin-top: 25px;
     top: 50%;
     transform: translateY(-50%);
     background: #333333;
@@ -45,56 +46,38 @@
 
 .workspace {
     position: absolute;
-    top: 80px;
-    left: 30px;
 
-    width: 50px;
-    height: 50px;
     outline: 3px solid black;
     min-width: 25px;
     min-height: 25px;
+    box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.5);
+
+    transition-property: width, height, top, left;
+    transition-duration: 1ms;
 }
 
 .resizer {
     width: 10px;
     height: 10px;
-    background: transparent;
+    background: url("../../../dataStorage/images/App/resizer.png");
+    background-size: 100%;
     position: absolute;
     cursor: se-resize;
     right: 0;
     bottom: 0;
 }
 
-
-
-
-
-
-
-
 .wrapPreview {
     display: flex;
     flex-direction: column;
     padding-left: 50px;
-}
-
-
-.previewIcons {
-    display: flex;
+    margin-left: 300px;
 }
 
 .square {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     background: #333333;
-    margin-bottom: 20px;
     border-radius: 30px;
-}
-
-.circle {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: #333333;
-    margin-left: 20px;
+    margin: 0 auto 20px;
 }

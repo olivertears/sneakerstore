@@ -2,6 +2,9 @@ import React, {Dispatch, FC, SetStateAction, useEffect, useRef, useState} from '
 //@ts-ignore
 import cl from './AvatarCreation.module.css'
 import {finished} from "stream";
+import {useActions} from "../../../hooks/useActions";
+import {ICustomer} from "../../../models/ICustomer";
+import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
 interface IAvatarCreationProps {
     avatarUrl: string
@@ -9,6 +12,8 @@ interface IAvatarCreationProps {
 }
 
 const AvatarCreation: FC<IAvatarCreationProps> = ({avatarUrl, setAvatarUrl}) => {
+    const {customer, authorization} = useTypedSelector(state => state.customer)
+    const {putCustomer} = useActions.useCustomerActions()
     const canvasWidth = useRef<number>(0)
     const canvasHeight = useRef<number>(0)
 
@@ -19,9 +24,16 @@ const AvatarCreation: FC<IAvatarCreationProps> = ({avatarUrl, setAvatarUrl}) => 
         const canvas: HTMLCanvasElement = document.getElementById('canvas')
         const ctx = canvas.getContext('2d')
         // @ts-ignore
+        const previewCanvas: HTMLCanvasElement = document.getElementById('previewCanvas')
+        const previewCtx = previewCanvas.getContext('2d')
+        previewCanvas.setAttribute('width', `180px`)
+        previewCanvas.setAttribute('height', `180px`)
+        // @ts-ignore
         const workspace: HTMLDivElement = document.getElementById('workspace')
         // @ts-ignore
         const resizer: HTMLDivElement = document.getElementById('resizer')
+        // @ts-ignore
+        const saveBtn: HTMLButtonElement = document.getElementById('saveBtn')
 
         avatar.onload = () => {
             const RATIO: number = avatar.width > avatar.height ? 300 / avatar.width : 300 / avatar.height
@@ -32,14 +44,28 @@ const AvatarCreation: FC<IAvatarCreationProps> = ({avatarUrl, setAvatarUrl}) => 
             workspace.style.maxHeight = `${WIDTH > HEIGHT ? HEIGHT : WIDTH}px`
             workspace.style.width = `${WIDTH > HEIGHT ? HEIGHT : WIDTH}px`
             workspace.style.height = `${WIDTH > HEIGHT ? HEIGHT : WIDTH}px`
-            workspace.style.top = `${WIDTH > HEIGHT ? 80 + (300 - HEIGHT) / 2 : 80 + (300 - WIDTH) / 2}px`
-            workspace.style.left = `${WIDTH > HEIGHT ? 50 + (300 - HEIGHT) / 2 : 50 + (300 - WIDTH) / 2}px`
+            workspace.style.top = `${WIDTH > HEIGHT ? (300 - HEIGHT) / 2 : (300 - WIDTH) / 2}px`
+            workspace.style.left = `${WIDTH > HEIGHT ? (300 - HEIGHT) / 2 : (300 - WIDTH) / 2}px`
 
             canvas.setAttribute('width', `${WIDTH}px`)
             canvas.setAttribute('height', `${HEIGHT}px`)
             // @ts-ignore
             ctx.drawImage(avatar, 0, 0, WIDTH, HEIGHT)
+
+            const minOffsetTop: number =  Math.floor((300 - canvasHeight.current) / 2)
+            const minOffsetLeft: number = Math.floor((300 - canvasWidth.current) / 2)
+            // @ts-ignore
+            previewCtx.drawImage(canvas, workspace.offsetLeft - minOffsetLeft, workspace.offsetTop - minOffsetTop, workspace.clientWidth, workspace.clientHeight, 0, 0, 180, 180)
         }
+
+        workspace.addEventListener('transitionend', () => {
+            const minOffsetTop: number =  Math.floor((300 - canvasHeight.current) / 2)
+            const minOffsetLeft: number = Math.floor((300 - canvasWidth.current) / 2)
+            // @ts-ignore
+            previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height)
+            // @ts-ignore
+            previewCtx.drawImage(canvas, workspace.offsetLeft - minOffsetLeft, workspace.offsetTop - minOffsetTop, workspace.clientWidth, workspace.clientHeight, 0, 0, 180, 180)
+        })
 
         resizer.addEventListener('mousedown', (e: MouseEvent) => {
             e.preventDefault()
@@ -51,8 +77,17 @@ const AvatarCreation: FC<IAvatarCreationProps> = ({avatarUrl, setAvatarUrl}) => 
         }, false);
 
         const resize = (e: MouseEvent) => {
-            workspace.style.width = (e.clientX - 210 - workspace.offsetLeft) + 'px';
-            workspace.style.height = (e.clientX - 210 - workspace.offsetLeft) + 'px';
+            const minOffsetTop: number =  Math.floor((300 - canvasHeight.current) / 2)
+            const maxOffsetTop: number = minOffsetTop + canvasHeight.current
+            const minOffsetLeft: number = Math.floor((300 - canvasWidth.current) / 2)
+            const maxOffsetLeft: number = minOffsetLeft + canvasWidth.current
+
+            if(workspace.offsetTop > maxOffsetTop - workspace.clientHeight || workspace.offsetLeft > maxOffsetLeft - workspace.clientWidth) {
+                e.stopImmediatePropagation()
+            } else {
+                workspace.style.height = (e.clientX - 450 - workspace.offsetLeft) + 'px'
+                workspace.style.width = (e.clientX - 450 - workspace.offsetLeft) + 'px'
+            }
         }
         function stopResize() {
             window.removeEventListener('mousemove', resize, false);
@@ -78,9 +113,9 @@ const AvatarCreation: FC<IAvatarCreationProps> = ({avatarUrl, setAvatarUrl}) => 
                     y: e.clientY
                 }
 
-                const minOffsetTop: number = 80 + (300 - canvasHeight.current) / 2
+                const minOffsetTop: number =  Math.floor((300 - canvasHeight.current) / 2)
                 const maxOffsetTop: number = minOffsetTop + canvasHeight.current
-                const minOffsetLeft: number = 50 + (300 - canvasWidth.current) / 2
+                const minOffsetLeft: number = Math.floor((300 - canvasWidth.current) / 2)
                 const maxOffsetLeft: number = minOffsetLeft + canvasWidth.current
 
                 if(workspace.offsetTop < minOffsetTop) {
@@ -106,6 +141,14 @@ const AvatarCreation: FC<IAvatarCreationProps> = ({avatarUrl, setAvatarUrl}) => 
             document.addEventListener('mousemove', onMouseMove);
             document.addEventListener('mouseup', onMouseUp);
         })
+
+        saveBtn.onclick = () => {
+            const changedCustomer: ICustomer = {
+                ...customer,
+                avatar: previewCanvas.toDataURL("image/jpeg")
+            }
+            putCustomer(changedCustomer, authorization)
+        }
     }, [])
 
 
@@ -124,11 +167,8 @@ const AvatarCreation: FC<IAvatarCreationProps> = ({avatarUrl, setAvatarUrl}) => 
 
                     <div className={cl.wrapPreview}>
                         <h1>PREVIEW</h1>
-                        <div className={cl.previewIcons}>
-                            <img src={avatarUrl} className={cl.square}/>
-                            <img src={avatarUrl} className={cl.circle}/>
-                        </div>
-                        <button onClick={() => setAvatarUrl('')}>
+                        <canvas id='previewCanvas' className={cl.square}/>
+                        <button id='saveBtn' onClick={() => setAvatarUrl('')}>
                             Save
                         </button>
                     </div>

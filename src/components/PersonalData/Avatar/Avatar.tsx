@@ -3,8 +3,11 @@ import React, {ChangeEvent, FC, useRef, useState} from 'react';
 import cl from './Avatar.module.css'
 import {appImages} from "../../../dataStorage/images/App";
 import AvatarCreation from "../AvatarCreation/AvatarCreation";
+import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
 const Avatar: FC = () => {
+    const {customer} = useTypedSelector(state => state.customer)
+
     const [avatarUrl, setAvatarUrl] = useState<string>('')
 
     const changeAvatar = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -18,13 +21,15 @@ const Avatar: FC = () => {
         }
     }
 
+    console.log(customer)
+
     return (
         <div id='photoWrap' className={cl.photoWrap}>
             {avatarUrl && <AvatarCreation avatarUrl={avatarUrl} setAvatarUrl={setAvatarUrl}/>}
-            {avatarUrl
+            {customer.avatar
                 ?
                 <img
-                    src={avatarUrl || ''}
+                    src={customer.avatar}
                     className={cl.avatar}
                 />
                 :

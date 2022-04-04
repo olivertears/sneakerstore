@@ -3,7 +3,7 @@ import {ICustomer} from "../../../models/ICustomer";
 
 const initialState: CustomerState = {
     loginWithGoogleForm: false,
-    auth: true,
+    auth: false,
     authorization: '',
     customer: {} as ICustomer,
 }
