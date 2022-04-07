@@ -1,0 +1,19 @@
+.wrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.brandWrap {
+    height: 30px;
+    padding: 10px;
+    display: flex;
+}
+
+.brandWrap:hover {
+    background: #f6f6f6;
+}
+
+.brandImg {
+    width: 30px;
+    margin: auto;
+}

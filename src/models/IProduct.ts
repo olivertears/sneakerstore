@@ -5,7 +5,7 @@ export interface IProduct {
     brand: string,
     name: string,
     destiny: string,
-    season: string, // [summer, winter, demi-season, multi-season]
+    season: string,
     color: string,
     originCountry: string,
     material: string, // [suede, leather, textile, polymer, other materials]

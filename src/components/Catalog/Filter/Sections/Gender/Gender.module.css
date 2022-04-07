@@ -1,0 +1,19 @@
+.wrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.genderWrap {
+    height: 30px;
+    padding: 10px;
+    display: flex;
+}
+
+.genderWrap:hover {
+    background: #f6f6f6;
+}
+
+.genderImg {
+    width: 30px;
+    margin: auto;
+}

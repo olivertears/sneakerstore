@@ -30,7 +30,6 @@ const Info: FC = () => {
         putCustomer(changedCustomer, authorization)
     }
 
-
     return (
         <div className={cl.wrap}>
             <h1>PERSONAL INFORMATION</h1>

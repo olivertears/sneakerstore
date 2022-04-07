@@ -1,0 +1,19 @@
+.wrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.seasonWrap {
+    height: 30px;
+    padding: 10px;
+    display: flex;
+}
+
+.seasonWrap:hover {
+    background: #f6f6f6;
+}
+
+.seasonImg {
+    width: 30px;
+    margin: auto;
+}

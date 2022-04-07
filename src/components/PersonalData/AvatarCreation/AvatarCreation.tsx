@@ -13,7 +13,9 @@ interface IAvatarCreationProps {
 
 const AvatarCreation: FC<IAvatarCreationProps> = ({avatarUrl, setAvatarUrl}) => {
     const {customer, authorization} = useTypedSelector(state => state.customer)
-    const {putCustomer} = useActions.useCustomerActions()
+    const {putCustomer, setCustomer} = useActions.useCustomerActions()
+    const {setError} = useActions.useAppActions()
+
     const canvasWidth = useRef<number>(0)
     const canvasHeight = useRef<number>(0)
 
@@ -36,6 +38,11 @@ const AvatarCreation: FC<IAvatarCreationProps> = ({avatarUrl, setAvatarUrl}) => 
         const saveBtn: HTMLButtonElement = document.getElementById('saveBtn')
 
         avatar.onload = () => {
+            if (avatar.width / avatar.height > 12 || avatar.width / avatar.height < 1 / 12) {
+                setError('Incorrect aspect ratio: one side of the image is much longer than another one!')
+                setAvatarUrl('')
+            }
+
             const RATIO: number = avatar.width > avatar.height ? 300 / avatar.width : 300 / avatar.height
             const WIDTH: number = canvasWidth.current = Math.floor(avatar.width * RATIO)
             const HEIGHT: number = canvasHeight.current = Math.floor(avatar.height * RATIO)
@@ -72,27 +79,31 @@ const AvatarCreation: FC<IAvatarCreationProps> = ({avatarUrl, setAvatarUrl}) => 
             e.stopPropagation()
             e.stopImmediatePropagation()
 
+            let startX = e.clientX
+
+            const resize = (e: MouseEvent) => {
+                e.preventDefault()
+
+                let offsetX = startX - e.clientX
+
+                startX = e.clientX
+
+                const maxOffsetTop: number = Math.floor((300 - canvasHeight.current) / 2 + canvasHeight.current)
+                const maxOffsetLeft: number = Math.floor((300 - canvasWidth.current) / 2 + canvasWidth.current)
+
+                workspace.offsetTop > maxOffsetTop - workspace.clientHeight || workspace.offsetLeft > maxOffsetLeft - workspace.clientWidth
+                    ? e.stopImmediatePropagation()
+                    : workspace.style.width = workspace.style.height = workspace.clientWidth - offsetX + 'px'
+            }
+
+            function stopResize() {
+                window.removeEventListener('mousemove', resize, false);
+                window.removeEventListener('mouseup', stopResize, false);
+            }
+
             window.addEventListener('mousemove', resize, false)
             window.addEventListener('mouseup', stopResize, false)
         }, false);
-
-        const resize = (e: MouseEvent) => {
-            const minOffsetTop: number =  Math.floor((300 - canvasHeight.current) / 2)
-            const maxOffsetTop: number = minOffsetTop + canvasHeight.current
-            const minOffsetLeft: number = Math.floor((300 - canvasWidth.current) / 2)
-            const maxOffsetLeft: number = minOffsetLeft + canvasWidth.current
-
-            if(workspace.offsetTop > maxOffsetTop - workspace.clientHeight || workspace.offsetLeft > maxOffsetLeft - workspace.clientWidth) {
-                e.stopImmediatePropagation()
-            } else {
-                workspace.style.height = (e.clientX - 450 - workspace.offsetLeft) + 'px'
-                workspace.style.width = (e.clientX - 450 - workspace.offsetLeft) + 'px'
-            }
-        }
-        function stopResize() {
-            window.removeEventListener('mousemove', resize, false);
-            window.removeEventListener('mouseup', stopResize, false);
-        }
 
 
         workspace.addEventListener('mousedown', (e) => {

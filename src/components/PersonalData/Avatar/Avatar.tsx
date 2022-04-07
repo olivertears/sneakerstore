@@ -21,8 +21,6 @@ const Avatar: FC = () => {
         }
     }
 
-    console.log(customer)
-
     return (
         <div id='photoWrap' className={cl.photoWrap}>
             {avatarUrl && <AvatarCreation avatarUrl={avatarUrl} setAvatarUrl={setAvatarUrl}/>}

@@ -1,0 +1,34 @@
+.sectionHeader {
+    display: flex;
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.sectionHeader:hover {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.openSection {
+    background: #969696;
+}
+
+.arrow {
+    width: 20px;
+    margin: 5px;
+    position: absolute;
+    right: 0;
+}
+
+.mirrorArrow {
+    transform: rotate(180deg);
+}
+
+.sectionContent {
+    height: auto;
+    position: relative;
+}
+
+.hideSectionContent {
+    display: none;
+}

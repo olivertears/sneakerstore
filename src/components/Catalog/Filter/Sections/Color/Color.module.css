@@ -1,0 +1,23 @@
+.wrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.colorWrap {
+    height: 30px;
+    padding: 15px 10px;
+    display: flex;
+}
+
+.colorWrap:hover {
+    background: #f6f6f6;
+}
+
+.color {
+    width: 30px;
+    height: 30px;
+    outline: 3px solid black;
+    color: lightskyblue;
+    border-radius: 50%;
+    margin: auto;
+}

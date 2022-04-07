@@ -1,0 +1,41 @@
+.wrap {
+    width: 100%;
+}
+
+.dark {
+    background-color: #333333;
+}
+
+.wrap:hover {
+    outline: 3px solid black;
+}
+
+.first {
+    border-radius: 5px 0 0 5px;
+}
+.last {
+    border-radius: 0 5px 5px 0;
+}
+
+.img {
+    background-size: 100%;
+    width: 30px;
+    height: 30px;
+    margin: 10px auto;
+}
+
+.grid {
+    background-image: url("../../../dataStorage/images/Catalog/gridDark.png");
+}
+
+.list {
+    background-image: url("../../../dataStorage/images/Catalog/listDark.png");
+}
+
+.gridChecked {
+    background-image: url("../../../dataStorage/images/Catalog/gridLight.png");
+}
+
+.listChecked {
+    background-image: url("../../../dataStorage/images/Catalog/listLight.png");
+}

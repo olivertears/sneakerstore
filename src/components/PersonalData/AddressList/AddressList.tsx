@@ -23,6 +23,7 @@ const AddressList: FC<IAddressListProps> = ({setAddressSettings}) => {
         setAddresses(JSON.parse(localStorage.getItem('addresses') || '') as IAddress[])
     }, [])
 
+
     return (
         <div className={cl.wrap}>
             <h1>ADDRESSES</h1>

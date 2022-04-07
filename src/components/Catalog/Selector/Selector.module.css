@@ -1,0 +1,57 @@
+.wrap {
+    background-color: #dadada;
+    border-radius: 5px;
+    height: 50px;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+}
+
+.listName {
+    padding: 10px;
+    color: white;
+    background: #333333;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px 0 0 5px;
+}
+
+.listType {
+    padding: 10px 0px;
+    height: 30px;
+    width: calc(100% - 100px);
+    text-align: center;
+    border-radius: 0 5px 5px 0;
+    background: #dadada;
+    cursor: pointer;
+}
+
+.listOpen {
+    border-radius: 0 5px 0 0;
+}
+
+.list {
+    position: inherit;
+    margin-left: 100px;
+    width: calc(100% - 100px);
+}
+
+.option {
+    padding: 10px;
+    height: 30px;
+    background: rgba(51, 51, 51, 0.8);
+    color: white;
+    text-align: center;
+}
+
+.option:last-child {
+    border-radius: 0 0 5px 5px;
+}
+
+.option:hover {
+    background: rgba(51, 51, 51, 0.95);
+    cursor: pointer;
+}
+
