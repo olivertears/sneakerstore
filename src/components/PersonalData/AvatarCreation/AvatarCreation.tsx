@@ -13,7 +13,7 @@ interface IAvatarCreationProps {
 
 const AvatarCreation: FC<IAvatarCreationProps> = ({avatarUrl, setAvatarUrl}) => {
     const {customer, authorization} = useTypedSelector(state => state.customer)
-    const {putCustomer, setCustomer} = useActions.useCustomerActions()
+    const {putCustomer} = useActions.useCustomerActions()
     const {setError} = useActions.useAppActions()
 
     const canvasWidth = useRef<number>(0)
@@ -156,7 +156,7 @@ const AvatarCreation: FC<IAvatarCreationProps> = ({avatarUrl, setAvatarUrl}) => 
         saveBtn.onclick = () => {
             const changedCustomer: ICustomer = {
                 ...customer,
-                avatar: previewCanvas.toDataURL("image/jpeg")
+                avatar: previewCanvas.toDataURL("image/webp")
             }
             putCustomer(changedCustomer, authorization)
         }

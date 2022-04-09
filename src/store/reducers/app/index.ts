@@ -2,7 +2,8 @@ import {AppAction, AppActionsEnum, AppState} from "./types";
 
 
 const initialState: AppState = {
-    loading: false,
+    appLoader: false,
+    catalogLoader: false,
     page: 'MAIN',
     currency: {label: 'USD', symbol: '$', exchangeRate: 1},
     error: '',
@@ -11,8 +12,10 @@ const initialState: AppState = {
 
 export default function appReducer(state = initialState, action: AppAction): typeof initialState{
     switch (action.type) {
-        case AppActionsEnum.SET_LOADING:
-            return {...state, loading: action.payload}
+        case AppActionsEnum.SET_APP_LOADER:
+            return {...state, appLoader: action.payload}
+        case AppActionsEnum.SET_CATALOG_LOADER:
+            return {...state, catalogLoader: action.payload}
         case AppActionsEnum.SET_ERROR:
             return {...state, error: action.payload}
         case AppActionsEnum.SET_WARNING:

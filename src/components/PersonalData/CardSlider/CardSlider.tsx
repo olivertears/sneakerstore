@@ -13,23 +13,17 @@ interface ICardSliderProps {
 
 const CardSlider: FC<ICardSliderProps> = ({setCardSettings}) => {
     const {cards} = useTypedSelector(state => state.card)
-    const {setCards} = useActions.useCardActions()
 
     const [activeImgIndex, setActiveImgIndex] = useState<number>(cards.length > 1 ? 1 : 0);
-    const prevImgIndex: number = activeImgIndex ? activeImgIndex - 1 : cards.length - 1
-    const nextImgIndex: number = activeImgIndex === cards.length - 1 ? 0 : activeImgIndex + 1
+    let prevImgIndex: number = activeImgIndex ? activeImgIndex - 1 : cards.length - 1
+    let nextImgIndex: number = activeImgIndex === cards.length - 1 ? 0 : activeImgIndex + 1
 
     const [right, setRight] = useState(false)
     const [left, setLeft] = useState(false)
 
     useEffect(() => {
-        localStorage.setItem('cards', JSON.stringify(cards))
+        setActiveImgIndex(cards.length > 1 ? 1 : 0)
     }, [cards])
-
-    useEffect(() => {
-        setCards(JSON.parse(localStorage.getItem('cards') || '') as ICard[])
-    }, [])
-
 
     return (
         <div className={cl.wrap}>
@@ -41,7 +35,7 @@ const CardSlider: FC<ICardSliderProps> = ({setCardSettings}) => {
                     onClick={() => {
                         setRight(true)
                         setTimeout(() => {
-                            setActiveImgIndex(activeImgIndex === cards.length - 1 ? 0 : activeImgIndex + 1)
+                            setActiveImgIndex(activeImgIndex === 0 ? cards.length - 1 : activeImgIndex - 1)
                             setRight(false)
                         }, 450)
                     }}
@@ -56,7 +50,7 @@ const CardSlider: FC<ICardSliderProps> = ({setCardSettings}) => {
                     onClick={() => {
                         setLeft(true)
                         setTimeout(() => {
-                            setActiveImgIndex(activeImgIndex === 0 ? cards.length - 1 : activeImgIndex - 1)
+                            setActiveImgIndex(activeImgIndex === cards.length - 1 ? 0 : activeImgIndex + 1)
                             setLeft(false)
                         }, 450)
                     }}

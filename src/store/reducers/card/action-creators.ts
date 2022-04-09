@@ -32,46 +32,50 @@ export const CardActionCreators = {
 
     getCards: (customerId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             const response = await CardService.getCards(customerId, authorization)
-            dispatch(CardActionCreators.setCards(response.data as ICard[]))
+            localStorage.setItem('cards', JSON.stringify([{id: '0', number: '', validityDate: '', owner: '', cvv: '', customersIds: ['']}, ...response.data as ICard[]]))
+            dispatch(CardActionCreators.setCards([{id: '0', number: '', validityDate: '', owner: '', cvv: '', customersIds: ['']}, ...response.data as ICard[]]))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     postCard: (newCard: ICard, authorization: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await CardService.postCard(newCard, authorization)
+            localStorage.setItem('cards', JSON.stringify([...JSON.parse(localStorage.getItem('cards') || '') as ICard[], newCard]))
             dispatch(CardActionCreators.addCard(newCard))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Card with this number already exists'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     putCard: (changedCard: ICard, authorization: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await CardService.putCard(changedCard, authorization)
+            localStorage.setItem('cards', JSON.stringify([...JSON.parse(localStorage.getItem('cards') || '') as ICard[]].map(card => card.id === changedCard.id ? changedCard : card)))
             dispatch(CardActionCreators.changeCard(changedCard))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Card with this number already exists'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     deleteCard: (cardId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await CardService.deleteCard(cardId, authorization)
+            localStorage.setItem('cards', JSON.stringify([...JSON.parse(localStorage.getItem('cards') || '') as ICard[]].filter(card => card.id !== cardId)))
             dispatch(CardActionCreators.removeCard(cardId))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
 }

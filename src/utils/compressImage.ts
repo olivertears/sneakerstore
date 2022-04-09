@@ -1,4 +1,6 @@
-export const compressImage = (imgUrl: string): string => {
+import {Dispatch, SetStateAction} from "react";
+
+export const compressImage = (imgUrl: string, setAvatarUrl: Dispatch<SetStateAction<string>>): void => {
     const canvas = document.createElement('canvas')
     const img = document.createElement('img')
 
@@ -28,9 +30,6 @@ export const compressImage = (imgUrl: string): string => {
         const ctx = canvas.getContext('2d')
         // @ts-ignore
         ctx.drawImage(img, 0, 0, width, height)
-
-        let compressedImgUrl = canvas.toDataURL('image/jpeg', 0.7)
-
+        setAvatarUrl(canvas.toDataURL())
     }
-    return ''
 }

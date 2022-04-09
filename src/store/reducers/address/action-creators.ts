@@ -31,46 +31,50 @@ export const AddressActionCreators = {
 
     getAddresses: (customerId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             const response = await AddressService.getAddresses(customerId, authorization)
+            localStorage.setItem('addresses', JSON.stringify(response.data as IAddress[]))
             dispatch(AddressActionCreators.setAddresses(response.data as IAddress[]))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     postAddress: (newAddress: IAddress, authorization: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await AddressService.postAddress(newAddress, authorization)
+            localStorage.setItem('addresses', JSON.stringify([...JSON.parse(localStorage.getItem('addresses') || '') as IAddress[], newAddress]))
             dispatch(AddressActionCreators.addAddress(newAddress))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     putAddress: (changedAddress: IAddress, authorization: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await AddressService.putAddress(changedAddress, authorization)
+            localStorage.setItem('addresses', JSON.stringify([...JSON.parse(localStorage.getItem('addresses') || '') as IAddress[]].map(address => address.id === changedAddress.id ? changedAddress : address)))
             dispatch(AddressActionCreators.changeAddress(changedAddress))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     deleteAddress: (addressId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await AddressService.deleteAddress(addressId, authorization)
+            localStorage.setItem('addresses', JSON.stringify([...JSON.parse(localStorage.getItem('addresses') || '') as IAddress[]].filter(address => address.id !== addressId)))
             dispatch(AddressActionCreators.removeAddress(addressId))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
 }

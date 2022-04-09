@@ -1,7 +1,8 @@
 import {ICurrency} from "../../../models/ICurrency";
 
 export interface AppState {
-    loading: boolean,
+    appLoader: boolean,
+    catalogLoader: boolean,
     error: string,
     warning: string,
     page: string,
@@ -9,15 +10,21 @@ export interface AppState {
 }
 
 export enum AppActionsEnum {
-    SET_LOADING = 'SET_LOADING',
+    SET_APP_LOADER = 'SET_APP_LOADER',
+    SET_CATALOG_LOADER = 'SET_CATALOG_LOADER',
     SET_ERROR = 'SET_ERROR',
     SET_WARNING = 'SET_WARNING',
     SET_PAGE = 'SET_PAGE',
     SET_CURRENCY = 'SET_CURRENCY',
 }
 
-export interface SetLoadingAction {
-    type: AppActionsEnum.SET_LOADING,
+export interface SetAppLoaderAction {
+    type: AppActionsEnum.SET_APP_LOADER,
+    payload: boolean
+}
+
+export interface SetCatalogLoaderAction {
+    type: AppActionsEnum.SET_CATALOG_LOADER,
     payload: boolean
 }
 
@@ -43,7 +50,8 @@ export interface SetCurrencyAction {
 
 
 export type AppAction =
-    SetLoadingAction |
+    SetAppLoaderAction |
+    SetCatalogLoaderAction |
     SetErrorAction |
     SetWarningAction |
     SetPageAction |

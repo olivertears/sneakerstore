@@ -4,18 +4,15 @@ import AppRouter from "./components/AppRouter";
 import './css/App.css'
 import './css/fonts.css'
 import {useTypedSelector} from "./hooks/useTypedSelector";
-import Loader from "./components/Loader";
+import Loader from "./components/AppLoader";
 import Footer from "./components/Footer/Footer";
 import ArrowToTop from "./components/ReusedComponents/ArrowToTop/ArrowToTop";
 import {useActions} from "./hooks/useActions";
 import {ICustomer} from "./models/ICustomer";
-import {RouteNames} from "./router";
-import {useNavigate} from "react-router-dom";
-import {ILogin} from "./models/ILogin";
 
 const App = () => {
     const {setAuth, setCustomer, setAuthorization} = useActions.useCustomerActions()
-    const {loading} = useTypedSelector(state => state.app)
+    const {appLoader} = useTypedSelector(state => state.app)
     const [scroll, setScroll] = useState<number>(0)
 
     const scrollHandler = () => {
@@ -35,7 +32,7 @@ const App = () => {
     return (
         <div className="appWrapper">
             <Navbar/>
-            {loading
+            {appLoader
                 ?
                 <Loader/>
                 :

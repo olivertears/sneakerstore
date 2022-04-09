@@ -2,17 +2,22 @@ import {
     AppActionsEnum,
     SetPageAction,
     SetCurrencyAction,
-    SetLoadingAction,
     SetErrorAction,
-    SetWarningAction
+    SetWarningAction,
+    SetAppLoaderAction,
+    SetCatalogLoaderAction
 } from "./types";
 import {ICurrency} from "../../../models/ICurrency";
 import {scrollToTop} from "../../../utils/scrolls/scrollToTop";
 
 
 export const AppActionCreators = {
-    setLoading: (loading: boolean): SetLoadingAction => ({
-        type: AppActionsEnum.SET_LOADING,
+    setAppLoader: (loading: boolean): SetAppLoaderAction => ({
+        type: AppActionsEnum.SET_APP_LOADER,
+        payload: loading
+    }),
+    setCatalogLoader: (loading: boolean): SetCatalogLoaderAction => ({
+        type: AppActionsEnum.SET_CATALOG_LOADER,
         payload: loading
     }),
     setError: (error: string): SetErrorAction => ({

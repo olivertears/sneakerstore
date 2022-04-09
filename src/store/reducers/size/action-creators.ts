@@ -12,13 +12,13 @@ export const SizeActionCreators = {
 
     getSizes: (productId: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             const response = await SizeService.getSizes(productId)
             dispatch(SizeActionCreators.setSizes(response.data as ISize[]))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     }
 }

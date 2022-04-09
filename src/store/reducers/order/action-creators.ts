@@ -20,35 +20,35 @@ export const OrderActionCreators = {
 
     getOrders: (customerId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             const response = await OrderService.getOrders(customerId, authorization)
             dispatch(OrderActionCreators.setOrders(response.data as IOrder[]))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     postOrder: (newOrder: IOrder) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await OrderService.postOrder(newOrder)
             dispatch(OrderActionCreators.addOrder(newOrder))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     deleteOrder: (orderId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await OrderService.deleteOrder(orderId, authorization)
             dispatch(OrderActionCreators.removeOrder(orderId))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
 }

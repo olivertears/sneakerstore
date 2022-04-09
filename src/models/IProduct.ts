@@ -1,5 +1,5 @@
 export interface IProduct {
-    id: string,
+    id?: string,
     price: number,
     sex: string,
     brand: string,
@@ -14,7 +14,7 @@ export interface IProduct {
     orderedAmount: number, //Вадя забыл добавить, потом добавит
     averageRate: number,
 
-    photosIds: string[],
-    sizesIds: string[],
+    photos: string[],
+    sizesIds?: string[],
     commentsIds?: string[],
 }

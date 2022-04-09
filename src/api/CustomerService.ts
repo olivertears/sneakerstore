@@ -35,9 +35,6 @@ export default class CustomerService {
             },
         })
     }
-    static async loginWithGoogleForm(): Promise<AxiosResponse<ICustomer>> {
-        return axios.get('https://apisneakerstore.herokuapp.com/oauth2/authorization/google')
-    }
     static async checkDoesEmailExist(email: string): Promise<AxiosResponse> {
         return axios.post('https://apisneakerstore.herokuapp.com/api/forgot_password', {
             params: {
@@ -46,10 +43,10 @@ export default class CustomerService {
         })
     }
     static async resetPassword(resetPasswordData: IResetPassword): Promise<AxiosResponse> {
-        return axios.post('https://apisneakerstore.herokuapp.com/api/recovery', resetPasswordData)
+        return axios.post('https://apisneakerstore.herokuapp.com/api/reset_password', resetPasswordData)
     }
     static async changePassword(changePasswordData: IChangePassword): Promise<AxiosResponse> {
-        return axios.put('https://apisneakerstore.herokuapp.com/api/recovery', changePasswordData, {
+        return axios.put('https://apisneakerstore.herokuapp.com/api/change_password', changePasswordData, {
             headers: {
                 Authorization: 'Basic ' + btoa(`${changePasswordData.email}:${changePasswordData.oldPassword}`)
             },

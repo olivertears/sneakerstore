@@ -7,7 +7,7 @@ import {capitalizePattern} from "../../utils/patterns/capitalizePattern";
 import {IRegistration} from "../../models/IRegistration";
 
 const Registration: FC = () => {
-    const {registration, loginWithGoogleForm} = useActions.useCustomerActions()
+    const {registration} = useActions.useCustomerActions()
 
     const [name, setName] = useState<string>('')
     const [surname, setSurname] = useState<string>('')
@@ -31,12 +31,6 @@ const Registration: FC = () => {
     return (
         <div className={cl.wrap}>
             <h1>REGISTRATION</h1>
-            <a
-                href="https://apisneakerstore.herokuapp.com/oauth2/authorization/google"
-                onClick={() => loginWithGoogleForm()}
-            >
-                <h4>Login with Google</h4>
-            </a>
 
             <form onSubmit={postCustomerData}>
                 <div className={cl.inputWrap}>

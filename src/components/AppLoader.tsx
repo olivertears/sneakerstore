@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
+import '../css/AppLoader.css'
 
-const Loader: FC = () => {
+const AppLoader: FC = () => {
     return (
         <div className="lds-spinner">
             <div></div>
@@ -19,4 +20,4 @@ const Loader: FC = () => {
     );
 };
 
-export default Loader
+export default AppLoader

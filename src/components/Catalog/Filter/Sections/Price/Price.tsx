@@ -8,6 +8,7 @@ import {
 } from "react";
 //@ts-ignore
 import cl from "./Price.module.css";
+import {useTypedSelector} from "../../../../../hooks/useTypedSelector";
 
 interface IPriceProps {
     min: number;
@@ -15,19 +16,24 @@ interface IPriceProps {
 }
 
 const Price: FC<IPriceProps> = ({min, max}) => {
+    const {currency} = useTypedSelector(state => state.app)
+
     const [minVal, setMinVal] = useState(min);
     const [maxVal, setMaxVal] = useState(max);
     const minValRef = useRef<HTMLInputElement>(null);
     const maxValRef = useRef<HTMLInputElement>(null);
     const range = useRef<HTMLDivElement>(null);
 
-    // Convert to percentage
+    useEffect(() => {
+        setMinVal(Math.floor(min))
+        setMaxVal(Math.ceil(max))
+    }, [currency])
+
     const getPercent = useCallback(
         (value: number) => Math.round(((value - min) / (max - min)) * 100),
         [min, max]
     );
 
-    // Set width of the range to decrease from the left side
     useEffect(() => {
         if (maxValRef.current) {
             const minPercent = getPercent(minVal);
@@ -38,9 +44,8 @@ const Price: FC<IPriceProps> = ({min, max}) => {
                 range.current.style.width = `${maxPercent - minPercent}%`;
             }
         }
-    }, [minVal, getPercent]);
+    }, [minVal, getPercent, currency]);
 
-    // Set width of the range to decrease from the right side
     useEffect(() => {
         if (minValRef.current) {
             const minPercent = getPercent(+minValRef.current.value);
@@ -50,7 +55,7 @@ const Price: FC<IPriceProps> = ({min, max}) => {
                 range.current.style.width = `${maxPercent - minPercent}%`;
             }
         }
-    }, [maxVal, getPercent]);
+    }, [maxVal, getPercent, currency]);
 
     return (
         <div className={cl.container}>
@@ -61,7 +66,7 @@ const Price: FC<IPriceProps> = ({min, max}) => {
                 value={minVal}
                 ref={minValRef}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    const value = Math.min(+event.target.value, maxVal);
+                    const value = Math.min(+event.target.value, maxVal - 1);
                     setMinVal(value);
                     event.target.value = value.toString();
                 }}
@@ -74,7 +79,7 @@ const Price: FC<IPriceProps> = ({min, max}) => {
                 value={maxVal}
                 ref={maxValRef}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    const value = Math.max(+event.target.value, minVal);
+                    const value = Math.max(+event.target.value, minVal + 1);
                     setMaxVal(value);
                     event.target.value = value.toString();
                 }}

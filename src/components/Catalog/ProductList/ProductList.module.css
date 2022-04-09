@@ -2,6 +2,13 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;
+    position: relative;
+}
+
+.loader {
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
 
 .listWrap {
@@ -13,6 +20,10 @@
 .product {
     height: 300px;
     background: #333333;
+}
+
+.preview {
+    width: 100%;
 }
 
 @media (max-width: 1100px)  {

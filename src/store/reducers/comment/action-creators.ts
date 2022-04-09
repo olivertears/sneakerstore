@@ -32,46 +32,46 @@ export const CommentActionCreators = {
 
     getComments: (productId: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             const response = await CommentService.getComments(productId)
             dispatch(CommentActionCreators.setComments(response.data as IComment[]))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     postComment: (newComment: IComment, authorization: string) => async(dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await CommentService.postComment(newComment, authorization)
             dispatch(CommentActionCreators.addComment(newComment))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     putComment: (changedComment: IComment, authorization: string) => async(dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await CommentService.putComment(changedComment, authorization)
             dispatch(CommentActionCreators.changeComment(changedComment))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     deleteComment: (commentId: string, authorization: string) => async(dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await CommentService.deleteComment(commentId, authorization)
             dispatch(CommentActionCreators.removeComment(commentId))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
 }

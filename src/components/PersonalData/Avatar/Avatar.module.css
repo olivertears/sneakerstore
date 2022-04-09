@@ -35,3 +35,16 @@
 .photoWrap:hover {
     outline: 3px solid black;
 }
+
+.deleteBtn {
+    position: absolute;
+    width: 15px;
+    margin: 10px 0 0 -30px;
+    z-index: 2;
+}
+
+.deleteBtn:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px 2px;
+    background: black;
+}

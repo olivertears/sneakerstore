@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Info from "../components/PersonalData/Info/Info";
 import ChangePassword from "../components/PersonalData/ChangePassword/ChangePassword";
 import CardSlider from "../components/PersonalData/CardSlider/CardSlider";
@@ -11,11 +11,20 @@ import DeleteAccount from "../components/PersonalData/DeleteAccount/DeleteAccoun
 import Warning from "../components/ReusedComponents/ErrorWarningWindow/Warning";
 import {ICard} from "../models/ICard";
 import {IAddress} from "../models/IAddress";
+import {useActions} from "../hooks/useActions";
 
 const PersonalData: FC = () => {
     const {error, warning} = useTypedSelector(state => state.app)
+    const {setAddresses} = useActions.useAddressActions()
+    const {setCards} = useActions.useCardActions()
+
     const [cardSettings, setCardSettings] = useState<ICard>({} as ICard)
     const [addressSettings, setAddressSettings] = useState<IAddress>({} as IAddress)
+
+    useEffect(() => {
+        setAddresses(JSON.parse(localStorage.getItem('addresses') || '') as IAddress[])
+        setCards(JSON.parse(localStorage.getItem('cards') || '') as ICard[])
+    }, [])
 
     return (
         <div>

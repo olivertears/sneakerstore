@@ -11,11 +11,11 @@ const initialState: CardState = {
 export default function CardReducer(state = initialState, action: CardAction): CardState {
     switch (action.type) {
         case CardActionsEnum.SET_CARDS:
-            return {...state, cards: [...state.cards, ...action.payload]}
+            return {...state, cards: action.payload}
         case CardActionsEnum.ADD_CARD:
             return {...state, cards: [...state.cards, action.payload]}
         case CardActionsEnum.CHANGE_CARD:
-            return {...state, cards: [...state.cards, state.cards[state.cards.findIndex(card => card.id === action.payload.id)] = action.payload]}
+            return {...state, cards: state.cards.map(card => card.id === action.payload.id ? action.payload : card)}
         case CardActionsEnum.REMOVE_CARD:
             return {...state, cards: state.cards.filter(card => card.id !== action.payload)}
         default:

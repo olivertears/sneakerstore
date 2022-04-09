@@ -12,7 +12,7 @@ export default function AddressReducer(state = initialState, action: AddressActi
         case AddressActionsEnum.ADD_ADDRESS:
             return {...state, addresses: [...state.addresses, action.payload]}
         case AddressActionsEnum.CHANGE_ADDRESS:
-            return {...state, addresses: [...state.addresses, state.addresses[state.addresses.findIndex(address => address.id === action.payload.id)] = action.payload]}
+            return {...state, addresses: state.addresses.map(address => address.id === action.payload.id ? action.payload : address)}
         case AddressActionsEnum.REMOVE_ADDRESS:
             return {...state, addresses: state.addresses.filter(address => address.id === action.payload)}
         default:

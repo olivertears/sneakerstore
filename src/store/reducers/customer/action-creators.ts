@@ -36,40 +36,40 @@ export const CustomerActionCreators = {
 
     getCustomer: (customerId: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             const response = await CustomerService.getCustomer(customerId)
         } catch (err: any){
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     putCustomer: (customer: ICustomer, authorization: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await CustomerService.putCustomer(customer, authorization)
             localStorage.setItem('customer', JSON.stringify(customer))
             dispatch(CustomerActionCreators.setCustomer(customer))
         } catch (err: any){
             dispatch(AppActionCreators.setError(err.response.data.message))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     deleteCustomer: (customerId: string, authorization: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await CustomerService.deleteCustomer(customerId, authorization)
         } catch (err: any){
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
 
     login: (loginData: ILogin) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             const response = await CustomerService.login(loginData)
             localStorage.setItem('auth', JSON.stringify(true))
             localStorage.setItem('authorization', JSON.stringify(btoa(`${loginData.email}:${loginData.password}`)))
@@ -81,7 +81,7 @@ export const CustomerActionCreators = {
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Invalid email or password'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     logout: () => (dispatch: AppDispatch) => {
@@ -93,58 +93,47 @@ export const CustomerActionCreators = {
         dispatch(CustomerActionCreators.setAuth(false))
         dispatch(AppActionCreators.setPage('AUTHORIZATION'))
     },
-    loginWithGoogleForm: () => async (dispatch: AppDispatch) => {
-        try {
-            dispatch(AppActionCreators.setLoading(true))
-            const response = await CustomerService.loginWithGoogleForm()
-            dispatch(CustomerActionCreators.setLoginWithGoogleForm(true))
-        } catch (err: any) {
-            dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
-        } finally {
-            dispatch(AppActionCreators.setLoading(false))
-        }
-    },
     registration: (registrationData: IRegistration) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await CustomerService.registration(registrationData)
             scrollToTop()
         } catch (err: any) {
             dispatch(AppActionCreators.setError(err.response.data.message))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     checkDoesEmailExist: (email: string) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await CustomerService.checkDoesEmailExist(email)
         } catch (err: any) {
             dispatch(AppActionCreators.setError('There is no account with this email'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     resetPassword: (resetPasswordData: IResetPassword) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await CustomerService.resetPassword(resetPasswordData)
             scrollToTop()
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Invalid code'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     },
     changePassword: (changePasswordData: IChangePassword) => async (dispatch: AppDispatch) => {
         try {
-            dispatch(AppActionCreators.setLoading(true))
+            dispatch(AppActionCreators.setAppLoader(true))
             await CustomerService.changePassword(changePasswordData)
             dispatch(AppActionCreators.setWarning(`The password has been successfully changed!`))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Invalid oldPassword'))
         } finally {
-            dispatch(AppActionCreators.setLoading(false))
+            dispatch(AppActionCreators.setAppLoader(false))
         }
     }
 }

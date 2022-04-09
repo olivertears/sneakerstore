@@ -8,7 +8,6 @@ import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
 const ChangePassword: FC = () => {
     const {customer} = useTypedSelector(state => state.customer)
-    const {setWarning} = useActions.useAppActions()
     const {changePassword} = useActions.useCustomerActions()
 
     const [oldPassword, setOldPassword] = useState<string>('')

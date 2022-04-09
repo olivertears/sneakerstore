@@ -5,12 +5,9 @@ import cl from './Authorization.module.css'
 import {useActions} from "../../hooks/useActions";
 import {scrollIntoView} from "../../utils/scrolls/scrollIntoView";
 import {ILogin} from "../../models/ILogin";
-import {useNavigate} from "react-router-dom";
-import {RouteNames} from "../../router";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 const Login: FC = () => {
-    const {login, loginWithGoogleForm} = useActions.useCustomerActions()
+    const {login} = useActions.useCustomerActions()
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -27,12 +24,6 @@ const Login: FC = () => {
     return (
         <div className={cl.wrap}>
             <h1 className={cl.loginTitle}>LOGIN</h1>
-            <a
-                href="https://apisneakerstore.herokuapp.com/oauth2/authorization/google"
-                onClick={() => loginWithGoogleForm()}
-            >
-                <h4>Login with Google</h4>
-            </a>
 
             <form onSubmit={loginCustomer}>
                 <div className={cl.inputWrap}>

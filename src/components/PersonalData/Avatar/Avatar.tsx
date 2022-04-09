@@ -4,9 +4,11 @@ import cl from './Avatar.module.css'
 import {appImages} from "../../../dataStorage/images/App";
 import AvatarCreation from "../AvatarCreation/AvatarCreation";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
+import {useActions} from "../../../hooks/useActions";
 
 const Avatar: FC = () => {
-    const {customer} = useTypedSelector(state => state.customer)
+    const {customer, authorization} = useTypedSelector(state => state.customer)
+    const {putCustomer} = useActions.useCustomerActions()
 
     const [avatarUrl, setAvatarUrl] = useState<string>('')
 
@@ -26,16 +28,24 @@ const Avatar: FC = () => {
             {avatarUrl && <AvatarCreation avatarUrl={avatarUrl} setAvatarUrl={setAvatarUrl}/>}
             {customer.avatar
                 ?
-                <img
-                    src={customer.avatar}
-                    className={cl.avatar}
-                />
+                <>
+                    <img
+                        src={customer.avatar}
+                        className={cl.avatar}
+                    />
+                    <img
+                        src={appImages.deleteBtn}
+                        className={cl.deleteBtn}
+                        onClick={() => putCustomer({...customer, avatar: ''}, authorization)}
+                    />
+                </>
                 :
                 <img
                     src={appImages.addBtn}
                     className={cl.noAvatar}
                 />
             }
+
             <input
                 type="file"
                 accept="image/*"
