@@ -22,7 +22,7 @@ const App = () => {
     useEffect(() => {
         if(localStorage.getItem('auth')) {
             setAuth(JSON.parse(localStorage.getItem('auth') || '') as boolean)
-            setAuthorization(JSON.parse(localStorage.getItem('authorization') || '') as string)
+            setAuthorization(localStorage.getItem('authorization') || '')
             setCustomer(JSON.parse(localStorage.getItem('customer') || '') as ICustomer)
         }
         window.addEventListener("scroll", scrollHandler);
