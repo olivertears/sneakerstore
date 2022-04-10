@@ -16,9 +16,11 @@ const Navbar: FC = () => {
     const navigate = useNavigate()
 
     const {setPage} = useActions.useAppActions()
+    const {getProducts} = useActions.useProductActions()
 
     const {page} = useTypedSelector(state => state.app)
     const {auth} = useTypedSelector(state => state.customer)
+    const {catalogPage, filter, sort, showAmount} = useTypedSelector(state => state.product)
 
     const favourites: number = 42
     const cart: number = 1
@@ -31,7 +33,6 @@ const Navbar: FC = () => {
         page === 'PROFILE' && navigate(RouteNames.PROFILE)
     }, [page])
 
-
     return (
         <div className={cl.wrap}>
             <h1
@@ -42,7 +43,10 @@ const Navbar: FC = () => {
             </h1>
             <h1
                 className={ page === 'CATALOG' ? cl.selectedPage : cl.page}
-                onClick={() => navigate(RouteNames.CATALOG)}
+                onClick={() => {
+                    navigate(RouteNames.CATALOG)
+                    getProducts(sort, filter, showAmount, catalogPage)
+                }}
             >
                 CATALOG
             </h1>

@@ -15,15 +15,6 @@ const AddressList: FC<IAddressListProps> = ({setAddressSettings}) => {
     const {authorization} = useTypedSelector(state => state.customer)
     const {deleteAddress, setAddresses} = useActions.useAddressActions()
 
-    useEffect(() => {
-        localStorage.setItem('addresses', JSON.stringify(addresses))
-    }, [addresses])
-
-    useEffect(() => {
-        setAddresses(JSON.parse(localStorage.getItem('addresses') || '') as IAddress[])
-    }, [])
-
-
     return (
         <div className={cl.wrap}>
             <h1>ADDRESSES</h1>

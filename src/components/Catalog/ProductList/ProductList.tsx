@@ -3,8 +3,8 @@ import React, {Dispatch, FC, SetStateAction, useEffect} from 'react';
 import cl from './ProductList.module.css'
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
 import CatalogLoader from "../../CatalogLoader";
-import {catalog} from "../../../catalog";
-import axios from "axios";
+import {setNicePrice} from "../../../utils/setNicePrice";
+import {useActions} from "../../../hooks/useActions";
 
 interface IProductListProps {
     layout: string
@@ -12,15 +12,15 @@ interface IProductListProps {
 
 const ProductList: FC<IProductListProps> = ({layout}) => {
     const {catalogLoader} = useTypedSelector(state => state.app)
-    const {authorization} = useTypedSelector(state => state.customer)
+    const {products, filter, sort, showAmount, catalogPage} = useTypedSelector(state => state.product)
+    const {currency} = useTypedSelector(state => state.app)
 
-    // useEffect(() => {
-    //     axios.post('https://apisneakerstore.herokuapp.com/api/products/list', catalog, {
-    //         headers: {
-    //             Authorization: 'Basic ' + authorization
-    //         },
-    //     })
-    // }, [])
+    const {getProducts} = useActions.useProductActions()
+
+
+    useEffect(() => {
+        getProducts(sort, filter, showAmount, catalogPage)
+    }, [sort, filter, showAmount, catalogPage])
 
     return (
         <div className={`${layout === 'grid' ? cl.gridWrap : cl.listWrap}`}>
@@ -28,23 +28,15 @@ const ProductList: FC<IProductListProps> = ({layout}) => {
                 {catalogLoader && <CatalogLoader/>}
             </div>
 
-            {/*{catalog.map(product =>*/}
-            {/*    <div key={product.id} className={cl.product}>*/}
-            {/*        /!*<img src={product.links[0]} className={cl.preview}/>*!/*/}
-            {/*    </div>*/}
-            {/*)}*/}
-            <div className={cl.product}></div>
-            <div className={cl.product}></div>
-            <div className={cl.product}></div>
-            <div className={cl.product}></div>
-            <div className={cl.product}></div>
-            <div className={cl.product}></div>
-            <div className={cl.product}></div>
-            <div className={cl.product}></div>
-            <div className={cl.product}></div>
-            <div className={cl.product}></div>
-            <div className={cl.product}></div>
-            <div className={cl.product}></div>
+            {products.map(product =>
+                <div key={product.id} className={cl.product}>
+                    <img key={product.id} src={product.photos[0]} className={cl.preview}/>
+                    <div className={cl.text}>
+                        <h3>{product.name}</h3>
+                        <h2>{currency.symbol}{setNicePrice(product.price * currency.exchangeRate)}</h2>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

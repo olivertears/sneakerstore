@@ -18,12 +18,30 @@
 }
 
 .product {
-    height: 300px;
-    background: #333333;
+    background: #dadada;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .preview {
-    width: 100%;
+    width: calc(100% + 20px);
+    margin: -10px 0 0 -10px;
+    border-radius: 10px 10px 0 0;
+}
+
+.text {
+    text-align: center;
+    position: relative;
+}
+
+.text h3 {
+    font-size: 14px;
+    height: 40px;
+}
+
+.text h2 {
+    font-size: 18px;
+    margin: 10px 0 5px;
 }
 
 @media (max-width: 1100px)  {

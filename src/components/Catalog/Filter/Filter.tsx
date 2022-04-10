@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef} from 'react';
+import React, {FC} from 'react';
 //@ts-ignore
 import cl from './Filter.module.css'
 import Gender from "./Sections/Gender/Gender";
@@ -8,15 +8,10 @@ import Season from "./Sections/Season/Season";
 import Section from "./Section/Section";
 import Price from "./Sections/Price/Price";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
+import {setNicePrice} from "../../../utils/setNicePrice";
 
 const Filter: FC = () => {
     const {currency} = useTypedSelector(state => state.app)
-    const minPrice = useRef()
-    const maxPrice = useRef()
-
-    // useEffect(() => {
-    //     minPrice.current = 50
-    // }, [currency])
 
     return (
         <div className={cl.wrap}>
@@ -24,8 +19,7 @@ const Filter: FC = () => {
                 <h2>Filter</h2>
             </div>
 
-            <Section sectionName={'Price'} component={<Price min={Math.floor(50 * currency.exchangeRate)} max={Math.ceil(200 * currency.exchangeRate)}/>}/>
-            {/*<Section sectionName={'Price'} component={<Price min={50} max={200}/>}/>*/}
+            <Section sectionName={'Price'} component={<Price min={Math.floor(setNicePrice(59.99 * currency.exchangeRate))} max={Math.ceil(setNicePrice(199.99 * currency.exchangeRate))}/>}/>
             <hr className={cl.sectionDivider}/>
             <Section sectionName={'Gender'} component={<Gender/>}/>
             <hr className={cl.sectionDivider}/>

@@ -19,7 +19,7 @@ const CatalogWrap: FC = () => {
             <div className={cl.contentRight}>
                 <div className={cl.contentRightFirstLine}>
                     <Selector selectorArray={['Popularity', 'Rating', 'Price ↑', 'Price ↓']} selectorName={'Sort by:'}/>
-                    <Selector selectorArray={['12', '24', '36']} selectorName={'Show:'}/>
+                    <Selector selectorArray={[12, 24, 36]} selectorName={'Show:'}/>
                     <div className={cl.radioBtnWrap}>
                         <ChangeLayoutBtn layout={'grid'} setLayout={setLayout} currentLayout={layout}/>
                         <ChangeLayoutBtn layout={'list'} setLayout={setLayout} currentLayout={layout}/>

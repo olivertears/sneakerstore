@@ -484,8 +484,8 @@ export const catalog: IProduct[] = [
         averageRate: 0,
 
         photos: [
-            'https://drive.google.com/uc?export=view&id=1X0Z5q793BU3gwnTO4JxH4qPQTTQFcTJe',
             'https://drive.google.com/uc?export=view&id=1JKCCU2tv_D0j2knWximl2ImVF72nwe5g',
+            'https://drive.google.com/uc?export=view&id=1X0Z5q793BU3gwnTO4JxH4qPQTTQFcTJe',
             'https://drive.google.com/uc?export=view&id=1VOs11hj_HT-Vq0-_NcKgQfXcvdB5Rpj_',
             'https://drive.google.com/uc?export=view&id=1u-4R87hOQ89kbgiElQeXK2hJViVWkLDE',
             'https://drive.google.com/uc?export=view&id=1x5ivkO5P92AKsNLfcjjx5qrVYwo_ZnOx',
@@ -555,11 +555,11 @@ export const catalog: IProduct[] = [
         averageRate: 0,
 
         photos: [
-            'https://drive.google.com/uc?export=view&id=1hWcL6ETkb2imrE8Df5t7zzTcrnFiecFN',
             'https://drive.google.com/uc?export=view&id=10zShj_472fgUVlwXFsGQvFOsBzZ8R0DF',
             'https://drive.google.com/uc?export=view&id=1MuU9woSLfaKM6mP0N0TrLtc3Ivld7mBq',
             'https://drive.google.com/uc?export=view&id=1ekYo60smEqy8DwggPejkkf9Y5Vp3ylQl',
             'https://drive.google.com/uc?export=view&id=1Pz7SxyNias1IaTM4XBVBlvL9LDvcjr3S',
+            'https://drive.google.com/uc?export=view&id=1hWcL6ETkb2imrE8Df5t7zzTcrnFiecFN',
         ],
     },
     {

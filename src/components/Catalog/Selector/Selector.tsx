@@ -1,15 +1,21 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 //@ts-ignore
 import cl from './Selector.module.css'
+import {useActions} from "../../../hooks/useActions";
 
 interface ISelectorProps {
-    selectorArray: string[]
+    selectorArray: string[] | number[]
     selectorName: string
 }
 
 const Selector: FC<ISelectorProps> = ({selectorArray, selectorName}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [sortType, setSortType] = useState<string>(selectorArray[0])
+    const [sortType, setSortType] = useState<string | number>(selectorArray[0])
+    const {setSort, setShowAmount} = useActions.useProductActions()
+
+    useEffect(() => {
+        typeof sortType === 'string' ? setSort(sortType) : setShowAmount(sortType)
+    }, [sortType])
 
     return (
         <div className={cl.wrap}>

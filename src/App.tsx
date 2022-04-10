@@ -38,7 +38,7 @@ const App = () => {
                 :
                 <AppRouter/>
             }
-            {scroll ? <ArrowToTop/> : ''}
+            {scroll > 100 ? <ArrowToTop/> : ''}
             <Footer/>
         </div>
     );

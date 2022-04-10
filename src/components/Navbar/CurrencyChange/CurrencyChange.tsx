@@ -1,7 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 // @ts-ignore
 import cl from './CurrencyChange.module.css'
-// @ts-ignore
 import {navbarImages} from '../../../dataStorage/images/Navbar'
 import {arrOfCurrency} from "../../../dataStorage/currency";
 import {useActions} from "../../../hooks/useActions";
