@@ -19,15 +19,15 @@ const App = () => {
         setScroll(window.scrollY)
     }
 
-    useEffect(() => {
-        if(localStorage.getItem('auth')) {
-            setAuth(JSON.parse(localStorage.getItem('auth') || '') as boolean)
-            setAuthorization(JSON.parse(localStorage.getItem('authorization') || '') as string)
-            setCustomer(JSON.parse(localStorage.getItem('customer') || '') as ICustomer)
-        }
-        window.addEventListener("scroll", scrollHandler);
-        return () => window.removeEventListener("scroll", scrollHandler)
-    }, [])
+    // useEffect(() => {
+    //     if(localStorage.getItem('auth')) {
+    //         setAuth(JSON.parse(localStorage.getItem('auth') || '') as boolean)
+    //         setAuthorization(JSON.parse(localStorage.getItem('authorization') || '') as string)
+    //         setCustomer(JSON.parse(localStorage.getItem('customer') || '') as ICustomer)
+    //     }
+    //     window.addEventListener("scroll", scrollHandler);
+    //     return () => window.removeEventListener("scroll", scrollHandler)
+    // }, [])
 
     return (
         <div className="appWrapper">
