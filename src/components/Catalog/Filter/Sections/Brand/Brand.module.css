@@ -9,6 +9,11 @@
     display: flex;
 }
 
+.selectedBrand {
+    background-color: #5dc5ff;
+}
+
+
 .brandWrap:hover {
     background: #f6f6f6;
 }

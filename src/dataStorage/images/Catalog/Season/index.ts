@@ -7,4 +7,14 @@ import summer from './summer.png'
 // @ts-ignore
 import autumn from './autumn.png'
 
-export const seasonImages: string[] = [winter, spring, summer, autumn]
+interface ISeasonImage {
+    img: string,
+    season: string
+}
+
+export const seasonImages: ISeasonImage[] = [
+    {img: winter, season: 'winter'},
+    {img: spring, season: 'spring'},
+    {img: summer, season: 'summer'},
+    {img: autumn, season: 'autumn'},
+]

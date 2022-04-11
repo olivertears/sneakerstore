@@ -1,5 +1,12 @@
 import {IProduct} from "../../../models/IProduct";
-import {ProductActionsEnum, SetFilterAction, SetProductsAction, SetShowAmountAction, SetSortAction} from "./types";
+import {
+    ProductActionsEnum,
+    SetCatalogPageAction,
+    SetFilterAction, SetLayoutAction,
+    SetProductsAction,
+    SetShowAmountAction,
+    SetSortAction
+} from "./types";
 import {AppDispatch} from "../../index";
 import {AppActionCreators} from "../app/action-creators";
 import ProductService from "../../../api/ProductService";
@@ -17,7 +24,7 @@ export const ProductActionCreators = {
         }
     },
     setSort: (sort: string): SetSortAction => {
-        localStorage.setItem('sort', sort)
+        localStorage.setItem('sort', JSON.stringify(sort))
         return {
             type: ProductActionsEnum.SET_SORT,
             payload: sort
@@ -37,12 +44,27 @@ export const ProductActionCreators = {
             payload: showAmount
         }
     },
+    setCatalogPage: (catalogPage: number): SetCatalogPageAction => {
+        localStorage.setItem('catalogPage', JSON.stringify(catalogPage))
+        return {
+            type: ProductActionsEnum.SET_CATALOG_PAGE,
+            payload: catalogPage
+        }
+    },
+    setLayout: (layout: string): SetLayoutAction => {
+        localStorage.setItem('layout', JSON.stringify(layout))
+        return {
+            type: ProductActionsEnum.SET_LAYOUT,
+            payload: layout
+        }
+    },
 
-    getProducts: (sort: string, filter: IFilter, showAmount: number, catalogPage: number) => async (dispatch: AppDispatch) => {
+
+    getProducts: (sort: string, filter: IFilter, exchangeRate: number) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setCatalogLoader(true))
             const response = await ProductService.getProducts()
-            dispatch(ProductActionCreators.setProducts(sliceProducts(filterProducts(sortProducts(response.data as IProduct[], sort), filter), showAmount, catalogPage)))
+            dispatch(ProductActionCreators.setProducts(filterProducts(sortProducts(response.data as IProduct[], sort), filter, exchangeRate)))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {

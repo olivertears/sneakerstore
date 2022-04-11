@@ -7,4 +7,14 @@ import unisex from './unisex.png'
 // @ts-ignore
 import children from './children.png'
 
-export const genderImages: string[] = [man, woman, unisex, children]
+interface IGenderImg {
+    img: string,
+    sex: string
+}
+
+export const genderImages: IGenderImg[] = [
+    {img: man, sex: 'man'},
+    {img: woman, sex: 'woman'},
+    {img: unisex, sex: 'unisex'},
+    {img: children, sex: 'children'}
+]

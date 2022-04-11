@@ -5,3 +5,7 @@ export const setNicePrice = (price: number): number => {
 
     return Number(finalPrice)
 }
+
+export const returnPrice = (price: number): number => {
+    return setNicePrice(price - 5)
+}

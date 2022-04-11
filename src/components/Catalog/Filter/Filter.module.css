@@ -9,6 +9,20 @@
     background: #333333;
     color: white;
     border-radius: 5px 5px 0 0;
+    position: relative;
+}
+
+.deleteBtn {
+    width: 20px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.deleteBtn:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px 2px black;
+    background: black;
 }
 
 .sectionDivider {

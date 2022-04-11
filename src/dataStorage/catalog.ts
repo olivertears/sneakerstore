@@ -8,7 +8,7 @@ export const catalog: IProduct[] = [
         originCountry: 'China',
         material: 'Leather',
 
-        sex: 'man woman',
+        sex: 'unisex',
         brand: 'nike',
         color: 'black',
         season: 'spring autumn',
@@ -81,7 +81,7 @@ export const catalog: IProduct[] = [
         sex: 'man',
         brand: 'jordan',
         color: 'white black',
-        season: 'winter spring summer autumn',
+        season: 'spring summer autumn',
 
         orderedAmount: 0,
         averageRate: 0,
@@ -101,7 +101,7 @@ export const catalog: IProduct[] = [
         originCountry: 'USA',
         material: 'Leather',
 
-        sex: 'man woman',
+        sex: 'unisex',
         brand: 'jordan nike',
         color: 'white',
         season: 'spring summer autumn',
@@ -151,7 +151,7 @@ export const catalog: IProduct[] = [
         sex: 'man',
         brand: 'jordan',
         color: 'red',
-        season: 'winter spring summer autumn',
+        season: 'spring summer autumn',
 
         orderedAmount: 0,
         averageRate: 0,
@@ -175,7 +175,7 @@ export const catalog: IProduct[] = [
         sex: 'man',
         brand: 'underArmour',
         color: 'lightskyblue',
-        season: 'winter spring summer autumn',
+        season: 'spring summer autumn',
 
         orderedAmount: 0,
         averageRate: 0,
@@ -198,7 +198,7 @@ export const catalog: IProduct[] = [
         sex: 'man',
         brand: 'underArmour',
         color: 'black',
-        season: 'winter spring summer autumn',
+        season: 'spring summer autumn',
 
         orderedAmount: 0,
         averageRate: 0,
@@ -222,7 +222,7 @@ export const catalog: IProduct[] = [
         sex: 'man',
         brand: 'underArmour',
         color: 'white blue',
-        season: 'winter spring summer autumn',
+        season: 'spring summer autumn',
 
         orderedAmount: 0,
         averageRate: 0,
@@ -267,7 +267,7 @@ export const catalog: IProduct[] = [
         originCountry: 'China',
         material: 'Leather',
 
-        sex: 'man woman',
+        sex: 'unisex',
         brand: 'vans',
         color: 'white',
         season: 'spring autumn',
@@ -336,7 +336,7 @@ export const catalog: IProduct[] = [
         originCountry: 'China',
         material: 'Textile',
 
-        sex: 'man woman',
+        sex: 'unisex',
         brand: 'converse',
         color: 'black',
         season: 'spring summer autumn',
@@ -709,7 +709,7 @@ export const catalog: IProduct[] = [
         originCountry: 'China',
         material: 'Textile',
 
-        sex: 'man woman',
+        sex: 'unisex',
         brand: 'converse',
         color: 'black',
         season: 'spring summer autumn',
@@ -830,7 +830,7 @@ export const catalog: IProduct[] = [
         originCountry: 'Cambodia',
         material: 'Textile, Leather',
 
-        sex: 'man woman',
+        sex: 'unisex',
         brand: 'vans',
         color: 'black',
         season: 'summer',

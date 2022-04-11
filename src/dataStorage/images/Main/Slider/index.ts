@@ -3,12 +3,12 @@ import {sliderLeftBigImages, sliderRightBigImages} from "./big";
 import {sliderLeftMiniImages, sliderRightMiniImages} from "./mini";
 
 interface ISliderImages {
-    logoLeft: string[],
-    logoRight: string[],
+    logoLeft: string[][],
+    logoRight: string[][],
     bigLeft: string[],
     bigRight: string[],
-    miniLeft: string[],
-    miniRight: string[],
+    miniLeft: string[][],
+    miniRight: string[][],
 }
 
 export const sliderImages: ISliderImages = {

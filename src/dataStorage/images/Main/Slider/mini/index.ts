@@ -54,14 +54,14 @@ import vans2 from './vans2.jpg'
 // @ts-ignore
 import vans3 from './vans3.jpg'
 
-export const sliderLeftMiniImages: string[] = [
-    adidas1, asics1, converse1, jordan1,
-    adidas2, asics2, converse2, jordan2,
-    adidas3, asics3, converse3, jordan3,
+export const sliderLeftMiniImages: string[][] = [
+    [adidas1, ''], [asics1, ''], [converse1, ''], [jordan1, ''],
+    [adidas2, ''], [asics2, ''], [converse2, ''], [jordan2, ''],
+    [adidas3, ''], [asics3, ''], [converse3, ''], [jordan3, '']
 ]
 
-export const sliderRightMiniImages: string[] = [
-    nike1, puma1, underArmour1, vans1,
-    nike2, puma2, underArmour2, vans2,
-    nike3, puma3, underArmour3, vans3,
+export const sliderRightMiniImages: string[][] = [
+    [nike1, ''], [puma1, ''], [underArmour1, ''], [vans1, ''],
+    [nike2, ''], [puma2, ''], [underArmour2, ''], [vans2, ''],
+    [nike3, ''], [puma3, ''], [underArmour3, ''], [vans3, ''],
 ]

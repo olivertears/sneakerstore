@@ -9,6 +9,10 @@
     display: flex;
 }
 
+.selectedGender {
+    background: #5dc5ff;
+}
+
 .genderWrap:hover {
     background: #f6f6f6;
 }

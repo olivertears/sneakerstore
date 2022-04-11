@@ -1,6 +1,29 @@
 .wrap {
     height: 50px;
-    width: 350px;
-    margin: auto;
-    background-color: #333333;
+    margin: 0 auto;
+    background-color: #dadada;
+    display: flex;
+}
+
+.wrap *:hover {
+    background-color: #f6f6f6;
+}
+
+.selectedPage {
+    background-color: #5dc5ff;
+}
+
+.wrap h2 {
+    width: 50px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.arrowLeft {
+    width: 50px;
+}
+
+.arrowRight {
+    width: 50px;
+    transform: rotate(180deg);
 }

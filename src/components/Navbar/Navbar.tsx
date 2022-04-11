@@ -18,9 +18,9 @@ const Navbar: FC = () => {
     const {setPage} = useActions.useAppActions()
     const {getProducts} = useActions.useProductActions()
 
-    const {page} = useTypedSelector(state => state.app)
+    const {page, currency} = useTypedSelector(state => state.app)
     const {auth} = useTypedSelector(state => state.customer)
-    const {catalogPage, filter, sort, showAmount} = useTypedSelector(state => state.product)
+    const {filter, sort} = useTypedSelector(state => state.product)
 
     const favourites: number = 42
     const cart: number = 1
@@ -45,7 +45,7 @@ const Navbar: FC = () => {
                 className={ page === 'CATALOG' ? cl.selectedPage : cl.page}
                 onClick={() => {
                     navigate(RouteNames.CATALOG)
-                    getProducts(sort, filter, showAmount, catalogPage)
+                    getProducts(sort, filter, currency.exchangeRate)
                 }}
             >
                 CATALOG

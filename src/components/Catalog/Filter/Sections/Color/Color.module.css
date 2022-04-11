@@ -9,6 +9,10 @@
     display: flex;
 }
 
+.selectedColor {
+    background-color: #5dc5ff;
+}
+
 .colorWrap:hover {
     background: #f6f6f6;
 }

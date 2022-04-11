@@ -2,6 +2,9 @@ import React, {FC, useEffect, useRef, useState} from 'react';
 // @ts-ignore
 import cl from './CenterImageSlider.module.css'
 import {useTypedSelector} from "../../../../hooks/useTypedSelector";
+import {useActions} from "../../../../hooks/useActions";
+import {useNavigate} from "react-router-dom";
+import {RouteNames} from "../../../../router";
 
 interface ICenterSliderProps {
     images: string[],
@@ -9,6 +12,9 @@ interface ICenterSliderProps {
 }
 
 const CenterImageSlider: FC<ICenterSliderProps> = ({images, clockwise}) => {
+    const {setFilter} = useActions.useProductActions()
+    const navigate = useNavigate()
+
     const [activeIndex, setActiveIndex] = useState<number>(0);
 
     useEffect(() => {
@@ -24,7 +30,19 @@ const CenterImageSlider: FC<ICenterSliderProps> = ({images, clockwise}) => {
     const nextImgIndex: number = activeIndex === images.length - 1 ? 0 : activeIndex + 1
 
     return (
-        <div className={cl.wrap}>
+        <div
+            className={cl.wrap}
+            onClick={() => {
+                setFilter({
+                    price: [59, 200],
+                    gender: [clockwise ? 'man' : 'woman'] as string[],
+                    season: [] as string[],
+                    color: [] as string[],
+                    brand: [] as string[]
+                })
+                navigate(RouteNames.CATALOG)
+            }}
+        >
             <img
                 className={`${cl.img} ${clockwise ? cl.transformPositive : cl.transformNegative}`}
                 key={prevImgIndex}

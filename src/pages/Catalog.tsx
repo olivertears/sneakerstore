@@ -1,15 +1,18 @@
 import React, {FC, useEffect} from 'react';
 import CatalogWrap from "../components/Catalog/CatalogWrap/CatalogWrap";
-import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
-import {IFilter} from "../models/IFilter";
 
 const Catalog: FC = () => {
-    const {setFilter} = useActions.useProductActions()
+    const {setSort, setFilter, setShowAmount, setCatalogPage, setLayout} = useActions.useProductActions()
 
-    // useEffect(() => {
-    //     setFilter(JSON.parse(localStorage.getItem('filter') || '') as IFilter)
-    // })
+    useEffect(() => {
+        localStorage.getItem('sort') && setSort(JSON.parse(localStorage.getItem('sort') || ''))
+        localStorage.getItem('showAmount') && setShowAmount(JSON.parse(localStorage.getItem('showAmount') || ''))
+        localStorage.getItem('layout') && setLayout(JSON.parse(localStorage.getItem('layout') || ''))
+
+        localStorage.getItem('catalogPage') && setCatalogPage(JSON.parse(localStorage.getItem('catalogPage') || ''))
+        localStorage.getItem('filter') && setFilter(JSON.parse(localStorage.getItem('filter') || ''))
+    }, [])
 
     return (
         <div>

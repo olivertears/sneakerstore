@@ -9,6 +9,10 @@
     display: flex;
 }
 
+.selectedSeason {
+    background-color: #5dc5ff;
+}
+
 .seasonWrap:hover {
     background: #f6f6f6;
 }

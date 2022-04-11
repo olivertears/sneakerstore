@@ -15,6 +15,16 @@ import underArmour from './under_armour.jpg'
 // @ts-ignore
 import vans from './vans.jpg'
 
-export const sliderLeftLogoImages: string[] = [adidas, asics, converse, jordan]
+export const sliderLeftLogoImages: string[][] = [
+    [adidas, 'adidas'],
+    [asics, 'asics'],
+    [converse, 'converse'],
+    [jordan, 'jordan'],
+]
 
-export const sliderRightLogoImages: string[] = [nike, puma, underArmour, vans]
+export const sliderRightLogoImages: string[][] = [
+    [nike, 'nike'],
+    [puma, 'puma'],
+    [underArmour, 'underArmour'],
+    [vans, 'vans'],
+]

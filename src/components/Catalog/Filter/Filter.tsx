@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 //@ts-ignore
 import cl from './Filter.module.css'
 import Gender from "./Sections/Gender/Gender";
@@ -9,14 +9,22 @@ import Section from "./Section/Section";
 import Price from "./Sections/Price/Price";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
 import {setNicePrice} from "../../../utils/setNicePrice";
+import {appImages} from "../../../dataStorage/images/App";
+import {useActions} from "../../../hooks/useActions";
 
 const Filter: FC = () => {
     const {currency} = useTypedSelector(state => state.app)
+    const {setFilter} = useActions.useProductActions()
 
     return (
         <div className={cl.wrap}>
             <div className={cl.header}>
                 <h2>Filter</h2>
+                <img
+                    src={appImages.deleteBtn}
+                    className={cl.deleteBtn}
+                    onClick={() => setFilter({price: [55 * currency.exchangeRate, 205 * currency.exchangeRate], gender: [] as string[], season: [] as string[], color: [] as string[], brand: [] as string[]})}
+                />
             </div>
 
             <Section sectionName={'Price'} component={<Price min={Math.floor(setNicePrice(59.99 * currency.exchangeRate))} max={Math.ceil(setNicePrice(199.99 * currency.exchangeRate))}/>}/>

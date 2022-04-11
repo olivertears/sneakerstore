@@ -10,7 +10,7 @@ import {
 import cl from "./Price.module.css";
 import {useTypedSelector} from "../../../../../hooks/useTypedSelector";
 import {useActions} from "../../../../../hooks/useActions";
-import {setNicePrice} from "../../../../../utils/setNicePrice";
+import {returnPrice, setNicePrice} from "../../../../../utils/setNicePrice";
 
 interface IPriceProps {
     min: number;
@@ -31,13 +31,18 @@ const Price: FC<IPriceProps> = ({min, max}) => {
     const [prevExRate, setPrevExRate] = useState<number>(currency.exchangeRate)
 
     useEffect(() => {
-        setMinVal(Math.floor(setNicePrice(minVal / prevExRate * currency.exchangeRate)))
-        setMaxVal(Math.ceil(setNicePrice(maxVal / prevExRate * currency.exchangeRate -currency.exchangeRate)))
+        setMinVal(Math.floor(minVal / prevExRate * currency.exchangeRate - 5 * currency.exchangeRate))
+        setMaxVal(Math.ceil(maxVal / prevExRate * currency.exchangeRate + 5 * currency.exchangeRate))
         setPrevExRate(currency.exchangeRate)
     }, [currency])
 
     useEffect(() => {
-        setFilter({...filter, price: [minVal / currency.exchangeRate, maxVal / currency.exchangeRate]})
+        if (filter.price[0] <= min) setMinVal(min)
+        if (filter.price[1] >= max) setMaxVal(max)
+    }, [filter])
+
+    useEffect(() => {
+        setFilter({...filter, price: [minVal, maxVal]})
     }, [minVal, maxVal])
 
     const getPercent = useCallback(

@@ -9,9 +9,15 @@ interface ISelectorProps {
 }
 
 const Selector: FC<ISelectorProps> = ({selectorArray, selectorName}) => {
+    const {setSort, setShowAmount} = useActions.useProductActions()
+
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [sortType, setSortType] = useState<string | number>(selectorArray[0])
-    const {setSort, setShowAmount} = useActions.useProductActions()
+
+    useEffect(() => {
+        localStorage.getItem('sort') && typeof sortType === 'string' && setSortType(JSON.parse(localStorage.getItem('sort') || ''))
+        localStorage.getItem('showAmount') && typeof sortType === 'number' && setSortType(JSON.parse(localStorage.getItem('showAmount') || ''))
+    }, [])
 
     useEffect(() => {
         typeof sortType === 'string' ? setSort(sortType) : setShowAmount(sortType)
@@ -34,6 +40,7 @@ const Selector: FC<ISelectorProps> = ({selectorArray, selectorName}) => {
                 {
                     isOpen && selectorArray.map(sort =>
                         <div
+                            key={sort}
                             className={`${cl.option}`}
                             onClick={() => {
                                 sort !== sortType && setSortType(sort)

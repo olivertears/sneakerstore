@@ -15,4 +15,18 @@ import underArmour from './underArmour.png'
 // @ts-ignore
 import vans from './vans.png'
 
-export const brandImages: string[] = [adidas, asics, converse, jordan, nike, puma, underArmour, vans]
+interface IBrandImage {
+    img: string,
+    brand: string
+}
+
+export const brandImages: IBrandImage[] = [
+    {img: adidas, brand: 'adidas'},
+    {img: asics, brand: 'asics'},
+    {img: converse, brand: 'converse'},
+    {img: jordan, brand: 'jordan'},
+    {img: nike, brand: 'nike'},
+    {img: puma, brand: 'puma'},
+    {img: underArmour, brand: 'underArmour'},
+    {img: vans, brand: 'vans'},
+]

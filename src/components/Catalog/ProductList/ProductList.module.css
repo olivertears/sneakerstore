@@ -1,51 +1,91 @@
+.loader {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.textNoSneakers{
+    grid-column: 1/4;
+    padding: 100px;
+    height: 30px;
+}
+
 .gridWrap {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;
     position: relative;
+    text-align: center;
 }
 
-.loader {
-    position: absolute;
-    height: 100%;
-    width: 100%;
+.gridProduct {
+    background: #dadada;
+    border-radius: 10px;
 }
+
+.gridPreview {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+.gridText {
+    text-align: center;
+    position: relative;
+    padding: 10px;
+}
+
+.gridText h3 {
+    font-size: 14px;
+    height: 40px;
+}
+
+.gridText h2 {
+    font-size: 18px;
+    margin: 10px 0 5px;
+}
+
 
 .listWrap {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 15px;
-}
-
-.product {
-    background: #dadada;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.preview {
-    width: calc(100% + 20px);
-    margin: -10px 0 0 -10px;
-    border-radius: 10px 10px 0 0;
-}
-
-.text {
-    text-align: center;
     position: relative;
+    grid-auto-rows: 230px;
+    text-align: center;
 }
 
-.text h3 {
-    font-size: 14px;
-    height: 40px;
+.listProduct {
+    background: #dadada;
+    border-radius: 10px;
+    display: flex;
 }
 
-.text h2 {
-    font-size: 18px;
-    margin: 10px 0 5px;
+.listPreview {
+    height: 100%;
+    border-radius: 10px 0 0 10px;
 }
+
+.listText {
+    position: relative;
+    padding: 30px;
+    text-align: left;
+}
+
+.listText h3 {
+    height: 100px;
+}
+
+.listText h2 {
+    position: absolute;
+    bottom: 30px;
+}
+
 
 @media (max-width: 1100px)  {
     .gridWrap {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .listWrap {
+        grid-auto-rows: 180px;
     }
 }
