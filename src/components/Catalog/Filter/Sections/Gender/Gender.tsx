@@ -7,7 +7,7 @@ import {useTypedSelector} from "../../../../../hooks/useTypedSelector";
 
 const Gender: FC = () => {
     const {filter} = useTypedSelector(state => state.product)
-    const {setFilter} = useActions.useProductActions()
+    const {setFilter, setCatalogPage} = useActions.useProductActions()
 
     return (
         <div className={cl.wrap}>
@@ -16,9 +16,12 @@ const Gender: FC = () => {
                     <div
                         key={gender.img}
                         className={`${cl.genderWrap} ${filter.gender.includes(gender.sex) && cl.selectedGender}`}
-                        onClick={() => filter.gender.includes(gender.sex)
-                            ? setFilter({...filter, gender: filter.gender.filter(item => item !== gender.sex)})
-                            : setFilter({...filter, gender: [...filter.gender, gender.sex]})}
+                        onClick={() => {
+                            filter.gender.includes(gender.sex)
+                                ? setFilter({...filter, gender: filter.gender.filter(item => item !== gender.sex)})
+                                : setFilter({...filter, gender: [...filter.gender, gender.sex]})
+                            setCatalogPage(1)
+                        }}
                     >
                         <img src={gender.img} className={cl.genderImg}/>
                     </div>

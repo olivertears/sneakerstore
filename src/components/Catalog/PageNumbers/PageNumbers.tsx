@@ -6,14 +6,8 @@ import {useTypedSelector} from "../../../hooks/useTypedSelector";
 import {useActions} from "../../../hooks/useActions";
 
 const PageNumbers: FC = () => {
-    const {catalogPage, products, showAmount, filter} = useTypedSelector(state => state.product)
+    const {catalogPage, products, showAmount} = useTypedSelector(state => state.product)
     const {setCatalogPage} = useActions.useProductActions()
-
-    useEffect(() => {
-        products.length
-            ? catalogPage > Math.ceil(products.length / showAmount) && setCatalogPage(Math.ceil(products.length / showAmount))
-            : setCatalogPage(1)
-    }, [filter, products])
 
     return (
         <div className={cl.wrap}>

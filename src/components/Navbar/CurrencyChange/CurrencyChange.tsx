@@ -9,7 +9,9 @@ import {ICurrency} from "../../../models/ICurrency";
 
 const CurrencyChange: FC = () => {
     const {setCurrency} = useActions.useAppActions()
+    const {setFilter} = useActions.useProductActions()
     const {currency} = useTypedSelector(state => state.app)
+    const {filter} = useTypedSelector(state => state.product)
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -18,6 +20,7 @@ const CurrencyChange: FC = () => {
             setCurrency(JSON.parse(localStorage.getItem('currency') || '') as ICurrency)
         }
     }, [])
+
 
     return (
         <div className={cl.wrap}>
@@ -30,16 +33,17 @@ const CurrencyChange: FC = () => {
             <div className={cl.list}>
                 {isOpen
                     &&
-                    arrOfCurrency.map(currency =>
+                    arrOfCurrency.map(newCurrency =>
                         <h1
                             className={cl.option}
-                            key={currency.symbol}
+                            key={newCurrency.symbol}
                             onClick={() => {
                                 setIsOpen(false)
-                                setCurrency({label: currency.label, symbol: currency.symbol, exchangeRate: currency.exchangeRate})
+                                setFilter({...filter, price: [Math.round(filter.price[0] * newCurrency.exchangeRate / currency.exchangeRate), Math.round(filter.price[1] * newCurrency.exchangeRate / currency.exchangeRate)]})
+                                setCurrency({label: newCurrency.label, symbol: newCurrency.symbol, exchangeRate: newCurrency.exchangeRate})
                             }}
                         >
-                            {currency.symbol} {currency.label}
+                            {newCurrency.symbol} {newCurrency.label}
                         </h1>
                     )
                 }

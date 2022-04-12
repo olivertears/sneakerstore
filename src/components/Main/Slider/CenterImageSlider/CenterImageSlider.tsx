@@ -12,7 +12,8 @@ interface ICenterSliderProps {
 }
 
 const CenterImageSlider: FC<ICenterSliderProps> = ({images, clockwise}) => {
-    const {setFilter} = useActions.useProductActions()
+    const {setFilter, setCatalogPage} = useActions.useProductActions()
+    const {currency} = useTypedSelector(state => state.app)
     const navigate = useNavigate()
 
     const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -34,12 +35,13 @@ const CenterImageSlider: FC<ICenterSliderProps> = ({images, clockwise}) => {
             className={cl.wrap}
             onClick={() => {
                 setFilter({
-                    price: [59, 200],
+                    price: [55 * currency.exchangeRate, 205 * currency.exchangeRate],
                     gender: [clockwise ? 'man' : 'woman'] as string[],
                     season: [] as string[],
                     color: [] as string[],
                     brand: [] as string[]
                 })
+                setCatalogPage(1)
                 navigate(RouteNames.CATALOG)
             }}
         >

@@ -18,32 +18,18 @@ interface IPriceProps {
 }
 
 const Price: FC<IPriceProps> = ({min, max}) => {
-    const {currency} = useTypedSelector(state => state.app)
     const {filter} = useTypedSelector(state => state.product)
-    const {setFilter} = useActions.useProductActions()
+    const {setFilter, setCatalogPage} = useActions.useProductActions()
 
-    const [minVal, setMinVal] = useState(min);
-    const [maxVal, setMaxVal] = useState(max);
     const minValRef = useRef<HTMLInputElement>(null);
     const maxValRef = useRef<HTMLInputElement>(null);
     const range = useRef<HTMLDivElement>(null);
 
-    const [prevExRate, setPrevExRate] = useState<number>(currency.exchangeRate)
-
     useEffect(() => {
-        setMinVal(Math.floor(minVal / prevExRate * currency.exchangeRate - 5 * currency.exchangeRate))
-        setMaxVal(Math.ceil(maxVal / prevExRate * currency.exchangeRate + 5 * currency.exchangeRate))
-        setPrevExRate(currency.exchangeRate)
-    }, [currency])
-
-    useEffect(() => {
-        if (filter.price[0] <= min) setMinVal(min)
-        if (filter.price[1] >= max) setMaxVal(max)
+        if(filter.price[0] < min) setFilter({...filter, price: [min, filter.price[1]]})
+        if(filter.price[1] > max) setFilter({...filter, price: [filter.price[0], max]})
     }, [filter])
 
-    useEffect(() => {
-        setFilter({...filter, price: [minVal, maxVal]})
-    }, [minVal, maxVal])
 
     const getPercent = useCallback(
         (value: number) => Math.round(((value - min) / (max - min)) * 100),
@@ -52,7 +38,7 @@ const Price: FC<IPriceProps> = ({min, max}) => {
 
     useEffect(() => {
         if (maxValRef.current) {
-            const minPercent = getPercent(minVal);
+            const minPercent = getPercent(filter.price[0]);
             const maxPercent = getPercent(+maxValRef.current.value);
 
             if (range.current) {
@@ -60,18 +46,18 @@ const Price: FC<IPriceProps> = ({min, max}) => {
                 range.current.style.width = `${maxPercent - minPercent}%`;
             }
         }
-    }, [minVal, getPercent, currency]);
+    }, [filter.price[0], getPercent]);
 
     useEffect(() => {
         if (minValRef.current) {
             const minPercent = getPercent(+minValRef.current.value);
-            const maxPercent = getPercent(maxVal);
+            const maxPercent = getPercent(filter.price[1]);
 
             if (range.current) {
                 range.current.style.width = `${maxPercent - minPercent}%`;
             }
         }
-    }, [maxVal, getPercent, currency]);
+    }, [filter.price[1], getPercent]);
 
     return (
         <div className={cl.container}>
@@ -79,24 +65,26 @@ const Price: FC<IPriceProps> = ({min, max}) => {
                 type="range"
                 min={min}
                 max={max}
-                value={minVal}
+                value={filter.price[0]}
                 ref={minValRef}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    const value = Math.min(+event.target.value, maxVal - 1);
-                    setMinVal(value);
+                    const value = Math.min(+event.target.value, filter.price[1] - 1);
+                    setFilter({...filter, price: [value, filter.price[1]]});
+                    setCatalogPage(1)
                     event.target.value = value.toString();
                 }}
-                className={`${cl.thumb} ${cl.thumbZIndex3} ${minVal > max - 100 && cl.thumbZIndex5}`}
+                className={`${cl.thumb} ${cl.thumbZIndex3} ${filter.price[0] > max - 100 && cl.thumbZIndex5}`}
             />
             <input
                 type="range"
                 min={min}
                 max={max}
-                value={maxVal}
+                value={filter.price[1]}
                 ref={maxValRef}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    const value = Math.max(+event.target.value, minVal + 1);
-                    setMaxVal(value);
+                    const value = Math.max(+event.target.value, filter.price[0] + 1);
+                    setFilter({...filter, price: [filter.price[0], value]});
+                    setCatalogPage(1)
                     event.target.value = value.toString();
                 }}
                 className={`${cl.thumb} ${cl.thumbZIndex4}`}
@@ -105,8 +93,8 @@ const Price: FC<IPriceProps> = ({min, max}) => {
             <div className={cl.slider}>
                 <div className={cl.sliderTrack}/>
                 <div ref={range} className={cl.sliderRange}/>
-                <div className={cl.sliderLeftValue}>{minVal}</div>
-                <div className={cl.sliderRightValue}>{maxVal}</div>
+                <div className={cl.sliderLeftValue}>{filter.price[0]}</div>
+                <div className={cl.sliderRightValue}>{filter.price[1]}</div>
             </div>
         </div>
     );

@@ -13,7 +13,7 @@ import ProductService from "../../../api/ProductService";
 import {IFilter} from "../../../models/IFilter";
 import {sortProducts} from "../../../utils/catalog/sortProducts";
 import {filterProducts} from "../../../utils/catalog/filterProducts";
-import {sliceProducts} from "../../../utils/catalog/sliceProducts";
+
 
 export const ProductActionCreators = {
     setProducts: (products: IProduct[]): SetProductsAction => {
@@ -58,7 +58,6 @@ export const ProductActionCreators = {
             payload: layout
         }
     },
-
 
     getProducts: (sort: string, filter: IFilter, exchangeRate: number) => async (dispatch: AppDispatch) => {
         try {

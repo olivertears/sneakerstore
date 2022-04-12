@@ -7,9 +7,11 @@ import CenterImageSlider from "./CenterImageSlider/CenterImageSlider";
 import {RouteNames} from "../../../router";
 import {useActions} from "../../../hooks/useActions";
 import {useNavigate} from "react-router-dom";
+import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
 const Slider: FC = () => {
-    const {setFilter} = useActions.useProductActions()
+    const {setFilter, setCatalogPage} = useActions.useProductActions()
+    const {currency} = useTypedSelector(state => state.app)
     const navigate = useNavigate()
 
     const [idx, setIdx] = useState<number>(0)
@@ -20,12 +22,13 @@ const Slider: FC = () => {
                 className={cl.wrapSide}
                 onClick={() => {
                     setFilter({
-                        price: [59, 200],
+                        price: [55 * currency.exchangeRate, 205 * currency.exchangeRate],
                         gender: [] as string[],
                         season: [] as string[],
                         color: [] as string[],
                         brand: [sliderImages.logoLeft[idx][1]] as string[]
                     })
+                    setCatalogPage(1)
                     navigate(RouteNames.CATALOG)
                 }}
             >
@@ -55,12 +58,13 @@ const Slider: FC = () => {
                 className={cl.wrapSide}
                  onClick={() => {
                      setFilter({
-                         price: [59, 200],
+                         price: [55 * currency.exchangeRate, 205 * currency.exchangeRate],
                          gender: [] as string[],
                          season: [] as string[],
                          color: [] as string[],
                          brand: [sliderImages.logoRight[idx][1]] as string[]
                      })
+                     setCatalogPage(1)
                      navigate(RouteNames.CATALOG)
                  }}
             >

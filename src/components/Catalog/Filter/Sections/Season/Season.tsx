@@ -7,7 +7,7 @@ import {useActions} from "../../../../../hooks/useActions";
 
 const Season: FC = () => {
     const {filter} = useTypedSelector(state => state.product)
-    const {setFilter} = useActions.useProductActions()
+    const {setFilter, setCatalogPage} = useActions.useProductActions()
 
     return (
         <div className={cl.wrap}>
@@ -16,9 +16,12 @@ const Season: FC = () => {
                     <div
                         key={season.season}
                         className={`${cl.seasonWrap} ${filter.season.includes(season.season) && cl.selectedSeason}`}
-                        onClick={() => filter.season.includes(season.season)
-                            ? setFilter({...filter, season: filter.season.filter(item => item !== season.season)})
-                            : setFilter({...filter, season: [...filter.season, season.season]})}
+                        onClick={() => {
+                            filter.season.includes(season.season)
+                                ? setFilter({...filter, season: filter.season.filter(item => item !== season.season)})
+                                : setFilter({...filter, season: [...filter.season, season.season]})
+                            setCatalogPage(1)
+                        }}
                     >
                         <img src={season.img} className={cl.seasonImg}/>
                     </div>

@@ -14,7 +14,7 @@ import {useActions} from "../../../hooks/useActions";
 
 const Filter: FC = () => {
     const {currency} = useTypedSelector(state => state.app)
-    const {setFilter} = useActions.useProductActions()
+    const {setFilter, setCatalogPage} = useActions.useProductActions()
 
     return (
         <div className={cl.wrap}>
@@ -23,7 +23,16 @@ const Filter: FC = () => {
                 <img
                     src={appImages.deleteBtn}
                     className={cl.deleteBtn}
-                    onClick={() => setFilter({price: [55 * currency.exchangeRate, 205 * currency.exchangeRate], gender: [] as string[], season: [] as string[], color: [] as string[], brand: [] as string[]})}
+                    onClick={() => {
+                        setFilter({
+                            price: [55 * currency.exchangeRate, 205 * currency.exchangeRate],
+                            gender: [] as string[],
+                            season: [] as string[],
+                            color: [] as string[],
+                            brand: [] as string[]
+                        })
+                        setCatalogPage(1)
+                    }}
                 />
             </div>
 

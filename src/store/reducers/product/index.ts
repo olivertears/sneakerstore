@@ -7,7 +7,7 @@ const initialState: ProductState = {
     filter: {price: [59.99, 199.99], gender: [] as string[], season: [] as string[], color: [] as string[], brand: [] as string[]},
     showAmount: 12,
     catalogPage: 1,
-    layout: 'grid'
+    layout: 'grid',
 }
 
 export default function ProductReducer(state = initialState, action: ProductAction): ProductState {
