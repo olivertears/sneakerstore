@@ -9,14 +9,14 @@ import {sliceProducts} from "../../../utils/catalog/sliceProducts";
 
 const ProductList: FC = () => {
     const {catalogLoader} = useTypedSelector(state => state.app)
-    const {products, filter, sort, showAmount, catalogPage, layout} = useTypedSelector(state => state.product)
+    const {products, filter, sort, showAmount, catalogPage, layout, search} = useTypedSelector(state => state.product)
     const {currency} = useTypedSelector(state => state.app)
 
     const {getProducts} = useActions.useProductActions()
 
 
     useEffect(() => {
-        getProducts(sort, filter, currency.exchangeRate)
+        getProducts(search, sort, filter, currency.exchangeRate)
     }, [sort, filter, showAmount, catalogPage])
 
     return (

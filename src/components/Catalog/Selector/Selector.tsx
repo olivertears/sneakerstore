@@ -9,7 +9,7 @@ interface ISelectorProps {
 }
 
 const Selector: FC<ISelectorProps> = ({selectorArray, selectorName}) => {
-    const {setSort, setShowAmount} = useActions.useProductActions()
+    const {setSort, setShowAmount, setCatalogPage} = useActions.useProductActions()
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [sortType, setSortType] = useState<string | number>(selectorArray[0])
@@ -21,6 +21,7 @@ const Selector: FC<ISelectorProps> = ({selectorArray, selectorName}) => {
 
     useEffect(() => {
         typeof sortType === 'string' ? setSort(sortType) : setShowAmount(sortType)
+        setCatalogPage(1)
     }, [sortType])
 
     return (

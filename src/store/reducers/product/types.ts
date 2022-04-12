@@ -8,6 +8,7 @@ export interface ProductState {
     showAmount: number
     catalogPage: number
     layout: string
+    search: string
 }
 
 export enum ProductActionsEnum {
@@ -17,6 +18,7 @@ export enum ProductActionsEnum {
     SET_SHOW_AMOUNT = 'SET_SHOW_AMOUNT',
     SET_CATALOG_PAGE = 'SET_CATALOG_PAGE',
     SET_LAYOUT = 'SET_LAYOUT',
+    SET_SEARCH = 'SET_SEARCH'
 }
 
 export interface SetProductsAction {
@@ -49,10 +51,16 @@ export interface SetLayoutAction {
     payload: string
 }
 
+export interface SetSearchAction {
+    type: ProductActionsEnum.SET_SEARCH,
+    payload: string
+}
+
 export type ProductAction =
     SetProductsAction |
     SetSortAction |
     SetFilterAction |
     SetShowAmountAction |
     SetCatalogPageAction |
-    SetLayoutAction
+    SetLayoutAction |
+    SetSearchAction

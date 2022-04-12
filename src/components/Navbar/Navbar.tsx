@@ -9,18 +9,15 @@ import {useActions} from "../../hooks/useActions";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../router";
-import {useDispatch} from "react-redux";
-import {AppDispatch} from "../../store";
 
 const Navbar: FC = () => {
     const navigate = useNavigate()
 
     const {setPage} = useActions.useAppActions()
-    const {getProducts} = useActions.useProductActions()
+    const {setFilter, setCatalogPage} = useActions.useProductActions()
 
     const {page, currency} = useTypedSelector(state => state.app)
     const {auth} = useTypedSelector(state => state.customer)
-    const {filter, sort} = useTypedSelector(state => state.product)
 
     const favourites: number = 42
     const cart: number = 1
@@ -45,7 +42,14 @@ const Navbar: FC = () => {
                 className={ page === 'CATALOG' ? cl.selectedPage : cl.page}
                 onClick={() => {
                     navigate(RouteNames.CATALOG)
-                    getProducts(sort, filter, currency.exchangeRate)
+                    setFilter({
+                        price: [55 * currency.exchangeRate, 205 * currency.exchangeRate],
+                        gender: [] as string[],
+                        season: [] as string[],
+                        color: [] as string[],
+                        brand: [] as string[]
+                    })
+                    setCatalogPage(1)
                 }}
             >
                 CATALOG

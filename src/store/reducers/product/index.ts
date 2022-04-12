@@ -8,6 +8,7 @@ const initialState: ProductState = {
     showAmount: 12,
     catalogPage: 1,
     layout: 'grid',
+    search: ''
 }
 
 export default function ProductReducer(state = initialState, action: ProductAction): ProductState {
@@ -24,6 +25,8 @@ export default function ProductReducer(state = initialState, action: ProductActi
             return {...state, catalogPage: action.payload}
         case ProductActionsEnum.SET_LAYOUT:
             return {...state, layout: action.payload}
+        case ProductActionsEnum.SET_SEARCH:
+            return {...state, search: action.payload}
         default:
             return state
     }
