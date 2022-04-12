@@ -14,7 +14,7 @@ import {useActions} from "../../../hooks/useActions";
 
 const Filter: FC = () => {
     const {currency} = useTypedSelector(state => state.app)
-    const {setFilter, setCatalogPage} = useActions.useProductActions()
+    const {setFilter, setCatalogPage, setSearch} = useActions.useProductActions()
 
     return (
         <div className={cl.wrap}>
@@ -32,6 +32,7 @@ const Filter: FC = () => {
                             brand: [] as string[]
                         })
                         setCatalogPage(1)
+                        setSearch('')
                     }}
                 />
             </div>

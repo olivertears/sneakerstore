@@ -1,9 +1,7 @@
 import {
     CustomerActionsEnum,
-    SetAuthAction,
-    SetCustomerAction,
-    SetLoginDataAction,
-    SetLoginWithGoogleForm
+    SetAuthAction, SetAuthorizationAction,
+    SetCustomerAction, SetFavouritesAction,
 } from "../customer/types";
 import {ICustomer} from "../../../models/ICustomer";
 import {AppDispatch} from "../../index";
@@ -17,15 +15,11 @@ import {IChangePassword} from "../../../models/IChangePassword";
 
 
 export const CustomerActionCreators = {
-    setLoginWithGoogleForm: (isLoginWithGoogleForm: boolean): SetLoginWithGoogleForm => ({
-        type: CustomerActionsEnum.SET_LOGIN_WITH_GOOGLE_FORM,
-        payload: isLoginWithGoogleForm
-    }),
     setAuth: (auth: boolean): SetAuthAction => ({
         type: CustomerActionsEnum.SET_AUTH,
         payload: auth
     }),
-    setAuthorization: (authorization: string): SetLoginDataAction => ({
+    setAuthorization: (authorization: string): SetAuthorizationAction => ({
         type: CustomerActionsEnum.SET_AUTHORIZATION,
         payload: authorization
     }),
@@ -33,6 +27,13 @@ export const CustomerActionCreators = {
         type: CustomerActionsEnum.SET_CUSTOMER,
         payload: customer
     }),
+    setFavourites: (favourites: string[]): SetFavouritesAction => {
+        localStorage.setItem('favourites', JSON.stringify(favourites))
+        return {
+            type: CustomerActionsEnum.SET_FAVOURITES,
+            payload: favourites
+        }
+    },
 
     getCustomer: (customerId: string) => async (dispatch: AppDispatch) => {
         try {
@@ -74,9 +75,11 @@ export const CustomerActionCreators = {
             localStorage.setItem('auth', JSON.stringify(true))
             localStorage.setItem('authorization', JSON.stringify(btoa(`${loginData.email}:${loginData.password}`)))
             localStorage.setItem('customer', JSON.stringify(response.data))
+            localStorage.setItem('favourites', JSON.stringify(response.data.favoritesIds))
             dispatch(CustomerActionCreators.setAuth(true))
             dispatch(CustomerActionCreators.setAuthorization(btoa(`${loginData.email}:${loginData.password}`)))
             dispatch(CustomerActionCreators.setCustomer(response.data as ICustomer))
+            dispatch(CustomerActionCreators.setFavourites(response.data.favoritesIds as string[]))
             dispatch(AppActionCreators.setPage('PROFILE'))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Invalid email or password'))
@@ -85,9 +88,8 @@ export const CustomerActionCreators = {
         }
     },
     logout: () => (dispatch: AppDispatch) => {
-        localStorage.removeItem('authorization')
-        localStorage.removeItem('customer')
-        localStorage.removeItem('auth')
+        localStorage.clear()
+        dispatch(CustomerActionCreators.setFavourites([] as string[]))
         dispatch(CustomerActionCreators.setAuthorization(''))
         dispatch(CustomerActionCreators.setCustomer({} as ICustomer))
         dispatch(CustomerActionCreators.setAuth(false))

@@ -8,10 +8,10 @@ import {RouteNames} from "../../router";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 const ProfilePage: FC = () => {
-    const {customer, authorization} = useTypedSelector(state => state.customer)
+    const {customer, authorization, favourites} = useTypedSelector(state => state.customer)
     const {getCards} = useActions.useCardActions()
     const {getAddresses} = useActions.useAddressActions()
-    const {logout} = useActions.useCustomerActions()
+    const {logout, putCustomer} = useActions.useCustomerActions()
     const navigate = useNavigate()
 
     return (
@@ -55,6 +55,7 @@ const ProfilePage: FC = () => {
             </div>
 
             <button onClick={() => {
+                putCustomer({...customer, favoritesIds: favourites}, authorization)
                 logout()
                 navigate(RouteNames.AUTHORIZATION)
             }}>

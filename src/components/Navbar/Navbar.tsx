@@ -15,12 +15,16 @@ const Navbar: FC = () => {
 
     const {setPage} = useActions.useAppActions()
     const {setFilter, setCatalogPage} = useActions.useProductActions()
+    const {setFavourites} = useActions.useCustomerActions()
 
     const {page, currency} = useTypedSelector(state => state.app)
-    const {auth} = useTypedSelector(state => state.customer)
+    const {auth, favourites} = useTypedSelector(state => state.customer)
 
-    const favourites: number = 42
     const cart: number = 1
+
+    useEffect(() => {
+        localStorage.getItem('favourites') && setFavourites(JSON.parse(localStorage.getItem('favourites') || '') as string[])
+    }, [])
 
     useEffect(() => {
         setPage(window.location.pathname.slice(1).toUpperCase() || '')
@@ -78,7 +82,7 @@ const Navbar: FC = () => {
                          onClick={() => navigate(RouteNames.FAVOURITES)}
                     />
                     <div className={cl.circle}>
-                        <span className={cl.numberInCircle}>{favourites}</span>
+                        <span className={cl.numberInCircle}>{favourites.length}</span>
                     </div>
                 </div>
                 <div>

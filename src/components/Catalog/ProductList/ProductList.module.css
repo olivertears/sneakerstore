@@ -10,6 +10,37 @@
     height: 30px;
 }
 
+.imgWrap {
+    position: relative;
+}
+
+.favouriteImg {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    width: 30px;
+    padding: 5px;
+    background-color: rgba(246, 246, 246, 0.7);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.favouriteImgGrid {
+    bottom: 10px;
+}
+
+.favouriteImg:hover {
+    background-color: rgba(246, 246, 246, 0.9);
+}
+
+.selectedFavourite {
+    background-color: rgba(93, 197, 255, 0.7);
+}
+
+.selectedFavourite:hover {
+    background-color: rgba(93, 197, 255, 0.9);
+}
+
 .gridWrap {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -21,6 +52,11 @@
 .gridProduct {
     background: #dadada;
     border-radius: 10px;
+}
+
+.product:hover {
+    box-shadow: 0 0 5px 2px;
+    cursor: pointer;
 }
 
 .gridPreview {

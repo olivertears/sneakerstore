@@ -1,6 +1,6 @@
 import {IProduct} from "../models/IProduct";
 
-export const catalog: IProduct[] = [
+export const catalog = [
     {
         price: 109.99,
         name: 'Nike Air Force 1 (GS) (314192-009)',

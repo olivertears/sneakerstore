@@ -1,23 +1,17 @@
 import {ICustomer} from "../../../models/ICustomer";
-import {ILogin} from "../../../models/ILogin";
 
 export interface CustomerState {
-    loginWithGoogleForm: boolean
     auth: boolean,
     authorization: string,
     customer: ICustomer,
+    favourites: string[],
 }
 
 export enum CustomerActionsEnum {
-    SET_LOGIN_WITH_GOOGLE_FORM = 'SET_LOGIN_WITH_GOOGLE_FORM',
     SET_AUTH = 'SET_AUTH',
     SET_AUTHORIZATION = 'SET_LOGIN_DATA',
     SET_CUSTOMER = 'SET_CUSTOMER',
-}
-
-export interface SetLoginWithGoogleForm {
-    type: CustomerActionsEnum.SET_LOGIN_WITH_GOOGLE_FORM,
-    payload: boolean
+    SET_FAVOURITES = 'SET_FAVOURITES',
 }
 
 export interface SetAuthAction {
@@ -25,7 +19,7 @@ export interface SetAuthAction {
     payload: boolean
 }
 
-export interface SetLoginDataAction {
+export interface SetAuthorizationAction {
     type: CustomerActionsEnum.SET_AUTHORIZATION,
     payload: string
 }
@@ -35,4 +29,9 @@ export interface SetCustomerAction {
     payload: ICustomer
 }
 
-export type CustomerAction = SetLoginWithGoogleForm | SetAuthAction | SetLoginDataAction | SetCustomerAction
+export interface SetFavouritesAction {
+    type: CustomerActionsEnum.SET_FAVOURITES,
+    payload: string[]
+}
+
+export type CustomerAction = SetAuthAction | SetAuthorizationAction | SetCustomerAction | SetFavouritesAction
