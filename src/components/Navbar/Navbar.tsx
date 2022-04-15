@@ -9,12 +9,13 @@ import {useActions} from "../../hooks/useActions";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../router";
+import {IProduct} from "../../models/IProduct";
 
 const Navbar: FC = () => {
     const navigate = useNavigate()
 
     const {setPage} = useActions.useAppActions()
-    const {setFilter, setCatalogPage} = useActions.useProductActions()
+    const {setFilter, setCatalogPage, setProducts} = useActions.useProductActions()
     const {setFavourites} = useActions.useCustomerActions()
 
     const {page, currency} = useTypedSelector(state => state.app)
@@ -79,7 +80,10 @@ const Navbar: FC = () => {
                 <div>
                     <img className={cl.imgLink}
                          src={page === 'FAVOURITES' ? navbarImages.favouritesOn : navbarImages.favouritesOff}
-                         onClick={() => navigate(RouteNames.FAVOURITES)}
+                         onClick={() => {
+                             setProducts([] as IProduct[])
+                             navigate(RouteNames.FAVOURITES)
+                         }}
                     />
                     <div className={cl.circle}>
                         <span className={cl.numberInCircle}>{favourites.length}</span>

@@ -1,0 +1,34 @@
+.wrap {
+    display: grid;
+    grid-template-columns: 1fr 3fr 3fr;
+    grid-gap: 30px;
+    padding: 50px 100px;
+    min-width: 900px;
+}
+
+.sliderWrap {
+    min-width: 150px;
+    position: relative;
+}
+
+.previewWrap {
+    min-width: 450px;
+    position: relative;
+}
+
+.infoWrap {
+    grid-row: 1/3;
+    grid-column: 3/3;
+    background: #333333;
+    margin-left: -50px;
+}
+
+.commentWrap {
+    grid-column: 1/3;
+    width: calc(100% - 50px);
+    background: #333333;
+}
+
+.commentWrap {
+    height: 600px;
+}

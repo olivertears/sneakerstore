@@ -5,4 +5,7 @@ export default class ProductService {
     static async getProducts(): Promise<AxiosResponse<IProduct[]>>{
         return axios.get('https://apisneakerstore.herokuapp.com/api/products')
     }
+    static async getProduct(productId: string): Promise<AxiosResponse<IProduct>>{
+        return axios.get(`https://apisneakerstore.herokuapp.com/api/products/${productId}`)
+    }
 }

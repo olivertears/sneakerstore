@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 //@ts-ignore
 import cl from './ProfilePage.module.css'
 import {profileImages} from "../../dataStorage/images/Profile";
@@ -6,12 +6,14 @@ import {useActions} from "../../hooks/useActions";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../router";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {IProduct} from "../../models/IProduct";
 
 const ProfilePage: FC = () => {
     const {customer, authorization, favourites} = useTypedSelector(state => state.customer)
     const {getCards} = useActions.useCardActions()
     const {getAddresses} = useActions.useAddressActions()
     const {logout, putCustomer} = useActions.useCustomerActions()
+    const {setProducts} = useActions.useProductActions()
     const navigate = useNavigate()
 
     return (
@@ -40,7 +42,10 @@ const ProfilePage: FC = () => {
             <div className={cl.twoItemsWrap}>
                 <div
                     className={cl.contentWrap}
-                    onClick={() => navigate(RouteNames.FAVOURITES)}
+                    onClick={() => {
+                        setProducts([] as IProduct[])
+                        navigate(RouteNames.FAVOURITES)
+                    }}
                 >
                     <img src={profileImages.favourites}/>
                     <h2>FAVOURITES</h2>

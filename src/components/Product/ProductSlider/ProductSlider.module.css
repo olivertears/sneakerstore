@@ -1,0 +1,59 @@
+.wrap {
+    position: relative;
+    overflow: hidden;
+    outline: 3px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.photoWrap {
+    top: calc(100% / 3 * -1);
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    transition: top 0.2s ease-out;
+}
+
+.sliderPhoto {
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.whiteLayer {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: calc(100% / 3 - 1px);
+    position: absolute;
+    box-shadow: 0 0 0 300px rgba(255, 255, 255, 0.5);
+    outline: 3px solid black;
+    z-index: 2;
+}
+
+.arrowWrap {
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    z-index: 3;
+}
+
+.arrowWrap:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 5px 2px;
+    cursor: pointer;
+}
+
+.topArrow {
+    top: 0;
+    transform: rotate(180deg);
+}
+
+.arrow {
+    width: 30px;
+    padding: 10px;
+    margin: auto;
+}

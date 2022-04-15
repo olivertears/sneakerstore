@@ -1,9 +1,13 @@
 import {IProduct} from "../../../models/IProduct";
 import {
-    ProductActionsEnum,
+    AddProductAction,
+    ProductActionsEnum, RemoveProductAction,
     SetCatalogPageAction,
-    SetFilterAction, SetLayoutAction,
-    SetProductsAction, SetSearchAction,
+    SetFilterAction,
+    SetLayoutAction,
+    SetProductsAction,
+    SetSearchAction,
+    SetSelectedProductAction,
     SetShowAmountAction,
     SetSortAction
 } from "./types";
@@ -21,6 +25,21 @@ export const ProductActionCreators = {
         type: ProductActionsEnum.SET_PRODUCTS,
         payload: products
     }),
+    addProduct: (product: IProduct): AddProductAction => ({
+        type: ProductActionsEnum.ADD_PRODUCT,
+        payload: product
+    }),
+    removeProduct: (productId: string): RemoveProductAction => ({
+        type: ProductActionsEnum.REMOVE_PRODUCT,
+        payload: productId
+    }),
+    setSelectedProduct: (selectedProduct: IProduct): SetSelectedProductAction => {
+        localStorage.setItem('selectedProduct', JSON.stringify(selectedProduct))
+        return {
+            type: ProductActionsEnum.SET_SELECTED_PRODUCT,
+            payload: selectedProduct
+        }
+    },
     setSort: (sort: string): SetSortAction => {
         localStorage.setItem('sort', JSON.stringify(sort))
         return {
@@ -74,5 +93,16 @@ export const ProductActionCreators = {
         } finally {
             dispatch(AppActionCreators.setCatalogLoader(false))
         }
-    }
+    },
+    getProduct: (productId: string) => async (dispatch: AppDispatch) => {
+        try {
+            dispatch(AppActionCreators.setAppLoader(true))
+            const response = await ProductService.getProduct(productId)
+            dispatch(ProductActionCreators.addProduct(response.data as IProduct))
+        } catch (err: any) {
+            dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
+        } finally {
+            dispatch(AppActionCreators.setAppLoader(false))
+        }
+    },
 }

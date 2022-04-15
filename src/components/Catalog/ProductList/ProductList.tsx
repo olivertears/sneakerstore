@@ -15,7 +15,7 @@ const ProductList: FC = () => {
     const {products, filter, sort, showAmount, catalogPage, layout, search} = useTypedSelector(state => state.product)
     const {favourites} = useTypedSelector(state => state.customer)
     const {setFavourites} = useActions.useCustomerActions()
-    const {getProducts} = useActions.useProductActions()
+    const {getProducts, setSelectedProduct} = useActions.useProductActions()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -36,16 +36,24 @@ const ProductList: FC = () => {
                 <div
                     key={product.id}
                     className={`${cl.product} ${layout === 'grid' ? cl.gridProduct : cl.listProduct}`}
-                    onClick={() => navigate(RouteNames.CATALOG + '/' + product.id)}
+                    onClick={() => {
+                        setSelectedProduct(product)
+                        //getComments
+                        //getSizes
+                        navigate(RouteNames.CATALOG + '/' + product.id)
+                    }}
                 >
                     <div className={cl.imgWrap}>
                         <img key={product.id} src={product.photos[0]} className={`${layout === 'grid' ? cl.gridPreview : cl.listPreview}`}/>
                         <img
                             src={profileImages.favourites}
                             className={`${cl.favouriteImg} ${favourites.includes(product.id) && cl.selectedFavourite} ${layout === 'grid' && cl.favouriteImgGrid}`}
-                            onClick={() => favourites.includes(product.id)
-                                ? setFavourites(favourites.filter(fav => fav !== product.id))
-                                : setFavourites([...favourites, product.id])
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                favourites.includes(product.id)
+                                    ? setFavourites(favourites.filter(fav => fav !== product.id))
+                                    : setFavourites([...favourites, product.id])
+                            }
                             }
                         />
                     </div>
