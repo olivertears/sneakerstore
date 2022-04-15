@@ -10,7 +10,7 @@ import {useNavigate} from "react-router-dom";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
 const Slider: FC = () => {
-    const {setFilter, setCatalogPage} = useActions.useProductActions()
+    const {setFilter, setCatalogPage} = useActions.useCatalogActions()
     const {currency} = useTypedSelector(state => state.app)
     const navigate = useNavigate()
 

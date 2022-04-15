@@ -6,8 +6,9 @@ import {useTypedSelector} from "../../../hooks/useTypedSelector";
 import {useActions} from "../../../hooks/useActions";
 
 const PageNumbers: FC = () => {
-    const {catalogPage, products, showAmount} = useTypedSelector(state => state.product)
-    const {setCatalogPage} = useActions.useProductActions()
+    const {catalogPage, showAmount} = useTypedSelector(state => state.catalog)
+    const {products} = useTypedSelector(state => state.product)
+    const {setCatalogPage} = useActions.useCatalogActions()
 
     return (
         <div className={cl.wrap}>

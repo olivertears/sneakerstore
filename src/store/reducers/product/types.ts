@@ -1,15 +1,10 @@
 import {IProduct} from "../../../models/IProduct";
-import {IFilter} from "../../../models/IFilter";
+import {ISize} from "../../../models/ISize";
 
 export interface ProductState {
     products: IProduct[]
     selectedProduct: IProduct,
-    sort: string
-    filter: IFilter
-    showAmount: number
-    catalogPage: number
-    layout: string
-    search: string
+    sizes: ISize[]
 }
 
 export enum ProductActionsEnum {
@@ -17,12 +12,7 @@ export enum ProductActionsEnum {
     ADD_PRODUCT = 'ADD_PRODUCT',
     REMOVE_PRODUCT = 'REMOVE_PRODUCT',
     SET_SELECTED_PRODUCT = 'SET_SELECTED_PRODUCT',
-    SET_SORT = 'SET_SORT',
-    SET_FILTER = 'SET_FILTER',
-    SET_SHOW_AMOUNT = 'SET_SHOW_AMOUNT',
-    SET_CATALOG_PAGE = 'SET_CATALOG_PAGE',
-    SET_LAYOUT = 'SET_LAYOUT',
-    SET_SEARCH = 'SET_SEARCH'
+    SET_SIZES = 'SET_SIZES',
 }
 
 export interface SetProductsAction {
@@ -45,34 +35,9 @@ export interface SetSelectedProductAction {
     payload: IProduct
 }
 
-export interface SetSortAction {
-    type: ProductActionsEnum.SET_SORT,
-    payload: string
-}
-
-export interface SetFilterAction {
-    type: ProductActionsEnum.SET_FILTER,
-    payload: IFilter
-}
-
-export interface SetShowAmountAction {
-    type: ProductActionsEnum.SET_SHOW_AMOUNT,
-    payload: number
-}
-
-export interface SetCatalogPageAction {
-    type: ProductActionsEnum.SET_CATALOG_PAGE,
-    payload: number
-}
-
-export interface SetLayoutAction {
-    type: ProductActionsEnum.SET_LAYOUT,
-    payload: string
-}
-
-export interface SetSearchAction {
-    type: ProductActionsEnum.SET_SEARCH,
-    payload: string
+export interface SetSizesAction {
+    type: ProductActionsEnum.SET_SIZES
+    payload: ISize[]
 }
 
 export type ProductAction =
@@ -80,9 +45,4 @@ export type ProductAction =
     AddProductAction |
     RemoveProductAction |
     SetSelectedProductAction |
-    SetSortAction |
-    SetFilterAction |
-    SetShowAmountAction |
-    SetCatalogPageAction |
-    SetLayoutAction |
-    SetSearchAction
+    SetSizesAction

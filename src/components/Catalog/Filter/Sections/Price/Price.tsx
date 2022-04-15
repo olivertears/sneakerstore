@@ -18,8 +18,8 @@ interface IPriceProps {
 }
 
 const Price: FC<IPriceProps> = ({min, max}) => {
-    const {filter} = useTypedSelector(state => state.product)
-    const {setFilter, setCatalogPage} = useActions.useProductActions()
+    const {filter} = useTypedSelector(state => state.catalog)
+    const {setFilter, setCatalogPage} = useActions.useCatalogActions()
 
     const minValRef = useRef<HTMLInputElement>(null);
     const maxValRef = useRef<HTMLInputElement>(null);

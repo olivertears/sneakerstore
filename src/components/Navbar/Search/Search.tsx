@@ -8,8 +8,9 @@ import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../../router";
 
 const Search = () => {
-    const {setSearch, getProducts} = useActions.useProductActions()
-    const {search, sort, filter} = useTypedSelector(state => state.product)
+    const {getProducts} = useActions.useProductActions()
+    const {setSearch} = useActions.useCatalogActions()
+    const {search, sort, filter} = useTypedSelector(state => state.catalog)
     const {currency} = useTypedSelector(state => state.app)
     const navigate = useNavigate()
 

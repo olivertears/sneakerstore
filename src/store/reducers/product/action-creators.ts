@@ -2,14 +2,8 @@ import {IProduct} from "../../../models/IProduct";
 import {
     AddProductAction,
     ProductActionsEnum, RemoveProductAction,
-    SetCatalogPageAction,
-    SetFilterAction,
-    SetLayoutAction,
     SetProductsAction,
-    SetSearchAction,
-    SetSelectedProductAction,
-    SetShowAmountAction,
-    SetSortAction
+    SetSelectedProductAction, SetSizesAction,
 } from "./types";
 import {AppDispatch} from "../../index";
 import {AppActionCreators} from "../app/action-creators";
@@ -18,6 +12,7 @@ import {IFilter} from "../../../models/IFilter";
 import {sortProducts} from "../../../utils/catalog/sortProducts";
 import {filterProducts} from "../../../utils/catalog/filterProducts";
 import {searchProducts} from "../../../utils/catalog/searchProducts";
+import {ISize} from "../../../models/ISize";
 
 
 export const ProductActionCreators = {
@@ -40,47 +35,12 @@ export const ProductActionCreators = {
             payload: selectedProduct
         }
     },
-    setSort: (sort: string): SetSortAction => {
-        localStorage.setItem('sort', JSON.stringify(sort))
-        return {
-            type: ProductActionsEnum.SET_SORT,
-            payload: sort
-        }
-    },
-    setFilter: (filter: IFilter): SetFilterAction => {
-        localStorage.setItem('filter', JSON.stringify(filter))
-        return {
-            type: ProductActionsEnum.SET_FILTER,
-            payload: filter
-        }
-    },
-    setShowAmount: (showAmount: number): SetShowAmountAction => {
-        localStorage.setItem('showAmount', JSON.stringify(showAmount))
-        return {
-            type: ProductActionsEnum.SET_SHOW_AMOUNT,
-            payload: showAmount
-        }
-    },
-    setCatalogPage: (catalogPage: number): SetCatalogPageAction => {
-        localStorage.setItem('catalogPage', JSON.stringify(catalogPage))
-        return {
-            type: ProductActionsEnum.SET_CATALOG_PAGE,
-            payload: catalogPage
-        }
-    },
-    setLayout: (layout: string): SetLayoutAction => {
-        localStorage.setItem('layout', JSON.stringify(layout))
-        return {
-            type: ProductActionsEnum.SET_LAYOUT,
-            payload: layout
-        }
-    },
-    setSearch: (search: string): SetSearchAction => {
-        localStorage.setItem('search', JSON.stringify(search))
-        return {
-            type: ProductActionsEnum.SET_SEARCH,
-            payload: search
-        }
+    setSizes: (sizes: ISize[]): SetSizesAction => {
+       localStorage.setItem('sizes', JSON.stringify(sizes))
+       return  {
+           type: ProductActionsEnum.SET_SIZES,
+           payload: sizes
+       }
     },
 
     getProducts: (search: string, sort: string, filter: IFilter, exchangeRate: number) => async (dispatch: AppDispatch) => {
@@ -99,6 +59,17 @@ export const ProductActionCreators = {
             dispatch(AppActionCreators.setAppLoader(true))
             const response = await ProductService.getProduct(productId)
             dispatch(ProductActionCreators.addProduct(response.data as IProduct))
+        } catch (err: any) {
+            dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
+        } finally {
+            dispatch(AppActionCreators.setAppLoader(false))
+        }
+    },
+    getSizes: (productId: string) => async (dispatch: AppDispatch) => {
+        try {
+            dispatch(AppActionCreators.setAppLoader(true))
+            const response = await ProductService.getSizes(productId)
+            dispatch(ProductActionCreators.setSizes(response.data as ISize[]))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {

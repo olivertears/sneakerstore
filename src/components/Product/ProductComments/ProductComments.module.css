@@ -1,0 +1,11 @@
+.commentsText {
+    margin-bottom: 10px;
+}
+
+.commentWrap {
+    height: 100px;
+    background-color: #dadada;
+    outline: 3px solid black;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}

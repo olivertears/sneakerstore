@@ -15,7 +15,8 @@ const Navbar: FC = () => {
     const navigate = useNavigate()
 
     const {setPage} = useActions.useAppActions()
-    const {setFilter, setCatalogPage, setProducts} = useActions.useProductActions()
+    const {setProducts} = useActions.useProductActions()
+    const {setFilter, setCatalogPage} = useActions.useCatalogActions()
     const {setFavourites} = useActions.useCustomerActions()
 
     const {page, currency} = useTypedSelector(state => state.app)

@@ -5,8 +5,8 @@ import {useTypedSelector} from "../../../../../hooks/useTypedSelector";
 import {useActions} from "../../../../../hooks/useActions";
 
 const Color: FC = () => {
-    const {filter} = useTypedSelector(state => state.product)
-    const {setFilter, setCatalogPage} = useActions.useProductActions()
+    const {filter} = useTypedSelector(state => state.catalog)
+    const {setFilter, setCatalogPage} = useActions.useCatalogActions()
 
     const colorArray: string[] = ['black', 'white', 'red', 'pink', 'blue', 'lightskyblue', 'yellow', 'orange', 'green', 'brown', 'gray', 'purple']
 

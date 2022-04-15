@@ -1,0 +1,77 @@
+.wrap {
+    width: 100%;
+    position: relative;
+}
+
+.name {
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.sizesWrap {
+    max-width: 480px;
+    margin: 10px 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.size {
+    padding: 10px;
+    height: 30px;
+    width: 40px;
+    background-color: #dadada;
+    text-align: center;
+    margin: 0 10px 10px 0;
+    border-radius: 5px;
+}
+
+.size:hover {
+    box-shadow: 0 0 5px 2px;
+    cursor: pointer;
+}
+
+.btnWrap {
+    display: flex;
+    margin-top: 30px;
+}
+
+.addToCartBtn {
+    border-radius: 5px;
+    margin: 0;
+}
+
+.addToFavBtn {
+    width: 30px;
+    padding: 10px;
+    background-color: #333333;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+
+.addToFavBtn:hover {
+    outline: 3px solid black;
+    cursor: pointer;
+}
+
+.infoWrap {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin-top: 30px;
+    border-radius: 5px;
+    overflow: hidden;
+    outline: 3px solid black;
+}
+
+.infoCategoryName {
+    background-color: #333333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    outline: 3px solid black;
+}
+
+.infoCategoryInfo {
+    background-color: #dadada;
+    padding: 10px;
+    outline: 3px solid black;
+}

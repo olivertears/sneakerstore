@@ -4,6 +4,7 @@
     outline: 3px solid black;
     display: flex;
     flex-direction: column;
+    border-radius: 5px;
 }
 
 .photoWrap {

@@ -3,7 +3,7 @@ import CatalogWrap from "../components/Catalog/CatalogWrap/CatalogWrap";
 import {useActions} from "../hooks/useActions";
 
 const Catalog: FC = () => {
-    const {setSort, setFilter, setShowAmount, setCatalogPage, setLayout, setSearch} = useActions.useProductActions()
+    const {setSort, setFilter, setShowAmount, setCatalogPage, setLayout, setSearch} = useActions.useCatalogActions()
 
     useEffect(() => {
         localStorage.getItem('sort') && setSort(JSON.parse(localStorage.getItem('sort') || ''))

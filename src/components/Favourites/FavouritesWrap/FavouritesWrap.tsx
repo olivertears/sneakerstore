@@ -15,7 +15,8 @@ const FavouritesWrap: FC = () => {
     const {favourites} = useTypedSelector(state => state.customer)
     const {setAppLoader} = useActions.useAppActions()
     const {setFavourites} = useActions.useCustomerActions()
-    const {setSelectedProduct, getProduct, removeProduct, setProducts} = useActions.useProductActions()
+    const {getComments} = useActions.useCommentActions()
+    const {setSelectedProduct, getProduct, removeProduct, setProducts, getSizes} = useActions.useProductActions()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -41,8 +42,8 @@ const FavouritesWrap: FC = () => {
                     className={cl.product}
                     onClick={() => {
                         setSelectedProduct(product)
-                        //getComments
-                        //getSizes
+                        getComments(product.id)
+                        getSizes(product.id)
                         navigate(RouteNames.CATALOG + '/' + product.id)
                     }}
                 >

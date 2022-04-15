@@ -1,6 +1,4 @@
-import {ILogin} from "../models/ILogin";
 import axios, {AxiosResponse} from "axios";
-import {ICard} from "../models/ICard";
 import {IComment} from "../models/IComment";
 
 export default class CommentService {

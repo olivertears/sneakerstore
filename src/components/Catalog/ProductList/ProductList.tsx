@@ -12,10 +12,12 @@ import {RouteNames} from "../../../router";
 
 const ProductList: FC = () => {
     const {catalogLoader, currency} = useTypedSelector(state => state.app)
-    const {products, filter, sort, showAmount, catalogPage, layout, search} = useTypedSelector(state => state.product)
+    const {filter, sort, showAmount, catalogPage, layout, search} = useTypedSelector(state => state.catalog)
+    const {products} = useTypedSelector(state => state.product)
     const {favourites} = useTypedSelector(state => state.customer)
     const {setFavourites} = useActions.useCustomerActions()
-    const {getProducts, setSelectedProduct} = useActions.useProductActions()
+    const {getComments} = useActions.useCommentActions()
+    const {getProducts, setSelectedProduct, getSizes} = useActions.useProductActions()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -38,8 +40,8 @@ const ProductList: FC = () => {
                     className={`${cl.product} ${layout === 'grid' ? cl.gridProduct : cl.listProduct}`}
                     onClick={() => {
                         setSelectedProduct(product)
-                        //getComments
-                        //getSizes
+                        getComments(product.id)
+                        getSizes(product.id)
                         navigate(RouteNames.CATALOG + '/' + product.id)
                     }}
                 >

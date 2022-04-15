@@ -12,7 +12,7 @@ interface ICenterSliderProps {
 }
 
 const CenterImageSlider: FC<ICenterSliderProps> = ({images, clockwise}) => {
-    const {setFilter, setCatalogPage} = useActions.useProductActions()
+    const {setFilter, setCatalogPage} = useActions.useCatalogActions()
     const {currency} = useTypedSelector(state => state.app)
     const navigate = useNavigate()
 

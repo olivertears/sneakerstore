@@ -9,9 +9,9 @@ import {ICurrency} from "../../../models/ICurrency";
 
 const CurrencyChange: FC = () => {
     const {setCurrency} = useActions.useAppActions()
-    const {setFilter} = useActions.useProductActions()
+    const {setFilter} = useActions.useCatalogActions()
     const {currency} = useTypedSelector(state => state.app)
-    const {filter} = useTypedSelector(state => state.product)
+    const {filter} = useTypedSelector(state => state.catalog)
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
 

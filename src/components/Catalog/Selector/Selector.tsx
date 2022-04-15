@@ -9,7 +9,7 @@ interface ISelectorProps {
 }
 
 const Selector: FC<ISelectorProps> = ({selectorArray, selectorName}) => {
-    const {setSort, setShowAmount, setCatalogPage} = useActions.useProductActions()
+    const {setSort, setShowAmount, setCatalogPage} = useActions.useCatalogActions()
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [sortType, setSortType] = useState<string | number>(selectorArray[0])

@@ -9,14 +9,16 @@ import {
 import {AppDispatch} from "../../index";
 import {AppActionCreators} from "../app/action-creators";
 import CommentService from "../../../api/CommentService";
-import {ILogin} from "../../../models/ILogin";
 
 
 export const CommentActionCreators = {
-    setComments: (comments: IComment[]): SetCommentsAction => ({
-        type: CommentActionsEnum.SET_COMMENTS,
-        payload: comments
-    }),
+    setComments: (comments: IComment[]): SetCommentsAction => {
+        localStorage.setItem('comments', JSON.stringify(comments))
+        return {
+            type: CommentActionsEnum.SET_COMMENTS,
+            payload: comments
+        }
+    },
     addComment: (comment: IComment): AddCommentAction => ({
         type: CommentActionsEnum.ADD_COMMENT,
         payload: comment

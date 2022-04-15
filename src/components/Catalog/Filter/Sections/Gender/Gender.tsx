@@ -6,8 +6,8 @@ import {useActions} from "../../../../../hooks/useActions";
 import {useTypedSelector} from "../../../../../hooks/useTypedSelector";
 
 const Gender: FC = () => {
-    const {filter} = useTypedSelector(state => state.product)
-    const {setFilter, setCatalogPage} = useActions.useProductActions()
+    const {filter} = useTypedSelector(state => state.catalog)
+    const {setFilter, setCatalogPage} = useActions.useCatalogActions()
 
     return (
         <div className={cl.wrap}>

@@ -9,8 +9,8 @@ interface IRadioBtnProps {
 }
 
 const ChangeLayoutBtn: FC<IRadioBtnProps> = ({radioLayout}) => {
-    const {layout} = useTypedSelector(state => state.product)
-    const {setLayout} = useActions.useProductActions()
+    const {layout} = useTypedSelector(state => state.catalog)
+    const {setLayout} = useActions.useCatalogActions()
 
     return (
         <div

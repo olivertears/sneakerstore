@@ -14,7 +14,7 @@ import {useActions} from "../../../hooks/useActions";
 
 const Filter: FC = () => {
     const {currency} = useTypedSelector(state => state.app)
-    const {setFilter, setCatalogPage, setSearch} = useActions.useProductActions()
+    const {setFilter, setCatalogPage, setSearch} = useActions.useCatalogActions()
 
     return (
         <div className={cl.wrap}>
@@ -43,9 +43,9 @@ const Filter: FC = () => {
             <hr className={cl.sectionDivider}/>
             <Section sectionName={'Brand'} component={<Brand/>}/>
             <hr className={cl.sectionDivider}/>
-            <Section sectionName={'Color'} component={<Color/>}/>
-            <hr className={cl.sectionDivider}/>
             <Section sectionName={'Season'} component={<Season/>}/>
+            <hr className={cl.sectionDivider}/>
+            <Section sectionName={'Color'} component={<Color/>}/>
         </div>
     );
 };
