@@ -17,15 +17,14 @@ const Navbar: FC = () => {
     const {setPage} = useActions.useAppActions()
     const {setProducts} = useActions.useProductActions()
     const {setFilter, setCatalogPage} = useActions.useCatalogActions()
-    const {setFavourites} = useActions.useCustomerActions()
+    const {setFavourites, setCart} = useActions.useCustomerActions()
 
     const {page, currency} = useTypedSelector(state => state.app)
-    const {auth, favourites} = useTypedSelector(state => state.customer)
-
-    const cart: number = 1
+    const {auth, favourites, cart} = useTypedSelector(state => state.customer)
 
     useEffect(() => {
         localStorage.getItem('favourites') && setFavourites(JSON.parse(localStorage.getItem('favourites') || '') as string[])
+        localStorage.getItem('cart') && setCart(JSON.parse(localStorage.getItem('cart') || '') as string[])
     }, [])
 
     useEffect(() => {
@@ -96,7 +95,7 @@ const Navbar: FC = () => {
                          onClick={() => navigate(RouteNames.CART)}
                     />
                     <div className={cl.circle}>
-                        <span className={cl.numberInCircle}>{cart}</span>
+                        <span className={cl.numberInCircle}>{cart.length}</span>
                     </div>
                 </div>
             </div>

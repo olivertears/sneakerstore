@@ -1,6 +1,18 @@
+.wrap {
+    position: relative;
+}
+
 .preview {
     width: calc(100% - 50px);
     border-radius: 5px;
+}
+
+.soldOut {
+    position: absolute;
+    left: 0;
+    width: calc(100% - 50px);
+    border-radius: 5px;
+    opacity: 30%;
 }
 
 .infoWrap {

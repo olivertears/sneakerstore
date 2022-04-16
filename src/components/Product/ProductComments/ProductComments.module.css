@@ -58,7 +58,7 @@
 }
 
 .changeCommentBtn:hover {
-    box-shadow: 0 0 5px 2px;
+    outline: 3px solid black;
     cursor: pointer;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .deleteBtn:hover {
-    box-shadow: 0 0 5px 2px;
+    outline: 3px solid black;
     cursor: pointer;
 }
 

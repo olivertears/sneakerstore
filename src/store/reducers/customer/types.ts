@@ -5,6 +5,7 @@ export interface CustomerState {
     authorization: string,
     customer: ICustomer,
     favourites: string[],
+    cart: string[],
 }
 
 export enum CustomerActionsEnum {
@@ -12,6 +13,7 @@ export enum CustomerActionsEnum {
     SET_AUTHORIZATION = 'SET_LOGIN_DATA',
     SET_CUSTOMER = 'SET_CUSTOMER',
     SET_FAVOURITES = 'SET_FAVOURITES',
+    SET_CART = 'SET_CART',
 }
 
 export interface SetAuthAction {
@@ -34,4 +36,14 @@ export interface SetFavouritesAction {
     payload: string[]
 }
 
-export type CustomerAction = SetAuthAction | SetAuthorizationAction | SetCustomerAction | SetFavouritesAction
+export interface SetCartAction {
+    type: CustomerActionsEnum.SET_CART,
+    payload: string[]
+}
+
+export type CustomerAction =
+    SetAuthAction |
+    SetAuthorizationAction |
+    SetCustomerAction |
+    SetFavouritesAction |
+    SetCartAction

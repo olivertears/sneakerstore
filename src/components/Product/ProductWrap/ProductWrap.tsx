@@ -6,10 +6,10 @@ import ProductSlider from "../ProductSlider/ProductSlider";
 import ProductPreview from "../ProductPreview/ProductPreview";
 import ProductInfo from "../ProductInfo/ProductInfo";
 import ProductComments from "../ProductComments/ProductComments";
+import {ISize} from "../../../models/ISize";
 
 const ProductWrap: FC = () => {
-    const {selectedProduct} = useTypedSelector(state => state.product)
-
+    const [selectedSize, setSelectedSize] = useState<ISize>({} as ISize)
     const [activeImgIndex, setActiveImgIndex] = useState<number>( 0);
 
     return (
@@ -18,10 +18,10 @@ const ProductWrap: FC = () => {
                 <ProductSlider activeImgIndex={activeImgIndex} setActiveImgIndex={setActiveImgIndex}/>
             </div>
             <div className={cl.previewWrap}>
-                <ProductPreview activeImgIndex={activeImgIndex}/>
+                <ProductPreview activeImgIndex={activeImgIndex} selectedSize={selectedSize}/>
             </div>
             <div className={cl.infoWrap}>
-                <ProductInfo/>
+                <ProductInfo selectedSize={selectedSize} setSelectedSize={setSelectedSize}/>
             </div>
             <div className={cl.commentWrap}>
                 <ProductComments/>

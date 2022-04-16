@@ -19,17 +19,19 @@ const ProductComments: FC = () => {
         setAppLoader(true)
         const commArr: IComment[] = JSON.parse(localStorage.getItem('comments') || '')
         setComments(commArr as IComment[])
-        commArr && commArr.forEach(comment => {
-            getAuthor(comment.customerId)
-            comment === commArr[commArr.length - 1] && setAppLoader(false)
-        })
+        commArr.length
+            ?
+            commArr.forEach(comment => {
+                getAuthor(comment.customerId)
+                comment === commArr[commArr.length - 1] && setAppLoader(false)
+            })
+            :
+            setAppLoader(false)
     }, [])
-
-
 
     return (
         <div>
-            <h1 className={cl.commentsText}>COMMENTS:</h1>
+            {comments.length !== 0 && <h1 className={cl.commentsText}>COMMENTS:</h1>}
             {authors.length === comments.length && comments.map((comment, idx) =>
                 <div key={comment.id} className={cl.commentWrap}>
                     <div className={cl.commentHeader}>

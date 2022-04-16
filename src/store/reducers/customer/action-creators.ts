@@ -1,6 +1,6 @@
 import {
     CustomerActionsEnum,
-    SetAuthAction, SetAuthorizationAction,
+    SetAuthAction, SetAuthorizationAction, SetCartAction,
     SetCustomerAction, SetFavouritesAction,
 } from "../customer/types";
 import {ICustomer} from "../../../models/ICustomer";
@@ -12,6 +12,7 @@ import {ILogin} from "../../../models/ILogin";
 import {IResetPassword} from "../../../models/IResetPassword";
 import {IRegistration} from "../../../models/IRegistration";
 import {IChangePassword} from "../../../models/IChangePassword";
+import cart from "../../../pages/Cart";
 
 
 export const CustomerActionCreators = {
@@ -32,6 +33,13 @@ export const CustomerActionCreators = {
         return {
             type: CustomerActionsEnum.SET_FAVOURITES,
             payload: favourites
+        }
+    },
+    setCart: (cart: string[]): SetCartAction => {
+        localStorage.setItem('cart', JSON.stringify(cart))
+        return {
+            type: CustomerActionsEnum.SET_CART,
+            payload: cart
         }
     },
 
@@ -66,10 +74,12 @@ export const CustomerActionCreators = {
             localStorage.setItem('authorization', JSON.stringify(btoa(`${loginData.email}:${loginData.password}`)))
             localStorage.setItem('customer', JSON.stringify(response.data))
             localStorage.setItem('favourites', JSON.stringify(response.data.favoritesIds))
+            localStorage.setItem('cart', JSON.stringify(response.data.inCartIds))
             dispatch(CustomerActionCreators.setAuth(true))
             dispatch(CustomerActionCreators.setAuthorization(btoa(`${loginData.email}:${loginData.password}`)))
             dispatch(CustomerActionCreators.setCustomer(response.data as ICustomer))
             dispatch(CustomerActionCreators.setFavourites(response.data.favoritesIds as string[]))
+            dispatch(CustomerActionCreators.setCart(response.data.inCartIds as string[]))
             dispatch(AppActionCreators.setPage('PROFILE'))
         } catch (err: any) {
             dispatch(AppActionCreators.setError('Invalid email or password'))
@@ -80,6 +90,7 @@ export const CustomerActionCreators = {
     logout: () => (dispatch: AppDispatch) => {
         localStorage.clear()
         dispatch(CustomerActionCreators.setFavourites([] as string[]))
+        dispatch(CustomerActionCreators.setCart([] as string[]))
         dispatch(CustomerActionCreators.setAuthorization(''))
         dispatch(CustomerActionCreators.setCustomer({} as ICustomer))
         dispatch(CustomerActionCreators.setAuth(false))

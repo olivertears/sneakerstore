@@ -5,7 +5,8 @@ const initialState: CustomerState = {
     auth: false,
     authorization: '',
     customer: {} as ICustomer,
-    favourites: [] as string[]
+    favourites: [] as string[],
+    cart: [] as string[],
 }
 
 export default function CustomerReducer(state = initialState, action: CustomerAction): CustomerState {
@@ -18,6 +19,8 @@ export default function CustomerReducer(state = initialState, action: CustomerAc
             return {...state, customer: action.payload}
         case CustomerActionsEnum.SET_FAVOURITES:
             return {...state, favourites: action.payload}
+        case CustomerActionsEnum.SET_CART:
+            return {...state, cart: action.payload}
         default:
             return state
     }
