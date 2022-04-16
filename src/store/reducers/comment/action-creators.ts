@@ -1,14 +1,17 @@
 import {IComment} from "../../../models/IComment";
 import {
+    AddAuthorAction,
     AddCommentAction,
     ChangeCommentAction,
     CommentActionsEnum,
-    RemoveCommentAction,
+    RemoveCommentAction, SetAuthorsAction,
     SetCommentsAction
 } from "./types";
 import {AppDispatch} from "../../index";
 import {AppActionCreators} from "../app/action-creators";
 import CommentService from "../../../api/CommentService";
+import {ICustomer} from "../../../models/ICustomer";
+import CustomerService from "../../../api/CustomerService";
 
 
 export const CommentActionCreators = {
@@ -31,6 +34,16 @@ export const CommentActionCreators = {
         type: CommentActionsEnum.REMOVE_COMMENT,
         payload: commentId
     }),
+    setAuthors: (authors: ICustomer[]): SetAuthorsAction => ({
+        type: CommentActionsEnum.SET_AUTHORS,
+        payload: authors
+    }),
+    addAuthor: (author: ICustomer): AddAuthorAction => ({
+        type: CommentActionsEnum.ADD_AUTHOR,
+        payload: author
+    }),
+
+
 
     getComments: (productId: string) => async (dispatch: AppDispatch) => {
         try {
@@ -74,6 +87,15 @@ export const CommentActionCreators = {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
             dispatch(AppActionCreators.setAppLoader(false))
+        }
+    },
+
+    getAuthor: (customerId: string) => async (dispatch: AppDispatch) => {
+        try {
+            const response = await CustomerService.getCustomer(customerId)
+            dispatch(CommentActionCreators.addAuthor(response.data))
+        } catch (err: any){
+            dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         }
     },
 }

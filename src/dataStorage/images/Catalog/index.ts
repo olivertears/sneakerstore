@@ -9,7 +9,6 @@ import listLight from './listLight.png'
 // @ts-ignore
 import filterArrow from './filterArrow.png'
 // @ts-ignore
-import stars from './stars.png'
 
 interface ICatalogImages {
     gridDark: string,
@@ -17,7 +16,6 @@ interface ICatalogImages {
     listDark: string,
     listLight: string,
     filterArrow: string,
-    stars: string
 }
 
 export const catalogImages: ICatalogImages = {
@@ -26,5 +24,4 @@ export const catalogImages: ICatalogImages = {
     listDark: listDark,
     listLight: listLight,
     filterArrow: filterArrow,
-    stars: stars
 }

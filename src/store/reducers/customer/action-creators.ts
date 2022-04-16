@@ -35,16 +35,6 @@ export const CustomerActionCreators = {
         }
     },
 
-    getCustomer: (customerId: string) => async (dispatch: AppDispatch) => {
-        try {
-            dispatch(AppActionCreators.setAppLoader(true))
-            const response = await CustomerService.getCustomer(customerId)
-        } catch (err: any){
-            dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
-        } finally {
-            dispatch(AppActionCreators.setAppLoader(false))
-        }
-    },
     putCustomer: (customer: ICustomer, authorization: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(AppActionCreators.setAppLoader(true))

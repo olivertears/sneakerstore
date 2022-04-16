@@ -1,7 +1,9 @@
 import {IComment} from "../../../models/IComment";
+import {ICustomer} from "../../../models/ICustomer";
 
 export interface CommentState {
     comments: IComment[]
+    authors: ICustomer[]
 }
 
 export enum CommentActionsEnum {
@@ -9,6 +11,8 @@ export enum CommentActionsEnum {
     ADD_COMMENT = 'ADD_COMMENT',
     CHANGE_COMMENT = 'CHANGE_COMMENT',
     REMOVE_COMMENT = 'REMOVE_COMMENT',
+    SET_AUTHORS = 'SET_AUTHORS',
+    ADD_AUTHOR = 'ADD_AUTHOR'
 }
 
 export interface SetCommentsAction {
@@ -31,4 +35,20 @@ export interface RemoveCommentAction {
     payload: string
 }
 
-export type CommentAction = SetCommentsAction | AddCommentAction | ChangeCommentAction | RemoveCommentAction
+export interface SetAuthorsAction {
+    type: CommentActionsEnum.SET_AUTHORS,
+    payload: ICustomer[]
+}
+
+export interface AddAuthorAction {
+    type: CommentActionsEnum.ADD_AUTHOR,
+    payload: ICustomer
+}
+
+export type CommentAction =
+    SetCommentsAction |
+    AddCommentAction |
+    ChangeCommentAction |
+    RemoveCommentAction |
+    SetAuthorsAction |
+    AddAuthorAction

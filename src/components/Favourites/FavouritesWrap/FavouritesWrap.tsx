@@ -29,6 +29,8 @@ const FavouritesWrap: FC = () => {
         })
     }, [])
 
+    console.log(products)
+
     return (
         <div className={cl.wrap}>
             <h5>MY FAVOURITE SNEAKERS</h5>

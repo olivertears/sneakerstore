@@ -2,7 +2,7 @@ import React, {Dispatch, FC, SetStateAction, useEffect} from 'react';
 // @ts-ignore
 import cl from './ProductPreview.module.css';
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
-import {catalogImages} from "../../../dataStorage/images/Catalog";
+import {productPageImages} from "../../../dataStorage/images/ProductPage";
 
 interface IProductPreviewProps {
     activeImgIndex: number
@@ -22,7 +22,7 @@ const ProductPreview: FC<IProductPreviewProps> = ({activeImgIndex}) => {
         <div>
             <img src={selectedProduct.photos[activeImgIndex]} className={cl.preview}/>
             <div className={cl.infoWrap}>
-                <img src={catalogImages.stars} className={cl.starsImg}/>
+                <img src={productPageImages.whiteStars} className={cl.starsImg}/>
                 <div id="percentage" className={cl.percentage}/>
                 <h3 className={cl.orders}>Orders: {selectedProduct.orderedAmount}</h3>
             </div>
