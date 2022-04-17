@@ -20,6 +20,8 @@ export default function ProductReducer(state = initialState, action: ProductActi
             return {...state, selectedProduct: action.payload}
         case ProductActionsEnum.SET_SIZES:
             return {...state, sizes: action.payload}
+        case ProductActionsEnum.ADD_SIZE:
+            return {...state, sizes: [...state.sizes, action.payload]}
         default:
             return state
     }

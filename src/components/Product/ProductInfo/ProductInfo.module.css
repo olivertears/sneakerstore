@@ -57,6 +57,10 @@
     margin: 0;
 }
 
+.inCart {
+    color: #5dc5ff;
+}
+
 .disabledBtn:hover {
     cursor: not-allowed;
 }

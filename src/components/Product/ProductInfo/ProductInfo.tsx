@@ -49,12 +49,12 @@ const ProductInfo: FC<IProductInfoProps> = ({selectedSize, setSelectedSize}) => 
             <div className={cl.btnWrap}>
                 <button
                     disabled={selectedSize.amount === 0}
-                    className={`${cl.addToCartBtn} ${selectedSize.amount === 0 && cl.disabledBtn}`}
+                    className={`${cl.addToCartBtn} ${selectedSize.amount === 0 && cl.disabledBtn} ${cart.includes(selectedSize.id) && cl.inCart}`}
                     onClick={() => cart.includes(selectedSize.id)
                         ? setCart(cart.filter(size => size !== selectedSize.id))
                         : setCart([...cart, selectedSize.id])}
                 >
-                    ADD TO CART
+                    {selectedSize.amount === 0 ? 'NOT IN STOCK' : cart.includes(selectedSize.id) ? 'IN CART' : 'ADD TO CART'}
                 </button>
                 <img
                     src={favourites.includes(selectedProduct.id) ? navbarImages.favouritesOn : navbarImages.favouritesOff}

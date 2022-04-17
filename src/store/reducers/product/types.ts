@@ -13,6 +13,7 @@ export enum ProductActionsEnum {
     REMOVE_PRODUCT = 'REMOVE_PRODUCT',
     SET_SELECTED_PRODUCT = 'SET_SELECTED_PRODUCT',
     SET_SIZES = 'SET_SIZES',
+    ADD_SIZE = 'ADD_SIZE',
 }
 
 export interface SetProductsAction {
@@ -40,9 +41,15 @@ export interface SetSizesAction {
     payload: ISize[]
 }
 
+export interface AddSizeAction {
+    type: ProductActionsEnum.ADD_SIZE
+    payload: ISize
+}
+
 export type ProductAction =
     SetProductsAction |
     AddProductAction |
     RemoveProductAction |
     SetSelectedProductAction |
-    SetSizesAction
+    SetSizesAction |
+    AddSizeAction

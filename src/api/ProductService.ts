@@ -12,4 +12,7 @@ export default class ProductService {
     static async getSizes(productId: string): Promise<AxiosResponse<ISize[]>>{
         return axios.get(`https://apisneakerstore.herokuapp.com/api/products/${productId}/sizes`)
     }
+    static async getSize(sizeId: string): Promise<AxiosResponse<ISize>>{
+        return axios.get(`https://apisneakerstore.herokuapp.com/api/sizes/${sizeId}`)
+    }
 }

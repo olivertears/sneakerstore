@@ -23,17 +23,20 @@ const FavouritesWrap: FC = () => {
         setProducts([] as IProduct[])
         setAppLoader(true)
         const favArr: string[] = JSON.parse(localStorage.getItem('favourites') || '')
-        favArr.forEach(fav => {
-            getProduct(fav)
-            fav === favArr[favArr.length - 1] && setAppLoader(false)
-        })
+        favArr.length
+            ? favArr.forEach(fav => {
+                getProduct(fav)
+                fav === favArr[favArr.length - 1] && setAppLoader(false)
+            })
+            :
+            setAppLoader(false)
     }, [])
 
     console.log(products)
 
     return (
         <div className={cl.wrap}>
-            <h5>MY FAVOURITE SNEAKERS</h5>
+            <h5>FAVOURITE SNEAKERS</h5>
 
             {products.length === 0 && <h1 className={cl.textNoSneakers}>Favourite list is empty :(</h1>}
 

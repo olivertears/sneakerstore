@@ -1,6 +1,6 @@
 import {IProduct} from "../../../models/IProduct";
 import {
-    AddProductAction,
+    AddProductAction, AddSizeAction,
     ProductActionsEnum, RemoveProductAction,
     SetProductsAction,
     SetSelectedProductAction, SetSizesAction,
@@ -42,6 +42,10 @@ export const ProductActionCreators = {
            payload: sizes
        }
     },
+    addSize: (size: ISize): AddSizeAction => ({
+        type: ProductActionsEnum.ADD_SIZE,
+        payload: size
+    }),
 
     getProducts: (search: string, sort: string, filter: IFilter, exchangeRate: number) => async (dispatch: AppDispatch) => {
         try {
@@ -74,6 +78,14 @@ export const ProductActionCreators = {
             dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         } finally {
             dispatch(AppActionCreators.setAppLoader(false))
+        }
+    },
+    getSize: (sizeId: string) => async (dispatch: AppDispatch) => {
+        try {
+            const response = await ProductService.getSize(sizeId)
+            dispatch(ProductActionCreators.addSize(response.data as ISize))
+        } catch (err: any) {
+            dispatch(AppActionCreators.setError('Something went wrong, please try again later...'))
         }
     },
 }
