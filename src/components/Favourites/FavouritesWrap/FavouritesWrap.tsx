@@ -32,8 +32,6 @@ const FavouritesWrap: FC = () => {
             setAppLoader(false)
     }, [])
 
-    console.log(products)
-
     return (
         <div className={cl.wrap}>
             <h5>FAVOURITE SNEAKERS</h5>

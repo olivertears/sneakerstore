@@ -1,7 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 //@ts-ignore
 import cl from './ProductWrap.module.css'
-import {useTypedSelector} from "../../../hooks/useTypedSelector";
 import ProductSlider from "../ProductSlider/ProductSlider";
 import ProductPreview from "../ProductPreview/ProductPreview";
 import ProductInfo from "../ProductInfo/ProductInfo";

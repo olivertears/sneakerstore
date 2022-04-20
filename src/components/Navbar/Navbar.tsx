@@ -47,6 +47,7 @@ const Navbar: FC = () => {
                 className={ page === 'CATALOG' ? cl.selectedPage : cl.page}
                 onClick={() => {
                     navigate(RouteNames.CATALOG)
+                    setProducts([] as IProduct[])
                     setFilter({
                         price: [55 * currency.exchangeRate, 205 * currency.exchangeRate],
                         gender: [] as string[],
@@ -92,7 +93,10 @@ const Navbar: FC = () => {
                 <div>
                     <img className={cl.imgLink}
                          src={page === 'CART' ? navbarImages.cartOn : navbarImages.cartOff}
-                         onClick={() => navigate(RouteNames.CART)}
+                         onClick={() => {
+                             setProducts([] as IProduct[])
+                             navigate(RouteNames.CART)
+                         }}
                     />
                     <div className={cl.circle}>
                         <span className={cl.numberInCircle}>{cart.length}</span>
